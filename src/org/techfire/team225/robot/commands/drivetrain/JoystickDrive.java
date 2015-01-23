@@ -21,7 +21,7 @@ public class JoystickDrive extends CommandBase {
 	public double X = 0;
 	
 	public JoystickDrive() {
-		requires(drivetrain);
+		requires(omniDrivetrain);
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public class JoystickDrive extends CommandBase {
 		
 		double l = yThrottle-rotationThrottle;
 		double r = yThrottle+rotationThrottle;
-		drivetrain.setLeftRight(l,-r);
+		omniDrivetrain.setLeftRight(l,-r);
 		//drivetrain.setMotorSpeeds(yThrottle, xThrottle, rotationThrottle);
 	}
 	
@@ -116,7 +116,7 @@ public class JoystickDrive extends CommandBase {
 
 	@Override
 	protected void end() {
-		drivetrain.setMotorSpeeds(0, 0, 0);
+		omniDrivetrain.setMotorSpeeds(0, 0, 0);
 	}
 	
 }

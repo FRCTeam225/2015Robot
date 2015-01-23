@@ -15,7 +15,7 @@ public class DriveRightUntilSee extends CommandBase {
 	private boolean isSecondDone = false;
 	
 	public DriveRightUntilSee() {
-		requires(drivetrain);
+		requires(omniDrivetrain);
 	}
 	
 	@Override
@@ -29,14 +29,14 @@ public class DriveRightUntilSee extends CommandBase {
 		
 		if (isSecondDone) {
 			if (!photoLeft.get() || !photoRight.get()) {
-				drivetrain.setMotorSpeeds(0, -0.25, 0);
+				omniDrivetrain.setMotorSpeeds(0, -0.25, 0);
 			} else {
-				drivetrain.setMotorSpeeds(0, 0, 0);
+				omniDrivetrain.setMotorSpeeds(0, 0, 0);
 				isFinished = true;
 			}
 		} else if (isFirstDone) {
 			if (!photoLeft.get() || !photoRight.get()) {
-				drivetrain.setMotorSpeeds(0, -0.5, 0);
+				omniDrivetrain.setMotorSpeeds(0, -0.5, 0);
 			} else {
 				isSecondDone = true;
 				try {
@@ -47,7 +47,7 @@ public class DriveRightUntilSee extends CommandBase {
 				}
 			}
 		} else if (!photoLeft.get() || !photoRight.get()) {
-			drivetrain.setMotorSpeeds(0, 0.75, 0);
+			omniDrivetrain.setMotorSpeeds(0, 0.75, 0);
 		} else if (photoLeft.get() && photoRight.get()){
 			isFirstDone = true;
 			try {
@@ -66,7 +66,7 @@ public class DriveRightUntilSee extends CommandBase {
 
 	@Override
 	protected void end() {
-		drivetrain.setMotorSpeeds(0, 0, 0);
+		omniDrivetrain.setMotorSpeeds(0, 0, 0);
 	}
 
 }
