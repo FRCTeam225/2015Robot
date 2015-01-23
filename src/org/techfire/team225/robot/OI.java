@@ -11,16 +11,20 @@ public class OI {
 	public static Joystick driver = new Joystick(0);
 	public static Joystick operator = new Joystick(1);
 	
+	public static boolean getDriverPreciseMode() {
+		return driver.getRawButton(8);
+	}
+	
 	public static double getDriverStrafeThrottle() {
-		return driver.getRawAxis(1);
+		return driver.getRawAxis(0);
 	}
 	
 	public static double getDriverForwardThrottle() {
-		return driver.getRawAxis(2);
+		return driver.getRawAxis(1);
 	}
 	
-	public static double getDriverTurn() {
-		return driver.getRawAxis(3);
+	public static double getDriverRotation() {
+		return driver.getRawAxis(2);
 	}
 }
 

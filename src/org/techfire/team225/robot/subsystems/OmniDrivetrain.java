@@ -6,14 +6,14 @@ import org.techfire.team225.robot.commands.drivetrain.JoystickDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Drivetrain extends Subsystem {
+public class OmniDrivetrain extends Subsystem {
 	
-	Victor[] victorLeft;
-	Victor[] victorRight;
+	Victor[] victorLeft = new Victor[2];
+	Victor[] victorRight = new Victor[2];
 	Victor victorFront;
 	Victor victorBack;
 	
-	public Drivetrain() {
+	public OmniDrivetrain() {
 		victorLeft[0] = new Victor(PortMap.LEFT_FORWARD_MOTOR);
 		victorLeft[1] = new Victor(PortMap.LEFT_BACK_MOTOR);
 		victorRight[0] = new Victor(PortMap.RIGHT_FORWARD_MOTOR);
@@ -23,30 +23,44 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void setMotorSpeeds(double ySpeed, double xSpeed, double rotation) {
-		if (Math.abs(rotation) > 0.1) {
-			victorFront.set(0);
-			victorBack.set(0);
+
+		
+		double rate = 1;
+		if (Math.abs(rotation) > 0.1)
+		{
+			for (Victor v : victorLeft) {
+				v.set(-rotation*rate);
+			}
+			for (Victor v : victorRight) {
+				v.set(-rotation*rate);
+			}
 			
-			for (Victor v : victorLeft) {
-				v.set(ySpeed);
-			}
-			for (Victor v : victorRight) {
-				v.set(ySpeed);
-			}
-		} else {
-			for (Victor v : victorLeft) {
-				v.set(ySpeed);
-			}
-			for (Victor v : victorRight) {
-				v.set(-ySpeed);
-			}
-			victorFront.set(xSpeed);
-			victorBack.set(-xSpeed);
+			victorFront.set(-rotation*rate);
+			victorBack.set(-rotation*rate);
 		}
+		else
+		{
+			for (Victor v : victorLeft) {
+				v.set(ySpeed*rate);
+			}
+			for (Victor v : victorRight) {
+				v.set(-ySpeed*rate);
+			}
+			victorFront.set(-xSpeed*rate);
+			victorBack.set(xSpeed*rate);
+		}
+	}
+	
+	public void setLeftRight(double l, double r)
+	{
+		for ( Victor v : victorLeft )
+			v.set(l);
+		for ( Victor v : victorRight )
+			v.set(r);
 	}
 
 	@Override
-	protected void initDefaultCommand() {
+	protected void initDefaultCommand()  {
 		setDefaultCommand(new JoystickDrive());
 	}
 }

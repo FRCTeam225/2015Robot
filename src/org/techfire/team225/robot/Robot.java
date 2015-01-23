@@ -1,10 +1,15 @@
 
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.commands.autonomous.DriveRightUntilSee;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -16,6 +21,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
+    DriveRightUntilSee driveRight;
+    Gyro gyro;
+    public static DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
+    public static DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -23,7 +32,10 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	CommandBase.init();
-    	
+    	driveRight = new DriveRightUntilSee();
+    	gyro = new Gyro(PortMap.GYRO);
+    	gyro.initGyro();
+    	gyro.reset();
     }
 	
 	public void disabledPeriodic() {
@@ -31,8 +43,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        if (driveRight != null) driveRight.start();
     }
 
     /**
@@ -62,6 +73,9 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        SmartDashboard.putNumber("Gyro", gyro.getAngle());
+        SmartDashboard.putBoolean("Photosensor Left", !photoLeft.get());
+        SmartDashboard.putBoolean("Photosensor Right", !photoRight.get());
         Scheduler.getInstance().run();
     }
     
