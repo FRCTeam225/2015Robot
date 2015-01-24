@@ -9,8 +9,11 @@ public class MecanumDrive extends CommandBase {
 		requires(mecanumDrivetrain);
 	}
 	
+	double targetAngle = 0;
+	
 	@Override
 	protected void initialize() {
+		targetAngle = mecanumDrivetrain.gyro.getAngle();
 	}
 
 	@Override
@@ -18,7 +21,14 @@ public class MecanumDrive extends CommandBase {
 		double yThrottle = OI.getDriverForwardThrottle(); // forward and backwards
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
-		
+		if ( Math.abs(rotationThrottle) > 0.1 )
+		{
+			targetAngle = mecanumDrivetrain.gyro.getAngle();
+		}
+		else
+		{
+			rotationThrottle = (mecanumDrivetrain.gyro.getAngle()-targetAngle)*-0.01;
+		}
 		mecanumDrivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, true);
 	}
 

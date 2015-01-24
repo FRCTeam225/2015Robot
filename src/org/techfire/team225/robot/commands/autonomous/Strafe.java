@@ -6,14 +6,13 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Strafe extends CommandBase {
 
-	private DigitalInput photoLeft = vision.photoLeft;
-	private DigitalInput photoRight = vision.photoRight;
+	private DigitalInput photoLeft = mecanumDrivetrain.photoLeft;
+	private DigitalInput photoRight = mecanumDrivetrain.photoRight;
 	
 	private boolean isFinished = false;
 	
 	public Strafe() {
 		requires(mecanumDrivetrain);
-		requires(vision);
 	}
 	
 	@Override

@@ -3,6 +3,7 @@ package org.techfire.team225.robot.subsystems;
 import org.techfire.team225.robot.PortMap;
 import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class MecanumDrivetrain extends Subsystem {
 	
 	public Gyro gyro = new Gyro(PortMap.GYRO);
+	public DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
+    public DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
+    
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
 	

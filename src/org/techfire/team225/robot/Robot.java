@@ -71,8 +71,10 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
-        SmartDashboard.putBoolean("Photosensor Left", !CommandBase.vision.getLeftEye());
-        SmartDashboard.putBoolean("Photosensor Right", !CommandBase.vision.getRightEye());
+        SmartDashboard.putBoolean("Photosensor Left", 
+        		!CommandBase.mecanumDrivetrain.photoLeft.get());
+        SmartDashboard.putBoolean("Photosensor Right", 
+        		!CommandBase.mecanumDrivetrain.photoRight.get());
         Scheduler.getInstance().run();
     }
     
