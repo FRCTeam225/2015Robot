@@ -2,6 +2,7 @@ package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.OI;
+import org.techfire.team225.robot.Robot;
 
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 
@@ -20,8 +21,9 @@ public class MecanumDrive extends CommandBase {
 		double yThrottle = OI.getDriverForwardThrottle(); // forward and backwards
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
+		double gyroAngle = Robot.gyro.getAngle();
 		
-        
+        /*
 		double[] diagonal1_3 = {0, 0};
 		double[] diagonal2_4 = {0, 0};
 		
@@ -34,7 +36,7 @@ public class MecanumDrive extends CommandBase {
         xIn = rotated[0];
         yIn = rotated[1];*/
         
-        diagonal1_3[1] = x + y + rotationThrottle;
+        /*diagonal1_3[1] = x + y + rotationThrottle;
         diagonal2_4[1] = -x + y - rotationThrottle;
         diagonal1_3[0] = -x + y + rotationThrottle;
         diagonal2_4[0] = x + y - rotationThrottle;
@@ -83,7 +85,7 @@ public class MecanumDrive extends CommandBase {
 			
 		}*/
 		
-		mecanumDrivetrain.setMotorSpeeds(diagonal1_3, diagonal2_4, rotationThrottle);
+		mecanumDrivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, gyroAngle);
 	}
 
 	@Override
@@ -95,6 +97,6 @@ public class MecanumDrive extends CommandBase {
 	protected void end() {
 		double[] diagonal1_3 = {0, 0};
 		double[] diagonal2_4 = {0, 0};
-		mecanumDrivetrain.setMotorSpeeds(diagonal1_3, diagonal2_4, 0);
+		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 0);
 	}
 }

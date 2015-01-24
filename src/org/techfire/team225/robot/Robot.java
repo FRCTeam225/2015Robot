@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
-    Gyro gyro;
+    public static Gyro gyro;
     public static DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
     public static DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
 

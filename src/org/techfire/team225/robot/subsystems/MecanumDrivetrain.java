@@ -18,9 +18,18 @@ public class MecanumDrivetrain extends Subsystem {
 		victorRight[1] = new Victor(PortMap.RIGHT_BACK_MOTOR);
 	}
 	
-	public void setMotorSpeeds(double[] diagonal1_3, double[] diagonal2_4, double rotation) {
-
-		if (Math.abs(rotation) > 0.1) {
+	public void setMotorSpeeds(double xIn, double yIn, double rotation, double gyroAngle) {
+		Math.toRadians(gyroAngle);
+		double x = xIn * Math.cos(gyroAngle) - yIn * Math.sin(gyroAngle);
+		double y = xIn * Math.sin(gyroAngle) + yIn * Math.cos(gyroAngle);
+		
+		
+		victorLeft[0].set(x + y + rotation);
+        victorRight[0].set(-(-x + y - rotation));
+        victorLeft[1].set(-x + y + rotation);
+        victorRight[1].set(-(x + y - rotation));
+		
+		/*if (Math.abs(rotation) > 0.1) {
 			victorRight[0].set(rotation); // I
 			victorLeft[0].set(rotation); // II
 			victorLeft[1].set(rotation); // III
@@ -30,7 +39,7 @@ public class MecanumDrivetrain extends Subsystem {
 			victorLeft[0].set(-diagonal2_4[0]); // II
 			victorLeft[1].set(-diagonal1_3[1]); // III
 			victorRight[1].set(diagonal2_4[1]); // IV
-		}
+		}*/
 	}
 
 	@Override
