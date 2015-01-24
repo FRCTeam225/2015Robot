@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class MecanumDrivetrain extends Subsystem {
 	
-	public static Gyro gyro = new Gyro(PortMap.GYRO);
+	public Gyro gyro = new Gyro(PortMap.GYRO);
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
 	

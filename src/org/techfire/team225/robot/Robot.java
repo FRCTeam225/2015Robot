@@ -1,9 +1,6 @@
 
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,8 +19,6 @@ public class Robot extends IterativeRobot {
 	
 	Gyro gyro;
     Command autonomousCommand;
-    public static DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
-    public static DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -31,7 +26,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	CommandBase.init();
-    	gyro = MecanumDrivetrain.gyro;
+    	OI.init();
+    	gyro = CommandBase.mecanumDrivetrain.gyro;
     	gyro.initGyro();
     	gyro.reset();
     }
@@ -72,8 +68,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
-        SmartDashboard.putBoolean("Photosensor Left", !photoLeft.get());
-        SmartDashboard.putBoolean("Photosensor Right", !photoRight.get());
+        SmartDashboard.putBoolean("Photosensor Left", !CommandBase.vision.getLeftEye());
+        SmartDashboard.putBoolean("Photosensor Right", !CommandBase.vision.getRightEye());
         Scheduler.getInstance().run();
     }
     
