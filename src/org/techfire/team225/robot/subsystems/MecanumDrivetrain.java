@@ -43,6 +43,14 @@ public class MecanumDrivetrain extends Subsystem {
         victorLeft[1].set(-x + y + rotation);
         victorRight[1].set(-(x + y - rotation));
 	}
+	
+	public boolean getRightEye() {
+		return photoRight.get();
+	}
+	
+	public boolean getLeftEye() {
+		return photoLeft.get();
+	}
 
 	@Override
 	protected void initDefaultCommand()  {

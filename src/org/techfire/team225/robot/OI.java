@@ -34,6 +34,10 @@ public class OI {
 		return driver.getRawAxis(2);
 	}
 	
+	public static double getDriverDPadRightLeft() {
+		return driver.getRawAxis(4);
+	}
+	
 	public static double getArmThrottle() {
 		return operator.getRawAxis(1);
 	}

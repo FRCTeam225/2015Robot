@@ -1,11 +1,14 @@
 
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.commands.autonomous.Strafe;
+import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
+import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
 
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +24,9 @@ public class Robot extends IterativeRobot {
 	
 	Gyro gyro;
     Command autonomousCommand;
+    
+    CommandGroup[] autonomi;
+    int selected = 0;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -32,15 +38,25 @@ public class Robot extends IterativeRobot {
     	gyro = CommandBase.mecanumDrivetrain.gyro;
     	gyro.initGyro();
     	gyro.reset();
-    	
+    	autonomi = new CommandGroup[] {
+        		new StrafeAndStackNormal(),
+        		new StrafeAndStackFlipped()
+        };
     }
 	
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
+		selected += OI.getDriverDPadRightLeft();
+		if (selected == 7) {
+			selected = 0;
+		} else if (selected == -1) {
+			selected = 6;
+		}
+		SmartDashboard.putString("Selected Autonomous", autonomi[selected].toString());
+		Timer.delay(1.0);
 	}
 
     public void autonomousInit() {
-    	autonomousCommand = new Strafe();
+    	autonomousCommand = autonomi[selected];
     }
 
     /**
