@@ -16,10 +16,10 @@ public class PortMap {
     public static int BACK_MOTOR = 0; // PWM
     
     // encoders
-    //public static int ENCODER_RIGHT_A = 2;
-    //public static int ENCODER_RIGHT_B = 3;
-    //public static int ENCODER_LEFT_A = 4;
-    //public static int ENCODER_LEFT_B = 5;
+    public static int ENCODER_RIGHT_A = 2; // DIO
+    public static int ENCODER_RIGHT_B = 3; // DIO
+    public static int ENCODER_LEFT_A = 4; // DIO
+    public static int ENCODER_LEFT_B = 5; // DIO
     
     // arm
     public static int ARM_MOTOR_1 = 6; // PWM

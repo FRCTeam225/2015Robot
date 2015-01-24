@@ -1,6 +1,8 @@
 
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -17,9 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	
+	Gyro gyro;
     Command autonomousCommand;
-    public static Gyro gyro;
     public static DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
     public static DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
 
@@ -29,7 +31,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	CommandBase.init();
-    	gyro = new Gyro(PortMap.GYRO);
+    	gyro = MecanumDrivetrain.gyro;
     	gyro.initGyro();
     	gyro.reset();
     }

@@ -3,11 +3,13 @@ package org.techfire.team225.robot.subsystems;
 import org.techfire.team225.robot.PortMap;
 import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class MecanumDrivetrain extends Subsystem {
 	
+	public static Gyro gyro = new Gyro(PortMap.GYRO);
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
 	
@@ -18,28 +20,24 @@ public class MecanumDrivetrain extends Subsystem {
 		victorRight[1] = new Victor(PortMap.RIGHT_BACK_MOTOR);
 	}
 	
-	public void setMotorSpeeds(double xIn, double yIn, double rotation, double gyroAngle) {
-		Math.toRadians(gyroAngle);
-		double x = xIn * Math.cos(gyroAngle) - yIn * Math.sin(gyroAngle);
-		double y = xIn * Math.sin(gyroAngle) + yIn * Math.cos(gyroAngle);
+	public void setMotorSpeeds(double xIn, double yIn, double rotation, boolean fieldCentric) {
+		double x;
+		double y;
+		double gyroAngle = gyro.getAngle();
 		
+		if (fieldCentric) {
+			gyroAngle = Math.toRadians(gyroAngle);
+			x = xIn * Math.cos(gyroAngle) - yIn * Math.sin(gyroAngle);
+			y = xIn * Math.sin(gyroAngle) + yIn * Math.cos(gyroAngle);
+		} else {
+			x = xIn;
+			y = yIn;
+		}
 		
 		victorLeft[0].set(x + y + rotation);
         victorRight[0].set(-(-x + y - rotation));
         victorLeft[1].set(-x + y + rotation);
         victorRight[1].set(-(x + y - rotation));
-		
-		/*if (Math.abs(rotation) > 0.1) {
-			victorRight[0].set(rotation); // I
-			victorLeft[0].set(rotation); // II
-			victorLeft[1].set(rotation); // III
-			victorRight[1].set(rotation); // IV
-		} else {
-			victorRight[0].set(diagonal1_3[0]); // I
-			victorLeft[0].set(-diagonal2_4[0]); // II
-			victorLeft[1].set(-diagonal1_3[1]); // III
-			victorRight[1].set(diagonal2_4[1]); // IV
-		}*/
 	}
 
 	@Override
