@@ -1,7 +1,7 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
-import org.techfire.team225.robot.commands.drivetrain.JoystickDrive;
+import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -35,6 +35,6 @@ public class MecanumDrivetrain extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand()  {
-		setDefaultCommand(new JoystickDrive());
+		setDefaultCommand(new MecanumDrive());
 	}
 }

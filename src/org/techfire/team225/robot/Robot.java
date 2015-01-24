@@ -1,8 +1,6 @@
 
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.commands.autonomous.DriveRightUntilSee;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -21,7 +19,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
-    DriveRightUntilSee driveRight;
     Gyro gyro;
     public static DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
     public static DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
@@ -32,7 +29,6 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	CommandBase.init();
-    	driveRight = new DriveRightUntilSee();
     	gyro = new Gyro(PortMap.GYRO);
     	gyro.initGyro();
     	gyro.reset();
@@ -43,7 +39,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        if (driveRight != null) driveRight.start();
+
     }
 
     /**
