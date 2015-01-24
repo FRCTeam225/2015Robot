@@ -23,9 +23,9 @@ public class MecanumDrivetrain extends Subsystem {
 	public void setMotorSpeeds(double xIn, double yIn, double rotation, boolean fieldCentric) {
 		double x;
 		double y;
-		double gyroAngle = gyro.getAngle();
 		
 		if (fieldCentric) {
+			double gyroAngle = gyro.getAngle();
 			gyroAngle = Math.toRadians(gyroAngle);
 			x = xIn * Math.cos(gyroAngle) - yIn * Math.sin(gyroAngle);
 			y = xIn * Math.sin(gyroAngle) + yIn * Math.cos(gyroAngle);

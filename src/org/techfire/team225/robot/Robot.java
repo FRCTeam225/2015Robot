@@ -1,6 +1,8 @@
 
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.commands.autonomous.Strafe;
+
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,6 +32,7 @@ public class Robot extends IterativeRobot {
     	gyro = CommandBase.mecanumDrivetrain.gyro;
     	gyro.initGyro();
     	gyro.reset();
+    	
     }
 	
 	public void disabledPeriodic() {
@@ -37,7 +40,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-
+    	autonomousCommand = new Strafe();
     }
 
     /**

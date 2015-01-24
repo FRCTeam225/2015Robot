@@ -9,16 +9,17 @@ public class CenterGyro extends CommandBase {
 	}
 	
 	@Override
-	protected void initialize() {}
-
-	@Override
-	protected void execute() {
+	protected void initialize() {
 		mecanumDrivetrain.gyro.reset();
 	}
 
 	@Override
+	protected void execute() {
+	}
+
+	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override

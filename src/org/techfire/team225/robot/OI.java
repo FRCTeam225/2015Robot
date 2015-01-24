@@ -33,5 +33,9 @@ public class OI {
 	public static double getDriverRotation() {
 		return driver.getRawAxis(2);
 	}
+	
+	public static double getArmThrottle() {
+		return operator.getRawAxis(1);
+	}
 }
 
