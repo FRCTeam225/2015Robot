@@ -4,6 +4,7 @@ import org.techfire.team225.robot.PortMap;
 import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -13,6 +14,11 @@ public class MecanumDrivetrain extends Subsystem {
 	public Gyro gyro = new Gyro(PortMap.GYRO);
 	public DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
     public DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
+    
+    public Encoder encoderFL = new Encoder(PortMap.ENCODER_LEFT_FORWARD_A, PortMap.ENCODER_LEFT_FORWARD_B);
+    public Encoder encoderFR = new Encoder(PortMap.ENCODER_RIGHT_FORWARD_A, PortMap.ENCODER_RIGHT_FORWARD_B);
+    public Encoder encoderBL = new Encoder(PortMap.ENCODER_LEFT_BACK_A, PortMap.ENCODER_LEFT_BACK_B);
+    public Encoder encoderBR = new Encoder(PortMap.ENCODER_RIGHT_BACK_A, PortMap.ENCODER_RIGHT_BACK_B);
     
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
@@ -50,6 +56,15 @@ public class MecanumDrivetrain extends Subsystem {
 	
 	public boolean getLeftEye() {
 		return photoLeft.get();
+	}
+	
+	public Integer[] getEncoders() {
+		return new Integer[] {
+				encoderFL.get(),
+				encoderFR.get(),
+				encoderBL.get(),
+				encoderBR.get()
+		};
 	}
 
 	@Override

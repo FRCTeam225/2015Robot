@@ -3,15 +3,17 @@ package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
+//import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
 
+//import redis.clients.jedis.Jedis;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,9 +24,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	
+	//Jedis jedis;
 	Gyro gyro;
+	PowerDistributionPanel pdp;
     Command autonomousCommand;
-    
     CommandGroup[] autonomi;
     int selected = 0;
 
@@ -35,6 +38,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	CommandBase.init();
     	OI.init();
+    	pdp = new PowerDistributionPanel();
     	gyro = CommandBase.mecanumDrivetrain.gyro;
     	gyro.initGyro();
     	gyro.reset();
@@ -42,6 +46,8 @@ public class Robot extends IterativeRobot {
         		new StrafeAndStackNormal(),
         		new StrafeAndStackFlipped()
         };
+    	//jedis = new Jedis("localhost");
+
     }
 	
 	public void disabledPeriodic() {
@@ -51,7 +57,7 @@ public class Robot extends IterativeRobot {
 		} else if (selected == -1) {
 			selected = 6;
 		}
-		SmartDashboard.putString("Selected Autonomous", autonomi[selected].toString());
+		//jedis.set("Selected Autonomous", autonomi[selected].toString());
 		Timer.delay(1.0);
 	}
 
@@ -86,11 +92,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        SmartDashboard.putNumber("Gyro", gyro.getAngle());
-        SmartDashboard.putBoolean("Photosensor Left", 
-        		!CommandBase.mecanumDrivetrain.photoLeft.get());
-        SmartDashboard.putBoolean("Photosensor Right", 
-        		!CommandBase.mecanumDrivetrain.photoRight.get());
+        writeJedis();
         Scheduler.getInstance().run();
     }
     
@@ -99,5 +101,26 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    private void writeJedis() {
+    	//MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
+    	/*
+    	jedis.set("Gyro", "" + gyro.getAngle());
+        jedis.set("Photosensor Left", 
+        		"" + !mecanumDrivetrain.photoLeft.get());
+        jedis.set("Photosensor Right", 
+        		"" + !mecanumDrivetrain.photoRight.get());
+        
+        // encoders
+        Integer[] encoderArray = mecanumDrivetrain.getEncoders();
+        jedis.set("Encoder Front Left", "" + encoderArray[0]);
+        jedis.set("Encoder Front Right", "" + encoderArray[1]);
+        jedis.set("Encoder Back Left", "" + encoderArray[2]);
+        jedis.set("Encoder Back Right", "" + encoderArray[3]);
+        
+        // pdp
+        jedis.set("Total Voltage", "0");
+        */
     }
 }

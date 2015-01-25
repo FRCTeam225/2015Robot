@@ -2,6 +2,7 @@ package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
 import org.techfire.team225.robot.commands.arm.HoldArm;
+//import org.techfire.team225.robot.commands.arm.ManualArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
@@ -45,8 +46,8 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setMotorSpeed(double speed) {
-		victorForward.set(speed);
-		victorBack.set(-speed);
+		victorForward.set(-speed);
+		victorBack.set(speed);
 	}
 	@Override
 	protected void initDefaultCommand() {
