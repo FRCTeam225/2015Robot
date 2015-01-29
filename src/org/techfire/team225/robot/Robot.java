@@ -3,13 +3,12 @@ package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
-//import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
+import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
 
-//import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Jedis;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,7 +23,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	
-	//Jedis jedis;
+	public static Jedis jedis;
 	Gyro gyro;
 	PowerDistributionPanel pdp;
     Command autonomousCommand;
@@ -46,23 +45,32 @@ public class Robot extends IterativeRobot {
         		new StrafeAndStackNormal(),
         		new StrafeAndStackFlipped()
         };
-    	//jedis = new Jedis("localhost");
-
+    	
+    	try {
+    		jedis = new Jedis("localhost");
+    	} catch ( Exception e ) {
+    		System.out.println("Jedis init error");
+    	}
+    	
+    	jedis.lpush("autonomi", "init");
+    	for (int i = 0; i < autonomi.length; i++) {
+        	jedis.lset("autonomi", i, autonomi[i].toString());
+    	}
     }
 	
 	public void disabledPeriodic() {
-		selected += OI.getDriverDPadRightLeft();
-		if (selected == 7) {
-			selected = 0;
-		} else if (selected == -1) {
-			selected = 6;
-		}
-		//jedis.set("Selected Autonomous", autonomi[selected].toString());
-		Timer.delay(1.0);
+		writeJedis();
 	}
 
     public void autonomousInit() {
-    	autonomousCommand = autonomi[selected];
+    	int i = 0;
+    	try {
+    		i = Integer.parseInt(jedis.get("currentAuto"));
+    	} catch (Exception e){
+    		
+    	}
+    	autonomousCommand = autonomi[i];
+    	autonomousCommand.start();
     }
 
     /**
@@ -104,23 +112,49 @@ public class Robot extends IterativeRobot {
     }
     
     private void writeJedis() {
-    	//MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
-    	/*
-    	jedis.set("Gyro", "" + gyro.getAngle());
-        jedis.set("Photosensor Left", 
-        		"" + !mecanumDrivetrain.photoLeft.get());
-        jedis.set("Photosensor Right", 
-        		"" + !mecanumDrivetrain.photoRight.get());
-        
-        // encoders
-        Integer[] encoderArray = mecanumDrivetrain.getEncoders();
-        jedis.set("Encoder Front Left", "" + encoderArray[0]);
-        jedis.set("Encoder Front Right", "" + encoderArray[1]);
-        jedis.set("Encoder Back Left", "" + encoderArray[2]);
-        jedis.set("Encoder Back Right", "" + encoderArray[3]);
-        
-        // pdp
-        jedis.set("Total Voltage", "0");
-        */
+    	MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
+    	try
+    	{
+	    	jedis.set("Gyro", "" + gyro.getAngle());
+	        jedis.set("PhotosensorLeft", 
+	        		"" + !mecanumDrivetrain.photoLeft.get());
+	        jedis.set("PhotosensorRight", 
+	        		"" + !mecanumDrivetrain.photoRight.get());
+	        
+	        // encoders
+	        Integer[] encoderArray = mecanumDrivetrain.getEncoders();
+	        jedis.set("EncoderFrontLeft", "" + encoderArray[0]);
+	        jedis.set("EncoderFrontRight", "" + encoderArray[1]);
+	        jedis.set("EncoderBackLeft", "" + encoderArray[2]);
+	        jedis.set("EncoderBackRight", "" + encoderArray[3]);
+	        
+	        // pdp totals
+	        jedis.set("Voltage", "" + pdp.getVoltage());
+	        jedis.set("Temperature", "" + pdp.getTemperature());
+	        jedis.set("TotalCurrent", "" + pdp.getTotalCurrent());
+	        jedis.set("TotalPower", "" + pdp.getTotalPower());
+	        jedis.set("TotalEnergy", "" + pdp.getTotalEnergy());
+	        
+	        // pdp individual components
+	        double currentFL = pdp.getCurrent(PortMap.LEFT_FORWARD_MOTOR_POWER);
+	        double currentFR = pdp.getCurrent(PortMap.RIGHT_FORWARD_MOTOR_POWER);
+	        double currentBL = pdp.getCurrent(PortMap.LEFT_BACK_MOTOR_POWER);
+	        double currentBR = pdp.getCurrent(PortMap.RIGHT_BACK_MOTOR_POWER);
+	        jedis.set("FrontLeftMotorCurrent", "" + pdp.getCurrent(PortMap.LEFT_FORWARD_MOTOR_POWER));
+	        jedis.set("FrontRightMotorCurrent", "" + pdp.getCurrent(PortMap.RIGHT_FORWARD_MOTOR_POWER));
+	        jedis.set("BackLeftMotorCurrent", "" + pdp.getCurrent(PortMap.LEFT_BACK_MOTOR_POWER));
+	        jedis.set("BackRightMotorCurrent", "" + pdp.getCurrent(PortMap.RIGHT_BACK_MOTOR_POWER));
+	        jedis.set("DrivetrainTotalCurrent", "" + currentFL + currentFR + currentBL + currentBR);
+	        
+	        double armCurrent1 = pdp.getCurrent(PortMap.ARM_FORWARD_MOTOR_POWER);
+	        double armCurrent2 = pdp.getCurrent(PortMap.ARM_BACK_MOTOR_POWER);
+	        jedis.set("ArmMotorOneCurrent", "" + armCurrent1);
+	        jedis.set("ArmMotorTwoCurrent", "" + armCurrent2);
+	        jedis.set("ArmTotalCurrent", "" + armCurrent1 + armCurrent2);
+	        
+	        jedis.set("ArmPosition", String.valueOf(CommandBase.arm.getPosition()));
+    	} catch( Exception e ) {
+    		System.out.println("Redis error");
+    	}
     }
 }

@@ -2,7 +2,7 @@ package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
 import org.techfire.team225.robot.commands.arm.HoldArm;
-//import org.techfire.team225.robot.commands.arm.ManualArmControl;
+import org.techfire.team225.robot.commands.arm.ManualArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 
-	Victor victorForward = new Victor(PortMap.ARM_FORWARD);
-	Victor victorBack = new Victor(PortMap.ARM_BACK);
+	Victor victorForward = new Victor(PortMap.ARM_FORWARD_MOTOR);
+	Victor victorBack = new Victor(PortMap.ARM_BACK_MOTOR);
 	AnalogInput pot = new AnalogInput(PortMap.ARM_POT);
 	PIDOutput outputGroup = new PIDOutput() {
 		public void pidWrite(double output)
@@ -46,12 +46,12 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setMotorSpeed(double speed) {
-		victorForward.set(-speed);
-		victorBack.set(speed);
+		victorForward.set(speed);
+		victorBack.set(-speed);
 	}
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new HoldArm());
+		setDefaultCommand(new ManualArmControl());
 	}
 
 }
