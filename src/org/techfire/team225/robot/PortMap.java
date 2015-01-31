@@ -33,6 +33,8 @@ public class PortMap {
     public static int ENCODER_RIGHT_B = 1; // DIO
     public static int ENCODER_LEFT_A = 2; // DIO
     public static int ENCODER_LEFT_B = 3; // DIO
+    public static int ENCODER_FOLLOW_A = 4; // DIO
+    public static int ENCODER_FOLLOW_B = 5; // DIO
         
     // sensors
     public static int PHOTO_SENSOR_LEFT = 6; // DIO

@@ -125,6 +125,7 @@ public class Robot extends IterativeRobot {
 	        // encoders
 	        jedis.set("EncoderLeft", "" + mecanumDrivetrain.getLeftEncoder());
 	        jedis.set("EncoderRight", "" + mecanumDrivetrain.getRightEncoder());
+	        jedis.set("EncoderFollow", "" + mecanumDrivetrain.getFollowEncoder());
 	        
 	        // pdp totals
 	        jedis.set("Voltage", "" + pdp.getVoltage());
@@ -148,7 +149,7 @@ public class Robot extends IterativeRobot {
 	        double armCurrent2 = pdp.getCurrent(PortMap.ARM_BACK_MOTOR_POWER);
 	        jedis.set("ArmMotorOneCurrent", "" + armCurrent1);
 	        jedis.set("ArmMotorTwoCurrent", "" + armCurrent2);
-	        jedis.set("ArmTotalCurrent", "" + armCurrent1 + armCurrent2);
+	        jedis.set("ArmTotalCurrent", "" + (armCurrent1 + armCurrent2));
 	        
 	        jedis.set("ArmPosition", String.valueOf(CommandBase.arm.getPosition()));
     	} catch( Exception e ) {

@@ -17,6 +17,7 @@ public class MecanumDrivetrain extends Subsystem {
     
     public Encoder encoderL = new Encoder(PortMap.ENCODER_LEFT_A, PortMap.ENCODER_LEFT_B);
     public Encoder encoderR = new Encoder(PortMap.ENCODER_RIGHT_A, PortMap.ENCODER_RIGHT_B);
+    public Encoder encoderF = new Encoder(PortMap.ENCODER_FOLLOW_A, PortMap.ENCODER_FOLLOW_B);
     
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
@@ -61,7 +62,11 @@ public class MecanumDrivetrain extends Subsystem {
 	}
 	
 	public int getRightEncoder() {
-		return encoderR.get();
+		return -encoderR.get();
+	}
+	
+	public int getFollowEncoder() {
+		return encoderF.get();
 	}
 
 	@Override
