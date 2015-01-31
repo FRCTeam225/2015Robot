@@ -23,6 +23,7 @@ public class PortMap {
     public static int ARM_FORWARD_MOTOR = 4; // PWM
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
+    public static int ARM_SOLENOID = 0; // PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 6; // PDP

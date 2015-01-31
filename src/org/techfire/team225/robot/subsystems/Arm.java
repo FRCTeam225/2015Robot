@@ -6,6 +6,7 @@ import org.techfire.team225.robot.commands.arm.ManualArmControl;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -14,6 +15,8 @@ public class Arm extends Subsystem {
 	Victor victorForward = new Victor(PortMap.ARM_FORWARD_MOTOR);
 	Victor victorBack = new Victor(PortMap.ARM_BACK_MOTOR);
 	AnalogInput pot = new AnalogInput(PortMap.ARM_POT);
+	Solenoid armSolenoid = new Solenoid(PortMap.ARM_SOLENOID);
+	
 	PIDOutput outputGroup = new PIDOutput() {
 		public void pidWrite(double output)
 		{
@@ -59,6 +62,10 @@ public class Arm extends Subsystem {
 			victorForward.set(0);
 			victorBack.set(0);
 		}
+	}
+	
+	public void toggleArm(boolean tilt) {
+		armSolenoid.set(tilt);
 	}
 	@Override
 	protected void initDefaultCommand() {

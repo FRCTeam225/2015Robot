@@ -1,5 +1,6 @@
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.commands.arm.TiltArm;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -16,7 +17,8 @@ public class OI {
 	
 	public static void init() {
 		new JoystickButton(driver, 10).whenPressed(new CenterGyro());
-		
+		new JoystickButton(driver, 2).whenPressed(new TiltArm(true));
+		new JoystickButton(driver, 4).whenPressed(new TiltArm(false));
 	}
 	
 	public static boolean getDriverPreciseMode() {
