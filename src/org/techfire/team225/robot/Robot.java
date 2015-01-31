@@ -48,14 +48,15 @@ public class Robot extends IterativeRobot {
     	
     	try {
     		jedis = new Jedis("localhost");
+        	jedis.del("autonomi");
+        	for (int i = 0; i < autonomi.length; i++) {
+            	jedis.rpush("autonomi", autonomi[i].toString());
+        	}
     	} catch ( Exception e ) {
-    		System.out.println("Jedis init error");
+    		System.err.println("Jedis init error");
     	}
     	
-    	jedis.lpush("autonomi", "init");
-    	for (int i = 0; i < autonomi.length; i++) {
-        	jedis.lset("autonomi", i, autonomi[i].toString());
-    	}
+
     }
 	
 	public void disabledPeriodic() {
@@ -144,7 +145,7 @@ public class Robot extends IterativeRobot {
 	        jedis.set("FrontRightMotorCurrent", "" + pdp.getCurrent(PortMap.RIGHT_FORWARD_MOTOR_POWER));
 	        jedis.set("BackLeftMotorCurrent", "" + pdp.getCurrent(PortMap.LEFT_BACK_MOTOR_POWER));
 	        jedis.set("BackRightMotorCurrent", "" + pdp.getCurrent(PortMap.RIGHT_BACK_MOTOR_POWER));
-	        jedis.set("DrivetrainTotalCurrent", "" + currentFL + currentFR + currentBL + currentBR);
+	        jedis.set("DrivetrainTotalCurrent", "" + (currentFL + currentFR + currentBL + currentBR));
 	        
 	        double armCurrent1 = pdp.getCurrent(PortMap.ARM_FORWARD_MOTOR_POWER);
 	        double armCurrent2 = pdp.getCurrent(PortMap.ARM_BACK_MOTOR_POWER);

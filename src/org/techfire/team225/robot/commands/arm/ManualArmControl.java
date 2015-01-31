@@ -1,12 +1,13 @@
 package org.techfire.team225.robot.commands.arm;
 
 import org.techfire.team225.robot.CommandBase;
-import org.techfire.team225.robot.OI;
 
 public class ManualArmControl extends CommandBase {
 
-	public ManualArmControl() {
+	boolean up;
+	public ManualArmControl(boolean up) {
 		requires(arm);
+		this.up = up;
 	}
 	
 	@Override
@@ -16,7 +17,12 @@ public class ManualArmControl extends CommandBase {
 
 	@Override
 	protected void execute() {
-		double throttle = OI.getArmThrottle();
+		double throttle;
+		if (up) {
+			throttle = 0.75;
+		} else {
+			throttle = -0.75;
+		}
 		arm.setMotorSpeed(throttle);
 	}
 
