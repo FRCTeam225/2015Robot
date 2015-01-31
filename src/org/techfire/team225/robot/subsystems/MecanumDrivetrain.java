@@ -15,10 +15,8 @@ public class MecanumDrivetrain extends Subsystem {
 	public DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
     public DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
     
-    public Encoder encoderFL = new Encoder(PortMap.ENCODER_LEFT_FORWARD_A, PortMap.ENCODER_LEFT_FORWARD_B);
-    public Encoder encoderFR = new Encoder(PortMap.ENCODER_RIGHT_FORWARD_A, PortMap.ENCODER_RIGHT_FORWARD_B);
-    public Encoder encoderBL = new Encoder(PortMap.ENCODER_LEFT_BACK_A, PortMap.ENCODER_LEFT_BACK_B);
-    public Encoder encoderBR = new Encoder(PortMap.ENCODER_RIGHT_BACK_A, PortMap.ENCODER_RIGHT_BACK_B);
+    public Encoder encoderL = new Encoder(PortMap.ENCODER_LEFT_A, PortMap.ENCODER_LEFT_B);
+    public Encoder encoderR = new Encoder(PortMap.ENCODER_RIGHT_A, PortMap.ENCODER_RIGHT_B);
     
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
@@ -60,10 +58,8 @@ public class MecanumDrivetrain extends Subsystem {
 	
 	public Integer[] getEncoders() {
 		return new Integer[] {
-				encoderFL.get(),
-				encoderFR.get(),
-				encoderBL.get(),
-				encoderBR.get()
+				encoderL.get(),
+				encoderR.get()
 		};
 	}
 
