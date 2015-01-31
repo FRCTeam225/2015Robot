@@ -123,11 +123,8 @@ public class Robot extends IterativeRobot {
 	        		"" + !mecanumDrivetrain.photoRight.get());
 	        
 	        // encoders
-	        Integer[] encoderArray = mecanumDrivetrain.getEncoders();
-	        jedis.set("EncoderFrontLeft", "" + encoderArray[0]);
-	        jedis.set("EncoderFrontRight", "" + encoderArray[1]);
-	        jedis.set("EncoderBackLeft", "" + encoderArray[2]);
-	        jedis.set("EncoderBackRight", "" + encoderArray[3]);
+	        jedis.set("EncoderLeft", "" + mecanumDrivetrain.getLeftEncoder());
+	        jedis.set("EncoderRight", "" + mecanumDrivetrain.getRightEncoder());
 	        
 	        // pdp totals
 	        jedis.set("Voltage", "" + pdp.getVoltage());
@@ -155,7 +152,8 @@ public class Robot extends IterativeRobot {
 	        
 	        jedis.set("ArmPosition", String.valueOf(CommandBase.arm.getPosition()));
     	} catch( Exception e ) {
-    		System.out.println("Redis error");
+    		e.printStackTrace();
+    		System.err.println("Redis error");
     	}
     }
 }

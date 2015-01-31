@@ -1,6 +1,5 @@
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.commands.arm.ManualArmControl;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,8 +17,6 @@ public class OI {
 	public static void init() {
 		new JoystickButton(driver, 10).whenPressed(new CenterGyro());
 		
-		new JoystickButton(driver, 7).whenPressed(new ManualArmControl(false));
-		new JoystickButton(driver, 8).whenPressed(new ManualArmControl(true));
 	}
 	
 	public static boolean getDriverPreciseMode() {
@@ -35,11 +32,11 @@ public class OI {
 	}
 	
 	public static double getDriverRotation() {
-		return driver.getRawAxis(2);
+		return driver.getRawAxis(4);
 	}
 	
 	public static double getDriverDPadRightLeft() {
-		return driver.getRawAxis(4);
+		return 0;
 	}
 }
 

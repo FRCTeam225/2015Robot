@@ -56,11 +56,12 @@ public class MecanumDrivetrain extends Subsystem {
 		return photoLeft.get();
 	}
 	
-	public Integer[] getEncoders() {
-		return new Integer[] {
-				encoderL.get(),
-				encoderR.get()
-		};
+	public int getLeftEncoder() {
+		return encoderL.get();
+	}
+	
+	public int getRightEncoder() {
+		return encoderR.get();
 	}
 
 	@Override
