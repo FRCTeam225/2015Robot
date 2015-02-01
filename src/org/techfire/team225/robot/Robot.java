@@ -37,6 +37,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	CommandBase.init();
     	OI.init();
+    	Constants.init();
     	pdp = new PowerDistributionPanel();
     	gyro = CommandBase.mecanumDrivetrain.gyro;
     	gyro.initGyro();
@@ -113,10 +114,11 @@ public class Robot extends IterativeRobot {
     }
     
     private void writeJedis() {
+    	System.out.println(CommandBase.arm.getPosition());
     	MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
     	try
     	{
-	    	jedis.set("Gyro", String.format("%.3","" + gyro.getAngle()));
+	    	jedis.set("Gyro", String.format("%2.3f",gyro.getAngle()));
 	        jedis.set("PhotosensorLeft", 
 	        		"" + !mecanumDrivetrain.photoLeft.get());
 	        jedis.set("PhotosensorRight", 
@@ -128,7 +130,7 @@ public class Robot extends IterativeRobot {
 	        jedis.set("EncoderFollow", "" + mecanumDrivetrain.getFollowEncoder());
 	        
 	        // pdp totals
-	        jedis.set("Voltage", String.format("%.3", "" + pdp.getVoltage()));
+	        jedis.set("Voltage", String.format("%2.3f", pdp.getVoltage()));
 	        jedis.set("Temperature", "" + pdp.getTemperature());
 	        jedis.set("TotalCurrent", "" + pdp.getTotalCurrent());
 	        jedis.set("TotalPower", "" + pdp.getTotalPower());

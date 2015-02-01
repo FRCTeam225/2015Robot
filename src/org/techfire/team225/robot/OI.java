@@ -16,7 +16,7 @@ public class OI {
 	public static Joystick operator = new Joystick(1);
 	
 	public static void init() {
-		new JoystickButton(driver, 10).whenPressed(new CenterGyro());
+		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 2).whenPressed(new TiltArm(true));
 		new JoystickButton(driver, 4).whenPressed(new TiltArm(false));
 	}
