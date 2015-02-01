@@ -6,8 +6,8 @@ public class Constants {
 	static HashMap<String, Double> map = new HashMap<>();
 	
 	public static void init() {
-		map.put("ARM_MIN", 1420.0);
-		map.put("ARM_MAX", 2402.0);
+		map.put("ARM_MIN", 2215.0);
+		map.put("ARM_MAX", 3240.0);
 	}
 	
 	public static double getConstant(String key) {

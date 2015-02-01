@@ -55,7 +55,7 @@ public class Arm extends Subsystem {
 		if (getPosition() >= 2215 && speed > 0) {
 			victorForward.set(speed/2);
 			victorBack.set(-speed/2);
-		} else if (getPosition() <= 3210 && speed < 0) {
+		} else if (getPosition() <= 3240 && speed < 0) {
 			victorForward.set(speed);
 			victorBack.set(-speed);
 		} else {

@@ -30,7 +30,7 @@ public class MecanumDrive extends CommandBase {
 		{
 			rotationThrottle = (mecanumDrivetrain.gyro.getAngle()-targetAngle)*-0.01;
 		}*/
-		mecanumDrivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, false);
+		mecanumDrivetrain.setMotorSpeeds(-xThrottle * 0.5, yThrottle * 0.5, -rotationThrottle * 0.5, false);
 	}
 
 	@Override
