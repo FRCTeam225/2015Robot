@@ -2,11 +2,11 @@ package org.techfire.team225.robot.commands.gripper;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class OpenGripper extends CommandBase {
+public class ToggleGripper extends CommandBase {
 	
 	@Override
 	protected void initialize() {
-		gripper.open();
+		gripper.toggleGripper();
 	}
 
 	@Override
@@ -16,7 +16,7 @@ public class OpenGripper extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override

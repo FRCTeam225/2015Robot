@@ -2,26 +2,24 @@ package org.techfire.team225.robot.commands.gripper;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class CloseGripper extends CommandBase {
+public class Punch extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		gripper.close();
+		gripper.togglePunch();
 	}
 
 	@Override
-	protected void execute() {
-		
+	protected void execute() {		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override
-	protected void end() {
-		
+	protected void end() {		
 	}
 
 }

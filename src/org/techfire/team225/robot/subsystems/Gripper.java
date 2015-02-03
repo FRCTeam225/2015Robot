@@ -4,22 +4,41 @@ import org.techfire.team225.robot.PortMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Gripper extends Subsystem {
 
-	DoubleSolenoid gripperSolenoid;
+	Solenoid gripperSolenoidLeft;
+	Solenoid gripperSolenoidRight;
+	DoubleSolenoid punchSolenoid;
+	
+	boolean gripperStatus;
+	boolean punchStatus;
 	
 	public Gripper() {
-		gripperSolenoid = new DoubleSolenoid(PortMap.GRIPPER_SOLENOID_A, PortMap.GRIPPER_SOLENOID_B);
+		gripperSolenoidLeft = new Solenoid(PortMap.GRIPPER_SOLENOID_LEFT);
+		gripperSolenoidRight = new Solenoid(PortMap.GRIPPER_SOLENOID_RIGHT);
+		punchSolenoid = new DoubleSolenoid(PortMap.PUNCH_SOLENOID_A, PortMap.PUNCH_SOLENOID_B);
 	}
 	
-	public void open() {
-		gripperSolenoid.set(Value.kForward);
+	public void toggleGripper() {
+		gripperStatus = !gripperStatus;
+		
+		gripperSolenoidLeft.set(gripperStatus);
+		gripperSolenoidRight.set(gripperStatus);
 	}
 	
-	public void close() {
-		gripperSolenoid.set(Value.kReverse);
+	public void togglePunch() {
+		Value v;
+		punchStatus = !punchStatus;
+		if (punchStatus) {
+			v = Value.kForward;
+		} else {
+			v = Value.kReverse;
+		}
+		
+		punchSolenoid.set(v);
 	}
 	
 	@Override
