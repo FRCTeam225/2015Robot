@@ -2,6 +2,8 @@ package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.arm.TiltArm;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
+import org.techfire.team225.robot.commands.gripper.CloseGripper;
+import org.techfire.team225.robot.commands.gripper.OpenGripper;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -19,6 +21,9 @@ public class OI {
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 2).whenPressed(new TiltArm(true));
 		new JoystickButton(driver, 4).whenPressed(new TiltArm(false));
+		new JoystickButton(driver, 3).whenPressed(new OpenGripper());
+		new JoystickButton(driver, 1).whenPressed(new CloseGripper());
+		
 	}
 	
 	public static boolean getDriverPreciseMode() {

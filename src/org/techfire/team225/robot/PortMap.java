@@ -25,6 +25,9 @@ public class PortMap {
     public static int ARM_POT = 1; // Analog
     public static int ARM_SOLENOID = 0; // PCM
     
+    // gripper
+    public static int GRIPPER_SOLENOID_A = 2; // PCM  
+    public static int GRIPPER_SOLENOID_B = 3; // PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 6; // PDP
