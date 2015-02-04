@@ -13,7 +13,8 @@ public class Gripper extends Subsystem {
 	Solenoid gripperSolenoidRight;
 	DoubleSolenoid punchSolenoid;
 	
-	boolean gripperStatus;
+	boolean gripperStatusLeft;
+	boolean gripperStatusRight;
 	boolean punchStatus;
 	
 	public Gripper() {
@@ -23,10 +24,17 @@ public class Gripper extends Subsystem {
 	}
 	
 	public void toggleGripper() {
-		gripperStatus = !gripperStatus;
+		gripperStatusLeft = !gripperStatusLeft;
+		gripperStatusRight = gripperStatusLeft;
 		
-		gripperSolenoidLeft.set(gripperStatus);
-		gripperSolenoidRight.set(gripperStatus);
+		gripperSolenoidLeft.set(gripperStatusLeft);
+		gripperSolenoidRight.set(gripperStatusLeft);
+	}
+	
+	public void singleToggle() {
+		gripperStatusRight = !gripperStatusRight;
+		
+		gripperSolenoidRight.set(gripperStatusRight);
 	}
 	
 	public void togglePunch() {
