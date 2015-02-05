@@ -1,3 +1,4 @@
+
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
@@ -18,6 +19,8 @@ public class MecanumDrivetrain extends Subsystem {
     public Encoder encoderL = new Encoder(PortMap.ENCODER_LEFT_A, PortMap.ENCODER_LEFT_B);
     public Encoder encoderR = new Encoder(PortMap.ENCODER_RIGHT_A, PortMap.ENCODER_RIGHT_B);
     public Encoder encoderF = new Encoder(PortMap.ENCODER_FOLLOW_A, PortMap.ENCODER_FOLLOW_B);
+    
+    public double driveScale = 0.5;
     
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
@@ -43,10 +46,10 @@ public class MecanumDrivetrain extends Subsystem {
 			y = yIn;
 		}
 		
-		victorLeft[0].set(x + y + rotation);
-        victorRight[0].set(-(-x + y - rotation));
-        victorLeft[1].set(-x + y + rotation);
-        victorRight[1].set(-(x + y - rotation));
+		victorLeft[0].set((x + y + rotation) * driveScale);
+        victorRight[0].set(-(-x + y - rotation) * driveScale);
+        victorLeft[1].set((-x + y + rotation) * driveScale);
+        victorRight[1].set(-(x + y - rotation) * driveScale);
 	}
 	
 	public boolean getRightEye() {

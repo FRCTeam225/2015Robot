@@ -24,17 +24,17 @@ public class Gripper extends Subsystem {
 	}
 	
 	public void toggleGripper() {
-		gripperStatusLeft = !gripperStatusLeft;
-		gripperStatusRight = gripperStatusLeft;
+		gripperStatusRight = !gripperStatusRight;
+		gripperStatusLeft = gripperStatusRight;
 		
 		gripperSolenoidLeft.set(gripperStatusLeft);
 		gripperSolenoidRight.set(gripperStatusLeft);
 	}
 	
 	public void singleToggle() {
-		gripperStatusRight = !gripperStatusRight;
+		gripperStatusLeft = !gripperStatusLeft;
 		
-		gripperSolenoidRight.set(gripperStatusRight);
+		gripperSolenoidLeft.set(gripperStatusLeft);
 	}
 	
 	public void togglePunch() {
