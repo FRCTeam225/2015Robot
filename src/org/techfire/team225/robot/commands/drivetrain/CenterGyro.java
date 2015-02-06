@@ -1,20 +1,17 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
+import org.techfire.team225.robot.GyroProvider;
 
 public class CenterGyro extends CommandBase {
 
-	public CenterGyro() {
-		requires(mecanumDrivetrain);
-	}
-	
 	@Override
 	protected void initialize() {
-		mecanumDrivetrain.gyro.reset();
+		GyroProvider.reset();
 	}
 
 	@Override
-	protected void execute() {
+	protected void execute() {		
 	}
 
 	@Override
@@ -23,6 +20,7 @@ public class CenterGyro extends CommandBase {
 	}
 
 	@Override
-	protected void end() {}
+	protected void end() {		
+	}
 
 }

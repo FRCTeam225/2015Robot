@@ -1,4 +1,3 @@
-
 package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
@@ -6,7 +5,6 @@ import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
 import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
 
 import redis.clients.jedis.Jedis;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,7 +22,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 	
 	public static Jedis jedis;
-	Gyro gyro;
 	PowerDistributionPanel pdp;
     Command autonomousCommand;
     CommandGroup[] autonomi;
@@ -39,9 +36,8 @@ public class Robot extends IterativeRobot {
     	OI.init();
     	Constants.init();
     	pdp = new PowerDistributionPanel();
-    	gyro = CommandBase.mecanumDrivetrain.gyro;
-    	gyro.initGyro();
-    	gyro.reset();
+    	GyroProvider.init();
+    	GyroProvider.reset();
     	autonomi = new CommandGroup[] {
         		new StrafeAndStackNormal(),
         		new StrafeAndStackFlipped()
@@ -118,7 +114,7 @@ public class Robot extends IterativeRobot {
     	MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
     	try
     	{
-	    	jedis.set("Gyro", String.format("%2.3f", gyro.getAngle()));
+	    	jedis.set("Gyro", String.format("%2.3f", GyroProvider.getAngle()));
 	        jedis.set("PhotosensorLeft", 
 	        		"" + !mecanumDrivetrain.photoLeft.get());
 	        jedis.set("PhotosensorRight", 

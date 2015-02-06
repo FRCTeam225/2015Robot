@@ -1,18 +1,17 @@
 
 package org.techfire.team225.robot.subsystems;
 
+import org.techfire.team225.robot.GyroProvider;
 import org.techfire.team225.robot.PortMap;
 import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class MecanumDrivetrain extends Subsystem {
 	
-	public Gyro gyro = new Gyro(PortMap.GYRO);
 	public DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
     public DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
     
@@ -36,8 +35,9 @@ public class MecanumDrivetrain extends Subsystem {
 		double x;
 		double y;
 		
+		double gyroAngle = getGyro();
+		
 		if (fieldCentric) {
-			double gyroAngle = gyro.getAngle();
 			gyroAngle = Math.toRadians(gyroAngle);
 			x = xIn * Math.cos(gyroAngle) - yIn * Math.sin(gyroAngle);
 			y = xIn * Math.sin(gyroAngle) + yIn * Math.cos(gyroAngle);
@@ -70,6 +70,10 @@ public class MecanumDrivetrain extends Subsystem {
 	
 	public int getFollowEncoder() {
 		return encoderF.get();
+	}
+	
+	public double getGyro() {
+		return GyroProvider.getAngle();
 	}
 
 	@Override

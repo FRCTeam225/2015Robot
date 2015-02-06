@@ -13,7 +13,7 @@ public class MecanumDrive extends CommandBase {
 	
 	@Override
 	protected void initialize() {
-		targetAngle = mecanumDrivetrain.gyro.getAngle();
+		targetAngle = mecanumDrivetrain.getGyro();
 	}
 
 	@Override
