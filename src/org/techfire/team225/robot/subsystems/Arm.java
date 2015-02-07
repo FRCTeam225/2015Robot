@@ -52,7 +52,7 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setMotorSpeed(double speed) {
-		if (getPosition() >= 2838 && speed > 0) {
+		if (getPosition() >= 2845 && speed > 0) {
 			victorForward.set(speed * 0.75);
 			victorBack.set(-speed * 0.75);
 		} else if (getPosition() <= 3937 && speed < 0) {
