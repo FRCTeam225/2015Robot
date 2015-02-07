@@ -1,13 +1,12 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
-import org.techfire.team225.robot.GyroProvider;
 
 public class CenterGyro extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		GyroProvider.reset();
+		mecanumDrivetrain.resetAngle();
 	}
 
 	@Override

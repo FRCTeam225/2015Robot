@@ -21,6 +21,8 @@ public class MecanumDrivetrain extends Subsystem {
     
     public double driveScale = 0.5;
     
+    GyroProvider gyro;
+    
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
 	
@@ -29,6 +31,8 @@ public class MecanumDrivetrain extends Subsystem {
 		victorLeft[1] = new Victor(PortMap.LEFT_BACK_MOTOR);
 		victorRight[0] = new Victor(PortMap.RIGHT_FORWARD_MOTOR);
 		victorRight[1] = new Victor(PortMap.RIGHT_BACK_MOTOR);
+		
+		gyro = new GyroProvider();
 	}
 	
 	public void setMotorSpeeds(double xIn, double yIn, double rotation, boolean fieldCentric) {
@@ -72,8 +76,12 @@ public class MecanumDrivetrain extends Subsystem {
 		return encoderF.get();
 	}
 	
-	public double getGyro() {
-		return GyroProvider.getAngle();
+	public int getGyro() {
+		return gyro.getAngle();
+	}
+	
+	public void resetAngle() {
+		gyro.reset();
 	}
 
 	@Override

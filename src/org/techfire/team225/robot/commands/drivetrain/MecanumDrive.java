@@ -24,11 +24,11 @@ public class MecanumDrive extends CommandBase {
 		// gyro correction, holds the robot at the angle the driver wants it to be at
 		/*if ( Math.abs(rotationThrottle) > 0.1 )
 		{
-			targetAngle = mecanumDrivetrain.gyro.getAngle();
+			targetAngle = mecanumDrivetrain.getGyro();
 		}
 		else
 		{
-			rotationThrottle = (mecanumDrivetrain.gyro.getAngle()-targetAngle)*-0.01;
+			rotationThrottle = (mecanumDrivetrain.getGyro()-targetAngle)*-0.01;
 		}*/
 		mecanumDrivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, false);
 	}

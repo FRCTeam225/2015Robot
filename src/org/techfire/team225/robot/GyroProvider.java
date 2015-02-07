@@ -1,17 +1,48 @@
 package org.techfire.team225.robot;
 
-public class GyroProvider {
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class GyroProvider extends Thread {
 	
-	public static double getAngle() {
-		return 0;
+	private int angle;
+	private int zero;
+	
+	public GyroProvider() {
+		start();
+		angle = 0;
+		zero = 0;
 	}
 	
-	public static void init() {
-		
+	public int getAngle() {
+		return angle - zero;
 	}
 	
-	public static void reset() {
-		
+	public void reset() {
+		zero = angle;
 	}
 
+	public void run() {
+		try {
+			int port = 1337;
+			
+			DatagramSocket dsocket = new DatagramSocket(port);
+			
+			while ( true )
+			{
+				try {
+					byte[] buffer = new byte[2];
+					DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+					
+					dsocket.receive(packet);
+					angle = ((buffer[0] & 0xff) << 8) | (buffer[1] & 0xff);
+				} catch (Exception e) {
+					System.out.println("Gyro packet error");
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Gyro thread error");
+		}
+	}
+	
 }
