@@ -32,12 +32,12 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	PortMap.init();
     	CommandBase.init();
     	OI.init();
     	Constants.init();
     	pdp = new PowerDistributionPanel();
-    	GyroProvider.init();
-    	GyroProvider.reset();
+    	CommandBase.mecanumDrivetrain.resetAngle();
     	autonomi = new CommandGroup[] {
         		new StrafeAndStackNormal(),
         		new StrafeAndStackFlipped()
@@ -114,7 +114,7 @@ public class Robot extends IterativeRobot {
     	MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
     	try
     	{
-	    	jedis.set("Gyro", String.format("%2.3f", GyroProvider.getAngle()));
+	    	jedis.set("Gyro", String.format("%2.3f", mecanumDrivetrain.getGyro()));
 	        jedis.set("PhotosensorLeft", 
 	        		"" + !mecanumDrivetrain.photoLeft.get());
 	        jedis.set("PhotosensorRight", 
@@ -133,18 +133,18 @@ public class Robot extends IterativeRobot {
 	        jedis.set("TotalEnergy", "" + pdp.getTotalEnergy());
 	        
 	        // pdp individual components
-	        double currentFL = pdp.getCurrent(PortMap.LEFT_FORWARD_MOTOR_POWER);
-	        double currentFR = pdp.getCurrent(PortMap.RIGHT_FORWARD_MOTOR_POWER);
-	        double currentBL = pdp.getCurrent(PortMap.LEFT_BACK_MOTOR_POWER);
-	        double currentBR = pdp.getCurrent(PortMap.RIGHT_BACK_MOTOR_POWER);
-	        jedis.set("FrontLeftMotorCurrent", "" + pdp.getCurrent(PortMap.LEFT_FORWARD_MOTOR_POWER));
-	        jedis.set("FrontRightMotorCurrent", "" + pdp.getCurrent(PortMap.RIGHT_FORWARD_MOTOR_POWER));
-	        jedis.set("BackLeftMotorCurrent", "" + pdp.getCurrent(PortMap.LEFT_BACK_MOTOR_POWER));
-	        jedis.set("BackRightMotorCurrent", "" + pdp.getCurrent(PortMap.RIGHT_BACK_MOTOR_POWER));
+	        double currentFL = pdp.getCurrent(PortMap.get("LEFT_FORWARD_MOTOR_POWER"));
+	        double currentFR = pdp.getCurrent(PortMap.get("RIGHT_FORWARD_MOTOR_POWER"));
+	        double currentBL = pdp.getCurrent(PortMap.get("LEFT_BACK_MOTOR_POWER"));
+	        double currentBR = pdp.getCurrent(PortMap.get("RIGHT_BACK_MOTOR_POWER"));
+	        jedis.set("FrontLeftMotorCurrent", "" + pdp.getCurrent(PortMap.get("LEFT_FORWARD_MOTOR_POWER")));
+	        jedis.set("FrontRightMotorCurrent", "" + pdp.getCurrent(PortMap.get("RIGHT_FORWARD_MOTOR_POWER")));
+	        jedis.set("BackLeftMotorCurrent", "" + pdp.getCurrent(PortMap.get("LEFT_BACK_MOTOR_POWER")));
+	        jedis.set("BackRightMotorCurrent", "" + pdp.getCurrent(PortMap.get("RIGHT_BACK_MOTOR_POWER")));
 	        jedis.set("DrivetrainTotalCurrent", "" + (currentFL + currentFR + currentBL + currentBR));
 	        
-	        double armCurrent1 = pdp.getCurrent(PortMap.ARM_FORWARD_MOTOR_POWER);
-	        double armCurrent2 = pdp.getCurrent(PortMap.ARM_BACK_MOTOR_POWER);
+	        double armCurrent1 = pdp.getCurrent(PortMap.get("ARM_FORWARD_MOTOR_POWER"));
+	        double armCurrent2 = pdp.getCurrent(PortMap.get("ARM_BACK_MOTOR_POWER"));
 	        jedis.set("ArmMotorOneCurrent", "" + armCurrent1);
 	        jedis.set("ArmMotorTwoCurrent", "" + armCurrent2);
 	        jedis.set("ArmTotalCurrent", "" + (armCurrent1 + armCurrent2));

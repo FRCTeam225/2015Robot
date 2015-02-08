@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class MecanumDrivetrain extends Subsystem {
 	
-	public DigitalInput photoLeft = new DigitalInput(PortMap.PHOTO_SENSOR_LEFT);
-    public DigitalInput photoRight = new DigitalInput(PortMap.PHOTO_SENSOR_RIGHT);
+	public DigitalInput photoLeft = new DigitalInput(PortMap.get("PHOTO_SENSOR_LEFT"));
+    public DigitalInput photoRight = new DigitalInput(PortMap.get("PHOTO_SENSOR_RIGHT"));
     
-    public Encoder encoderL = new Encoder(PortMap.ENCODER_LEFT_A, PortMap.ENCODER_LEFT_B);
-    public Encoder encoderR = new Encoder(PortMap.ENCODER_RIGHT_A, PortMap.ENCODER_RIGHT_B);
-    public Encoder encoderF = new Encoder(PortMap.ENCODER_FOLLOW_A, PortMap.ENCODER_FOLLOW_B);
+    public Encoder encoderL = new Encoder(PortMap.get("ENCODER_LEFT_A"), PortMap.get("ENCODER_LEFT_B"));
+    public Encoder encoderR = new Encoder(PortMap.get("ENCODER_RIGHT_A"), PortMap.get("ENCODER_RIGHT_B"));
+    public Encoder encoderF = new Encoder(PortMap.get("ENCODER_FOLLOW_A"), PortMap.get("ENCODER_FOLLOW_B"));
     
     public double driveScale = 0.5;
     
@@ -27,10 +27,10 @@ public class MecanumDrivetrain extends Subsystem {
 	Victor[] victorRight = new Victor[2];
 	
 	public MecanumDrivetrain() {
-		victorLeft[0] = new Victor(PortMap.LEFT_FORWARD_MOTOR);
-		victorLeft[1] = new Victor(PortMap.LEFT_BACK_MOTOR);
-		victorRight[0] = new Victor(PortMap.RIGHT_FORWARD_MOTOR);
-		victorRight[1] = new Victor(PortMap.RIGHT_BACK_MOTOR);
+		victorLeft[0] = new Victor(PortMap.get("LEFT_FORWARD_MOTOR"));
+		victorLeft[1] = new Victor(PortMap.get("LEFT_BACK_MOTOR"));
+		victorRight[0] = new Victor(PortMap.get("RIGHT_FORWARD_MOTOR"));
+		victorRight[1] = new Victor(PortMap.get("RIGHT_BACK_MOTOR"));
 		
 		gyro = new GyroProvider();
 	}

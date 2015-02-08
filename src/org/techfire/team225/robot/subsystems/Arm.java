@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 
-	Victor victorForward = new Victor(PortMap.ARM_FORWARD_MOTOR);
-	Victor victorBack = new Victor(PortMap.ARM_BACK_MOTOR);
-	AnalogInput pot = new AnalogInput(PortMap.ARM_POT);
-	Solenoid armSolenoid = new Solenoid(PortMap.ARM_SOLENOID);
+	Victor victorForward = new Victor(PortMap.get("ARM_FORWARD_MOTOR"));
+	Victor victorBack = new Victor(PortMap.get("ARM_BACK_MOTOR"));
+	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
+	Solenoid armSolenoid = new Solenoid(PortMap.get("ARM_SOLENOID"));
 	
 	PIDOutput outputGroup = new PIDOutput() {
 		public void pidWrite(double output)

@@ -18,9 +18,9 @@ public class Gripper extends Subsystem {
 	boolean punchStatus;
 	
 	public Gripper() {
-		gripperSolenoidLeft = new Solenoid(PortMap.GRIPPER_SOLENOID_LEFT);
-		gripperSolenoidRight = new Solenoid(PortMap.GRIPPER_SOLENOID_RIGHT);
-		punchSolenoid = new DoubleSolenoid(PortMap.PUNCH_SOLENOID_A, PortMap.PUNCH_SOLENOID_B);
+		gripperSolenoidLeft = new Solenoid(PortMap.get("GRIPPER_SOLENOID_LEFT"));
+		gripperSolenoidRight = new Solenoid(PortMap.get("GRIPPER_SOLENOID_RIGHT"));
+		punchSolenoid = new DoubleSolenoid(PortMap.get("PUNCH_SOLENOID_A"), PortMap.get("PUNCH_SOLENOID_B"));
 	}
 	
 	public void toggleGripper() {
