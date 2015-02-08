@@ -26,6 +26,7 @@ public class GyroProvider extends Thread {
 		try {
 			int port = 1337;
 			
+			@SuppressWarnings("resource")
 			DatagramSocket dsocket = new DatagramSocket(port);
 			
 			while ( true )
