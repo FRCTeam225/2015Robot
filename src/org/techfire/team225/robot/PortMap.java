@@ -10,6 +10,7 @@ public class PortMap {
 		try {
 			File flag = new File("/PracticeRobot");
 			isCompBot = !flag.exists();
+			Robot.jedis.set("isCompBot", "false");
 		} catch (Exception e) {
 			isCompBot = true;
 		}

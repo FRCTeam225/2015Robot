@@ -16,6 +16,7 @@ public class Arm extends Subsystem {
 	Victor victorBack = new Victor(PortMap.get("ARM_BACK_MOTOR"));
 	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
 	Solenoid armSolenoid = new Solenoid(PortMap.get("ARM_SOLENOID"));
+	public boolean potOverride = false;
 	
 	PIDOutput outputGroup = new PIDOutput() {
 		public void pidWrite(double output)
@@ -52,7 +53,15 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setMotorSpeed(double speed) {
-		if (getPosition() >= 2845 && speed > 0) {
+		if (potOverride) {
+			if (speed > 0) {
+				victorForward.set(speed * 0.75);
+				victorBack.set(-speed * 0.75);
+			} else if (speed < 0) {
+				victorForward.set(speed);
+				victorBack.set(-speed);
+			}
+		} else if (getPosition() >= 2845 && speed > 0) {
 			victorForward.set(speed * 0.75);
 			victorBack.set(-speed * 0.75);
 		} else if (getPosition() <= 3937 && speed < 0) {
