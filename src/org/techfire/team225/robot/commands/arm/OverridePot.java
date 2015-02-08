@@ -4,7 +4,7 @@ import org.techfire.team225.robot.CommandBase;
 
 public class OverridePot extends CommandBase {
 
-	boolean override = false;
+	static boolean override = false;
 	
 	@Override
 	protected void initialize() {

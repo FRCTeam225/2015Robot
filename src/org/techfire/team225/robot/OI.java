@@ -1,5 +1,6 @@
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.commands.arm.OverridePot;
 import org.techfire.team225.robot.commands.arm.TiltArm;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 import org.techfire.team225.robot.commands.gripper.ToggleGripper;
@@ -18,6 +19,7 @@ public class OI {
 	
 	public static void init() {
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
+		new JoystickButton(driver, 7).whenPressed(new OverridePot());
 		new JoystickButton(driver, 2).whenPressed(new TiltArm(true));
 		new JoystickButton(driver, 4).whenPressed(new TiltArm(false));
 		new JoystickButton(driver, 3).whenPressed(new ToggleGripper(1));
