@@ -15,7 +15,7 @@ public class Arm extends Subsystem {
 	Victor victorForward = new Victor(PortMap.get("ARM_FORWARD_MOTOR"));
 	Victor victorBack = new Victor(PortMap.get("ARM_BACK_MOTOR"));
 	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
-	Solenoid armSolenoid = new Solenoid(PortMap.get("ARM_SOLENOID"));
+	Solenoid wingsSolenoid = new Solenoid(PortMap.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
 	
 	PIDOutput outputGroup = new PIDOutput() {
@@ -73,8 +73,8 @@ public class Arm extends Subsystem {
 		}
 	}
 	
-	public void toggleArm(boolean tilt) {
-		armSolenoid.set(tilt);
+	public void toggleWings(boolean toggle) {
+		wingsSolenoid.set(toggle);
 	}
 	@Override
 	protected void initDefaultCommand() {

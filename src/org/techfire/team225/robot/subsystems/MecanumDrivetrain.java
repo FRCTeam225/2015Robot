@@ -72,6 +72,19 @@ public class MecanumDrivetrain extends Subsystem {
 		return -encoderR.get();
 	}
 	
+	public int getAverageForwardEncoders() {
+		return (encoderL.get() + encoderR.get())/2;
+	}
+	
+	public void resetForwardEncoders() {
+		encoderL.reset();
+		encoderR.reset();
+	}
+	
+	public void resetFollowerEncoder() {
+		encoderF.reset();
+	}
+	
 	public int getFollowEncoder() {
 		return encoderF.get();
 	}

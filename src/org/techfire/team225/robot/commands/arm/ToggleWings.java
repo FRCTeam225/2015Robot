@@ -2,16 +2,14 @@ package org.techfire.team225.robot.commands.arm;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class TiltArm extends CommandBase {
+public class ToggleWings extends CommandBase {
 
-	boolean tilt;
+	static boolean toggle = false;
 	
-	public TiltArm(boolean tilt) {
-		this.tilt = tilt;
-	}
 	@Override
 	protected void initialize() {
-		arm.toggleArm(tilt);
+		toggle = !toggle;
+		arm.toggleWings(toggle);
 	}
 
 	@Override
