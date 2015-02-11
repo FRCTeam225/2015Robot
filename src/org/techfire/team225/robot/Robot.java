@@ -2,6 +2,9 @@ package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
+import org.techfire.team225.robot.commands.drivetrain.DriveXDistance;
+import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
+import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
 
 import redis.clients.jedis.Jedis;
@@ -67,7 +70,10 @@ public class Robot extends IterativeRobot {
     	} catch (Exception e){
     		
     	}
-    	autonomousCommand = autonomi[i];
+    	//autonomousCommand = autonomi[i];
+    	//autonomousCommand.start();
+    	
+    	autonomousCommand = new TurnTo(90);
     	autonomousCommand.start();
     }
 
@@ -76,6 +82,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        CommandBase.mecanumDrivetrain.update();
     }
 
     public void teleopInit() {

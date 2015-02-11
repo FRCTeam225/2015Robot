@@ -1,17 +1,22 @@
 
 package org.techfire.team225.robot.subsystems;
 
-import org.techfire.team225.robot.GyroProvider;
 import org.techfire.team225.robot.PortMap;
+import org.techfire.team225.robot.SimplePID;
 import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class MecanumDrivetrain extends Subsystem {
 	
+	public SimplePID pidX = new SimplePID(0.05, 0.01, 0);
+	public SimplePID pidY = new SimplePID(0.05, 0.01, 0);
+	public SimplePID pidTheta = new SimplePID(0.1, 0, 0);
+
 	public DigitalInput photoLeft = new DigitalInput(PortMap.get("PHOTO_SENSOR_LEFT"));
     public DigitalInput photoRight = new DigitalInput(PortMap.get("PHOTO_SENSOR_RIGHT"));
     
@@ -21,10 +26,13 @@ public class MecanumDrivetrain extends Subsystem {
     
     public double driveScale = 0.5;
     
-    GyroProvider gyro;
+    //GyroProvider gyro;
+    Gyro gyro;
     
 	Victor[] victorLeft = new Victor[2];
 	Victor[] victorRight = new Victor[2];
+	
+	boolean pidEnabled = false;
 	
 	public MecanumDrivetrain() {
 		victorLeft[0] = new Victor(PortMap.get("LEFT_FORWARD_MOTOR"));
@@ -32,7 +40,8 @@ public class MecanumDrivetrain extends Subsystem {
 		victorRight[0] = new Victor(PortMap.get("RIGHT_FORWARD_MOTOR"));
 		victorRight[1] = new Victor(PortMap.get("RIGHT_BACK_MOTOR"));
 		
-		gyro = new GyroProvider();
+		//gyro = new GyroProvider();
+		gyro = new Gyro(PortMap.get("GYRO"));
 	}
 	
 	public void setMotorSpeeds(double xIn, double yIn, double rotation, boolean fieldCentric) {
@@ -56,6 +65,19 @@ public class MecanumDrivetrain extends Subsystem {
         victorRight[1].set(-(x + y - rotation) * driveScale);
 	}
 	
+	public void setPIDEnabled(boolean state)
+	{
+		this.pidEnabled = state;
+	}
+	
+	public void update()
+	{
+		
+		double turnSpeed = -pidTheta.calculate(getGyro());
+		if ( turnSpeed > 0.1 )
+		setMotorSpeeds(-pidX.calculate(getFollowEncoder()), -pidY.calculate(getAverageForwardEncoders()), turnSpeed, false);
+	}
+	
 	public boolean getRightEye() {
 		return photoRight.get();
 	}
@@ -73,7 +95,7 @@ public class MecanumDrivetrain extends Subsystem {
 	}
 	
 	public int getAverageForwardEncoders() {
-		return (encoderL.get() + encoderR.get())/2;
+		return (encoderL.get() - encoderR.get())/2;
 	}
 	
 	public void resetForwardEncoders() {
@@ -89,7 +111,7 @@ public class MecanumDrivetrain extends Subsystem {
 		return encoderF.get();
 	}
 	
-	public int getGyro() {
+	public double getGyro() {
 		return gyro.getAngle();
 	}
 	
