@@ -2,11 +2,11 @@ package org.techfire.team225.robot.commands.gripper;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class Punch extends CommandBase {
+public class CloseGripper extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		gripper.togglePunch();
+		gripper.setGripper(2);
 	}
 
 	@Override

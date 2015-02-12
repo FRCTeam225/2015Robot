@@ -2,8 +2,6 @@ package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -11,42 +9,35 @@ public class Gripper extends Subsystem {
 
 	Solenoid gripperSolenoidLeft;
 	Solenoid gripperSolenoidRight;
-	DoubleSolenoid punchSolenoid;
-	
-	boolean gripperStatusLeft;
-	boolean gripperStatusRight;
-	boolean punchStatus;
-	
+
 	public Gripper() {
 		gripperSolenoidLeft = new Solenoid(PortMap.get("GRIPPER_SOLENOID_LEFT"));
 		gripperSolenoidRight = new Solenoid(PortMap.get("GRIPPER_SOLENOID_RIGHT"));
-		punchSolenoid = new DoubleSolenoid(PortMap.get("PUNCH_SOLENOID_A"), PortMap.get("PUNCH_SOLENOID_B"));
 	}
 	
-	public void toggleGripper() {
-		gripperStatusRight = !gripperStatusRight;
-		gripperStatusLeft = gripperStatusRight;
-		
-		gripperSolenoidLeft.set(gripperStatusLeft);
-		gripperSolenoidRight.set(gripperStatusLeft);
-	}
-	
-	public void singleToggle() {
-		gripperStatusLeft = !gripperStatusLeft;
-		
-		gripperSolenoidLeft.set(gripperStatusLeft);
-	}
-	
-	public void togglePunch() {
-		Value v;
-		punchStatus = !punchStatus;
-		if (punchStatus) {
-			v = Value.kForward;
-		} else {
-			v = Value.kReverse;
+	/**
+	 * 0 = open;
+	 * 1 = half;
+	 * 2 = closed;
+	 * @param set
+	 */
+	public void setGripper(int set) {
+		switch (set) {
+			case 0: // open
+				gripperSolenoidLeft.set(true);
+				gripperSolenoidRight.set(true);
+				break;
+			case 1: // half
+				gripperSolenoidLeft.set(false);
+				gripperSolenoidRight.set(true);
+				break;
+			case 2: // close
+				gripperSolenoidLeft.set(false);
+				gripperSolenoidRight.set(false);
+				break;
+			default:
+				break;
 		}
-		
-		punchSolenoid.set(v);
 	}
 	
 	@Override

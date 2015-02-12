@@ -2,14 +2,17 @@ package org.techfire.team225.robot.commands.arm;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class ToggleWings extends CommandBase {
+public class SetWings extends CommandBase {
 
-	static boolean toggle = false;
+	boolean set = false;
+	
+	public SetWings(boolean set) {
+		this.set = set;
+	}
 	
 	@Override
 	protected void initialize() {
-		toggle = !toggle;
-		arm.toggleWings(toggle);
+		arm.setWings(set);
 	}
 
 	@Override

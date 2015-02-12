@@ -17,6 +17,7 @@ public class Arm extends Subsystem {
 	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
 	Solenoid wingsSolenoid = new Solenoid(PortMap.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
+	
 	public static int firstPosition = 2400;
 	public static int floorPosition = 2270;
 	public static int preContainerPosition = 3100;
@@ -82,8 +83,8 @@ public class Arm extends Subsystem {
 		}
 	}
 	
-	public void toggleWings(boolean toggle) {
-		wingsSolenoid.set(toggle);
+	public void setWings(boolean set) {
+		wingsSolenoid.set(set);
 	}
 	@Override
 	protected void initDefaultCommand() {

@@ -1,9 +1,11 @@
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.commands.arm.ToggleWings;
+import org.techfire.team225.robot.commands.arm.SetWings;
 import org.techfire.team225.robot.commands.arm.OverridePot;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
-import org.techfire.team225.robot.commands.gripper.ToggleGripper;
+import org.techfire.team225.robot.commands.gripper.CloseGripper;
+import org.techfire.team225.robot.commands.gripper.HalfGripper;
+import org.techfire.team225.robot.commands.gripper.OpenGripper;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -20,9 +22,10 @@ public class OI {
 	public static void init() {
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
-		new JoystickButton(driver, 2).whenPressed(new ToggleWings());
-		new JoystickButton(driver, 3).whenPressed(new ToggleGripper(1));
-		new JoystickButton(driver, 1).whenPressed(new ToggleGripper(2));
+		new JoystickButton(driver, 4).whenPressed(new SetWings(false));
+		new JoystickButton(driver, 3).whenPressed(new OpenGripper());
+		new JoystickButton(driver, 2).whenPressed(new CloseGripper());
+		new JoystickButton(driver, 1).whenPressed(new HalfGripper());
 		
 	}
 	
