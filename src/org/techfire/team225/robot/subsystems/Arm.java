@@ -17,10 +17,10 @@ public class Arm extends Subsystem {
 	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
 	Solenoid wingsSolenoid = new Solenoid(PortMap.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
-	public int firstPosition = 2400;
-	public int floorPosition = 2270;
-	public int preContainerPosition = 3100;
-	public int postContainerPosition = 3200;
+	public static int firstPosition = 2400;
+	public static int floorPosition = 2270;
+	public static int preContainerPosition = 3100;
+	public static int postContainerPosition = 3200;
 	
 	PIDOutput outputGroup = new PIDOutput() {
 		public void pidWrite(double output)
