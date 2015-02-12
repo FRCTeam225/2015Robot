@@ -12,10 +12,6 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class MecanumDrivetrain extends Subsystem {
-	
-	public SimplePID pidX = new SimplePID(0.05, 0.01, 0);
-	public SimplePID pidY = new SimplePID(0.05, 0.01, 0);
-	public SimplePID pidTheta = new SimplePID(0.1, 0, 0);
 
 	public DigitalInput photoLeft = new DigitalInput(PortMap.get("PHOTO_SENSOR_LEFT"));
     public DigitalInput photoRight = new DigitalInput(PortMap.get("PHOTO_SENSOR_RIGHT"));
@@ -68,14 +64,6 @@ public class MecanumDrivetrain extends Subsystem {
 	public void setPIDEnabled(boolean state)
 	{
 		this.pidEnabled = state;
-	}
-	
-	public void update()
-	{
-		
-		double turnSpeed = -pidTheta.calculate(getGyro());
-		if ( turnSpeed > 0.1 )
-		setMotorSpeeds(-pidX.calculate(getFollowEncoder()), -pidY.calculate(getAverageForwardEncoders()), turnSpeed, false);
 	}
 	
 	public boolean getRightEye() {

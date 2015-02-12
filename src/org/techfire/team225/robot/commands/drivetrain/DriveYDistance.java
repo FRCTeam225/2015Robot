@@ -1,35 +1,40 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
+import org.techfire.team225.robot.SimplePID;
 
 public class DriveYDistance extends CommandBase {
 
 	double dist;
-	public DriveYDistance(double dist)
+	public SimplePID pidY = new SimplePID(0.05, 0.01, 0);
+	public SimplePID pidTheta = new SimplePID(0.1, 0, 0);
+	
+	public DriveYDistance(double dist, double theta)
 	{
-		this.dist = dist;
+		pidY.setTarget(dist);
+		pidTheta.setTarget(theta);
 		requires(mecanumDrivetrain);
 	}
 	
 	@Override
 	protected void initialize() {
-		mecanumDrivetrain.pidY.setTarget(dist);
+		
 		
 	}
 
 	@Override
 	protected void execute() {
-		// Drivetrain PID loop runs at this time
-		
+		mecanumDrivetrain.setMotorSpeeds(0, -pidY.calculate(mecanumDrivetrain.getAverageForwardEncoders()), -pidTheta.calculate(mecanumDrivetrain.getGyro()), false);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(mecanumDrivetrain.pidY.getError()) < 10;
+		return Math.abs(pidY.getError()) < 10;
 	}
 
 	@Override
 	protected void end() {
+		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, false);
 
 	}
 

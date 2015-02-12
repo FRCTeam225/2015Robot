@@ -4,6 +4,7 @@ import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
 import org.techfire.team225.robot.commands.drivetrain.DriveXDistance;
 import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
+import org.techfire.team225.robot.commands.drivetrain.StrafeUntilSee;
 import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
 
@@ -64,6 +65,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	CommandBase.arm.enablePID();
     	int i = 0;
     	try {
     		i = Integer.parseInt(jedis.get("currentAuto"));
@@ -73,7 +75,7 @@ public class Robot extends IterativeRobot {
     	//autonomousCommand = autonomi[i];
     	//autonomousCommand.start();
     	
-    	autonomousCommand = new TurnTo(90);
+    	autonomousCommand = new StrafeUntilSee();
     	autonomousCommand.start();
     }
 
@@ -82,7 +84,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        CommandBase.mecanumDrivetrain.update();
     }
 
     public void teleopInit() {
@@ -91,6 +92,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+    	CommandBase.arm.enablePID();
     }
 
     /**
@@ -123,9 +125,9 @@ public class Robot extends IterativeRobot {
     	{
 	    	jedis.set("Gyro", String.format("%2.3f", mecanumDrivetrain.getGyro()));
 	        jedis.set("PhotosensorLeft", 
-	        		"" + !mecanumDrivetrain.photoLeft.get());
+	        		"" + mecanumDrivetrain.getLeftEye());
 	        jedis.set("PhotosensorRight", 
-	        		"" + !mecanumDrivetrain.photoRight.get());
+	        		"" + mecanumDrivetrain.getRightEye());
 	        
 	        // encoders
 	        jedis.set("EncoderLeft", "" + mecanumDrivetrain.getLeftEncoder());

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StrafeAndStackFlipped extends CommandGroup{
 	private String name = "Strafe & Stack - from side closer to driver";
 	public StrafeAndStackFlipped() {
-		addSequential(new StrafeUntilSee(-1));
+		//addSequential(new StrafeUntilSee(-1));
 	}
 	
 	public String toString() {

@@ -1,32 +1,36 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
+import org.techfire.team225.robot.SimplePID;
 
 public class TurnTo extends CommandBase {
 
-	double theta;
+	public SimplePID pidTheta = new SimplePID(0.1, 0, 0);
+	
 	public TurnTo(double theta)
 	{
-		this.theta = theta;
+		pidTheta.setTarget(theta);
+		requires(mecanumDrivetrain);
 	}
 	
 	@Override
 	protected void initialize() {
-		mecanumDrivetrain.pidTheta.setTarget(theta);
-	}
-
-	@Override
-	protected void execute() {
 		
 	}
 
 	@Override
+	protected void execute() {
+		mecanumDrivetrain.setMotorSpeeds(0, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), false);
+	}
+
+	@Override
 	protected boolean isFinished() {
-		return Math.abs(mecanumDrivetrain.pidTheta.getError()) < 1;
+		return Math.abs(pidTheta.getError()) < 1;
 	}
 
 	@Override
 	protected void end() {
+		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, false);
 
 	}
 

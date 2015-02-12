@@ -17,6 +17,10 @@ public class Arm extends Subsystem {
 	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
 	Solenoid wingsSolenoid = new Solenoid(PortMap.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
+	public int firstPosition = 2400;
+	public int floorPosition = 2270;
+	public int preContainerPosition = 3100;
+	public int postContainerPosition = 3200;
 	
 	PIDOutput outputGroup = new PIDOutput() {
 		public void pidWrite(double output)
@@ -30,7 +34,7 @@ public class Arm extends Subsystem {
 	}
 	
 	
-	PIDController pid = new PIDController(0, 0, 0, pot, outputGroup);
+	PIDController pid = new PIDController(0.2, 0, 0, pot, outputGroup);
 	
 	public void enablePID()
 	{
@@ -52,6 +56,10 @@ public class Arm extends Subsystem {
 		pid.setSetpoint(position);
 	}
 	
+	public double getError() {
+		return pid.getError();
+	}
+	
 	public void setMotorSpeed(double speed) {
 		if (potOverride) {
 			if (speed > 0) {
@@ -61,10 +69,11 @@ public class Arm extends Subsystem {
 				victorForward.set(speed);
 				victorBack.set(-speed);
 			}
-		} else if (getPosition() >= 2845 && speed > 0) {
+		// the arm will overshoot the set pot value by about 10 to 20
+		} else if (getPosition() >= 2275 && speed > 0) {
 			victorForward.set(speed * 0.75);
 			victorBack.set(-speed * 0.75);
-		} else if (getPosition() <= 3937 && speed < 0) {
+		} else if (getPosition() <= 3420 && speed < 0) {
 			victorForward.set(speed);
 			victorBack.set(-speed);
 		} else {
