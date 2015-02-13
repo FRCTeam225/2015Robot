@@ -1,7 +1,7 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
-import org.techfire.team225.robot.commands.arm.HoldArm;
+import org.techfire.team225.robot.commands.arm.ArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
@@ -62,6 +62,10 @@ public class Arm extends Subsystem {
 		return pid.getError();
 	}
 	
+	public boolean isPIDenabled() {
+		return pid.isEnable();
+	}
+	
 	public void setMotorSpeed(double speed) {
 		if (potOverride) {
 			if (speed > 0) {
@@ -89,7 +93,7 @@ public class Arm extends Subsystem {
 	}
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new HoldArm());
+		setDefaultCommand(new ArmControl());
 	}
 
 }
