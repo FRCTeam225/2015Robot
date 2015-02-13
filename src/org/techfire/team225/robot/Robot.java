@@ -1,5 +1,6 @@
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
 import org.techfire.team225.robot.commands.drivetrain.DriveXDistance;
@@ -66,16 +67,16 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
     	CommandBase.arm.enablePID();
-    	int i = 0;
+    	/*int i = 0;
     	try {
     		i = Integer.parseInt(jedis.get("currentAuto"));
     	} catch (Exception e){
     		
-    	}
+    	}*/
     	//autonomousCommand = autonomi[i];
     	//autonomousCommand.start();
     	
-    	autonomousCommand = new StrafeUntilSee();
+    	autonomousCommand = new SetArm(3000);//StrafeAndStackNormal();
     	autonomousCommand.start();
     }
 

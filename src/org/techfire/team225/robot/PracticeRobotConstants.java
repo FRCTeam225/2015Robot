@@ -26,10 +26,8 @@ public class PracticeRobotConstants {
     public static int ARM_SOLENOID = 0; // PCM
     
     // gripper
-    public static int GRIPPER_SOLENOID_LEFT = 5; // PCM  
-    public static int GRIPPER_SOLENOID_RIGHT = 4; // PCM
-    public static int PUNCH_SOLENOID_A = 2; // PCM
-    public static int PUNCH_SOLENOID_B = 3; // PCM 
+    public static int GRIPPER_SOLENOID_LEFT = 4; // PCM  
+    public static int GRIPPER_SOLENOID_RIGHT = 5; // PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 6; // PDP

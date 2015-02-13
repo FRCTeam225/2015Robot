@@ -22,7 +22,8 @@ public class OI {
 	public static void init() {
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
-		new JoystickButton(driver, 4).whenPressed(new SetWings(false));
+		new JoystickButton(driver, 5).whenPressed(new SetWings(true));
+		new JoystickButton(driver, 6).whenPressed(new SetWings(false));
 		new JoystickButton(driver, 3).whenPressed(new OpenGripper());
 		new JoystickButton(driver, 2).whenPressed(new CloseGripper());
 		new JoystickButton(driver, 1).whenPressed(new HalfGripper());
