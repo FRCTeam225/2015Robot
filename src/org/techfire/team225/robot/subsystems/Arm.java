@@ -1,7 +1,7 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
-import org.techfire.team225.robot.commands.arm.ManualArmControl;
+import org.techfire.team225.robot.commands.arm.HoldArm;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
@@ -89,7 +89,7 @@ public class Arm extends Subsystem {
 	}
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new ManualArmControl());
+		setDefaultCommand(new HoldArm());
 	}
 
 }
