@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
     	//autonomousCommand = autonomi[i];
     	//autonomousCommand.start();
     	
-    	autonomousCommand = new SetArm(3000);//StrafeAndStackNormal();
+    	autonomousCommand = new SetArm(2500);//StrafeAndStackNormal();
     	autonomousCommand.start();
     }
 
@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	CommandBase.arm.disablePID();
     }
 
     /**

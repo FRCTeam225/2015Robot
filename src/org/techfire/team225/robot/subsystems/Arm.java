@@ -27,7 +27,7 @@ public class Arm extends Subsystem {
 	PIDOutput outputGroup = new PIDOutput() {
 		public void pidWrite(double output)
 		{
-			setMotorSpeed(output);
+			setMotorSpeed(-output);
 		}
 	};
 	
@@ -36,7 +36,7 @@ public class Arm extends Subsystem {
 	}
 	
 	
-	PIDController pid = new PIDController(0.6, 0, 0, pot, outputGroup);
+	PIDController pid = new PIDController(10, 0, 0, pot, outputGroup);
 	
 	public void enablePID()
 	{
