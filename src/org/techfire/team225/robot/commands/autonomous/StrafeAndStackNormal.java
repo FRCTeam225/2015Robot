@@ -20,14 +20,19 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class StrafeAndStackNormal extends CommandGroup{
 	private String name = "Strafe & Stack - normal";
 	public StrafeAndStackNormal() {
+		// init
 		addSequential(new ResetEncoders());
 		addSequential(new CenterGyro());
 		
+		// first tote
 		addSequential(new HalfGripper());
 		addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new WaitForArm());
-		addSequential(new StrafeUntilSee(true));
+		
+		addSequential(new StrafeUntilSee());
+		
+		// second tote
 		addSequential(new DriveToBin());
 		addSequential(new SetArm(Arm.firstPosition - 50));
 		addSequential(new WaitForArmAndHoldPosition());
@@ -37,36 +42,32 @@ public class StrafeAndStackNormal extends CommandGroup{
 		addSequential(new WaitForArm());
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(150,0));
-		
-		
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new DriveYDistance(30,0));
-		addSequential(new StrafeUntilSee(true));
+		
+		addSequential(new StrafeUntilSee());
+		
+		// third tote
 		addSequential(new DriveToBin());
 		addSequential(new SetArm(Arm.firstPosition - 50));
 		addSequential(new WaitForArmAndHoldPosition());
 		addSequential(new OpenGripper());
-		
-		// backup and grab stack
+		addSequential(new WaitCommand(0.5));
+		addSequential(new SetArm(Arm.floorPosition));
+		addSequential(new WaitForArm());
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(-50,0));
-		
-		addSequential(new SetArm(Arm.floorPosition));
-		addSequential(new WaitForArm());
-		addSequential(new DriveYDistance(20,0));
-		
+		addSequential(new DriveYDistance(150,0));
 		addSequential(new CloseGripper());
-		addSequential(new SetArm(Arm.floorPosition+ 50));
-		addSequential(new DriveYDistance(-150,0));
+		addSequential(new WaitCommand(0.5));
+		
+		// pull totes into scoring area
+		addSequential(new SetArm(Arm.floorPosition + 200));
+		addSequential(new DriveYDistance(-300,0));
 		addSequential(new SetArm(Arm.floorPosition));
-		
-		addSequential(new WaitForArm());
 		addSequential(new OpenGripper());
-		
-		
-		
+		addSequential(new WaitForArm());	
 	}
 
 	public String toString() {

@@ -6,7 +6,7 @@ public class HalfGripper extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		gripper.setGripper(1);
+		gripper.setGripper(true, false);
 	}
 
 	@Override
@@ -20,7 +20,6 @@ public class HalfGripper extends CommandBase {
 
 	@Override
 	protected void end() {	
-		System.out.println("HalfGripper finished ");
 	}
 
 }

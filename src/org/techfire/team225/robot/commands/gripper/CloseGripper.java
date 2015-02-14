@@ -6,7 +6,7 @@ public class CloseGripper extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		gripper.setGripper(2);
+		gripper.setGripper(true, true);
 	}
 
 	@Override
