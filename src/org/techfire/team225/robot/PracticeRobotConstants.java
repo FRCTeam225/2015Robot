@@ -42,8 +42,8 @@ public class PracticeRobotConstants {
     public static int ENCODER_FOLLOW_B = 5; // DIO
         
     // sensors
-    public static int PHOTO_SENSOR_LEFT = 6; // DIO
-    public static int PHOTO_SENSOR_RIGHT  = 7; // DIO
+    public static int PHOTO_SENSOR_LEFT = 7; // DIO
+    public static int PHOTO_SENSOR_RIGHT  = 6; // DIO
     public static int GYRO = 0; // Analog
     
     // compressor

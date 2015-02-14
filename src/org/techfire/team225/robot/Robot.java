@@ -1,5 +1,6 @@
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.commands.arm.PIDArmControl;
 import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
@@ -64,9 +65,8 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		writeJedis();
 	}
-
+	
     public void autonomousInit() {
-    	CommandBase.arm.enablePID();
     	/*int i = 0;
     	try {
     		i = Integer.parseInt(jedis.get("currentAuto"));
@@ -75,25 +75,31 @@ public class Robot extends IterativeRobot {
     	}*/
     	//autonomousCommand = autonomi[i];
     	//autonomousCommand.start();
-    	
-    	autonomousCommand = new SetArm(2500);//StrafeAndStackNormal();
+    	new PIDArmControl().start();
+    	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
+    	CommandBase.mecanumDrivetrain.resetAngle();
+    	autonomousCommand = new StrafeAndStackNormal();
     	autonomousCommand.start();
     }
-
+    
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        writeJedis();
     }
 
     public void teleopInit() {
+    	Command c;
+    	if ( (c = CommandBase.arm.getCurrentCommand()) != null )
+    		c.cancel();
+    	
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-    	CommandBase.arm.enablePID();
     }
 
     /**
@@ -101,7 +107,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-    	CommandBase.arm.disablePID();
+
     }
 
     /**
@@ -120,10 +126,12 @@ public class Robot extends IterativeRobot {
     }
     
     private void writeJedis() {
-    	System.out.println(CommandBase.arm.getPosition());
     	MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
     	try
     	{
+    		
+    		jedis.set("atBin", (mecanumDrivetrain.atBin()?"yes":"no"));
+    		
 	    	jedis.set("Gyro", String.format("%2.3f", mecanumDrivetrain.getGyro()));
 	        jedis.set("PhotosensorLeft", 
 	        		"" + mecanumDrivetrain.getLeftEye());
@@ -134,6 +142,7 @@ public class Robot extends IterativeRobot {
 	        jedis.set("EncoderLeft", "" + mecanumDrivetrain.getLeftEncoder());
 	        jedis.set("EncoderRight", "" + mecanumDrivetrain.getRightEncoder());
 	        jedis.set("EncoderFollow", "" + mecanumDrivetrain.getFollowEncoder());
+	        jedis.set("EncoderAvg", String.valueOf(mecanumDrivetrain.getAverageForwardEncoders()));
 	        
 	        // pdp totals
 	        jedis.set("Voltage", String.format("%2.3f", pdp.getVoltage()));

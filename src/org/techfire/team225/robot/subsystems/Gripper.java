@@ -24,16 +24,16 @@ public class Gripper extends Subsystem {
 	public void setGripper(int set) {
 		switch (set) {
 			case 0: // open
-				gripperSolenoidLeft.set(true);
-				gripperSolenoidRight.set(true);
+				gripperSolenoidLeft.set(false);
+				gripperSolenoidRight.set(false);
 				break;
 			case 1: // half
 				gripperSolenoidLeft.set(false);
 				gripperSolenoidRight.set(true);
 				break;
 			case 2: // close
-				gripperSolenoidLeft.set(false);
-				gripperSolenoidRight.set(false);
+				gripperSolenoidLeft.set(true);
+				gripperSolenoidRight.set(true);
 				break;
 			default:
 				break;

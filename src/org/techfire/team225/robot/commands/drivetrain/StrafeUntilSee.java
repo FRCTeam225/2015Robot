@@ -38,11 +38,11 @@ public class StrafeUntilSee extends CommandBase {
 		switch ( stage )
 		{
 			case 0:
-				double speed = (invertDirection? 1.0:-1.0);
+				double speed = (invertDirection? 1.5:-1.5);
 				if ( mecanumDrivetrain.getLeftEye() && !invertDirection )
-					speed = -1.0;
+					speed = -1.5;
 				else if ( mecanumDrivetrain.getRightEye() && invertDirection)
-					speed = 1.0;
+					speed = 1.5;
 				mecanumDrivetrain.setMotorSpeeds(speed, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), false);
 				if ( mecanumDrivetrain.getLeftEye() && mecanumDrivetrain.getRightEye() )
 				{
@@ -64,11 +64,11 @@ public class StrafeUntilSee extends CommandBase {
 					stage++;
 				break;
 			case 2:
-				speed = (invertDirection? -0.9:0.9);
+				speed = (invertDirection? -0.85:0.85);
 				if ( mecanumDrivetrain.getLeftEye() && !invertDirection )
-					speed = 0.9;
+					speed = 0.85;
 				else if ( mecanumDrivetrain.getRightEye() && invertDirection)
-					speed = -0.9;
+					speed = -0.85;
 				mecanumDrivetrain.setMotorSpeeds(speed, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), false);
 				if ( mecanumDrivetrain.getLeftEye() && mecanumDrivetrain.getRightEye() )
 				{

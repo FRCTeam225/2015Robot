@@ -12,6 +12,7 @@ public class SetArm extends CommandBase {
 	
 	@Override
 	protected void initialize() {
+		System.out.println("Set arm to "+target);
 		arm.setTarget(target);
 	}
 

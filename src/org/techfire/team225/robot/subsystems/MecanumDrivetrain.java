@@ -2,7 +2,6 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
-import org.techfire.team225.robot.SimplePID;
 import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -15,6 +14,7 @@ public class MecanumDrivetrain extends Subsystem {
 
 	public DigitalInput photoLeft = new DigitalInput(PortMap.get("PHOTO_SENSOR_LEFT"));
     public DigitalInput photoRight = new DigitalInput(PortMap.get("PHOTO_SENSOR_RIGHT"));
+    public DigitalInput photoBin = new DigitalInput(8);
     
     public Encoder encoderL = new Encoder(PortMap.get("ENCODER_LEFT_A"), PortMap.get("ENCODER_LEFT_B"));
     public Encoder encoderR = new Encoder(PortMap.get("ENCODER_RIGHT_A"), PortMap.get("ENCODER_RIGHT_B"));
@@ -38,6 +38,11 @@ public class MecanumDrivetrain extends Subsystem {
 		
 		//gyro = new GyroProvider();
 		gyro = new Gyro(PortMap.get("GYRO"));
+	}
+	
+	public boolean atBin()
+	{
+		return photoBin.get();
 	}
 	
 	public void setMotorSpeeds(double xIn, double yIn, double rotation, boolean fieldCentric) {

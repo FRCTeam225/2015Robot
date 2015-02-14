@@ -72,7 +72,7 @@ public class SimplePID {
     public double getError()
     {
         if ( targetChangedBeforeCalculate )
-            return Integer.MAX_VALUE;
+            return Double.MAX_VALUE;
         return error;
     }
     

@@ -6,7 +6,7 @@ import org.techfire.team225.robot.SimplePID;
 public class DriveYDistance extends CommandBase {
 
 	double dist;
-	public SimplePID pidY = new SimplePID(0.05, 0.01, 0);
+	public SimplePID pidY = new SimplePID(0.04, 0.001, 0);
 	public SimplePID pidTheta = new SimplePID(0.1, 0, 0);
 	
 	public DriveYDistance(double dist, double theta)

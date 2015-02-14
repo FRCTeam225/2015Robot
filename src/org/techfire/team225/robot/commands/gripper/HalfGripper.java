@@ -19,7 +19,8 @@ public class HalfGripper extends CommandBase {
 	}
 
 	@Override
-	protected void end() {		
+	protected void end() {	
+		System.out.println("HalfGripper finished ");
 	}
 
 }

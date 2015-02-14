@@ -10,7 +10,7 @@ public class PortMap {
 		try {
 			File flag = new File("/PracticeRobot");
 			isCompBot = !flag.exists();
-			Robot.jedis.set("isCompBot", "false");
+			//Robot.jedis.set("isCompBot", "false");
 		} catch (Exception e) {
 			isCompBot = true;
 		}
@@ -28,9 +28,10 @@ public class PortMap {
 				Field constantField = constants.getField(key);
 				CompetitionRobotConstants portMap = new CompetitionRobotConstants();
 				return constantField.getInt(portMap);
-		}
+			}
 		} catch (Exception e) {
-			System.out.println("Code tried to get invalid object from PortMap");
+			System.out.println("Request for " + key + " failed");
+			e.printStackTrace();
 			return 0;
 		}
 	}

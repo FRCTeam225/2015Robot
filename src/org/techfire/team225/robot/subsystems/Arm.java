@@ -1,6 +1,7 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
+import org.techfire.team225.robot.SimplePID;
 import org.techfire.team225.robot.commands.arm.ArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -22,31 +23,14 @@ public class Arm extends Subsystem {
 	public static int firstPosition = 2450;
 	public static int preContainerPosition = 3100;
 	public static int postContainerPosition = 3200;
-	public static int topPosition = 3160;
-	
-	PIDOutput outputGroup = new PIDOutput() {
-		public void pidWrite(double output)
-		{
-			setMotorSpeed(-output);
-		}
-	};
-	
+	public static int topPosition = 3200;
+
 	public Arm()
 	{
 	}
 	
 	
-	PIDController pid = new PIDController(10, 0, 0, pot, outputGroup);
-	
-	public void enablePID()
-	{
-		pid.enable();
-	}
-	
-	public void disablePID()
-	{
-		pid.disable();
-	}
+	SimplePID pid = new SimplePID(0.006, 0, 0);
 	
 	public int getPosition()
 	{
@@ -55,15 +39,11 @@ public class Arm extends Subsystem {
 	
 	public void setTarget(int position)
 	{
-		pid.setSetpoint(position);
+		pid.setTarget(position);
 	}
 	
 	public double getError() {
 		return pid.getError();
-	}
-	
-	public boolean isPIDenabled() {
-		return pid.isEnable();
 	}
 	
 	public void setMotorSpeed(double speed) {
@@ -96,4 +76,14 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new ArmControl());
 	}
 
+	
+	public void updatePID()
+	{
+		double calc = pid.calculate(getPosition());
+		setMotorSpeed(-calc);
+		System.out.println("PID Output is "+calc);
+		System.out.println("Position is "+getPosition());
+		System.out.println("Error is "+pid.getError());
+		System.out.println("Target is "+pid.getTarget());
+	}
 }

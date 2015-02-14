@@ -14,7 +14,8 @@ public class WaitForArm extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return arm.getError() < 20;
+		
+		return Math.abs(arm.getError()) < 20;
 	}
 
 	@Override
