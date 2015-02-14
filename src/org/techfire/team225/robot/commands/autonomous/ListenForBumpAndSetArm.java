@@ -7,8 +7,6 @@ import org.techfire.team225.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class ListenForBumpAndSetArm extends CommandGroup {
-
-	public static boolean wasBumped; 
 	
 	public ListenForBumpAndSetArm() {
 		addSequential(new ListenForBump());
