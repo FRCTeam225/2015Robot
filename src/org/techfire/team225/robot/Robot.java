@@ -1,13 +1,8 @@
 package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
-import org.techfire.team225.robot.commands.arm.SetArm;
-import org.techfire.team225.robot.commands.autonomous.StrafeAndStackFlipped;
-import org.techfire.team225.robot.commands.autonomous.StrafeAndStackNormal;
-import org.techfire.team225.robot.commands.drivetrain.DriveXDistance;
-import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
-import org.techfire.team225.robot.commands.drivetrain.StrafeUntilSee;
-import org.techfire.team225.robot.commands.drivetrain.TurnTo;
+import org.techfire.team225.robot.commands.autonomous.Chokehold;
+import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
 import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
 
 import redis.clients.jedis.Jedis;
@@ -45,8 +40,8 @@ public class Robot extends IterativeRobot {
     	pdp = new PowerDistributionPanel();
     	CommandBase.mecanumDrivetrain.resetAngle();
     	autonomi = new CommandGroup[] {
-        		new StrafeAndStackNormal(),
-        		new StrafeAndStackFlipped()
+        		new StrafeAndStack(),
+        		new Chokehold()
         };
     	
     	try {
@@ -67,18 +62,16 @@ public class Robot extends IterativeRobot {
 	}
 	
     public void autonomousInit() {
-    	/*int i = 0;
+    	int i = 0;
     	try {
     		i = Integer.parseInt(jedis.get("currentAuto"));
     	} catch (Exception e){
     		
-    	}*/
-    	//autonomousCommand = autonomi[i];
-    	//autonomousCommand.start();
+    	}
+    	autonomousCommand = autonomi[i];
     	new PIDArmControl().start();
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.mecanumDrivetrain.resetAngle();
-    	autonomousCommand = new StrafeAndStackNormal();
     	autonomousCommand.start();
     }
     
@@ -114,6 +107,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	System.out.println("Current Gs on the Y axis" + CommandBase.mecanumDrivetrain.getAccelerometerY());
         writeJedis();
         Scheduler.getInstance().run();
     }

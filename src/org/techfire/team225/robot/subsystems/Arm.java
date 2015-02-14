@@ -21,8 +21,8 @@ public class Arm extends Subsystem {
 	
 	public static int floorPosition = 2065;
 	public static int firstPosition = 2450;
-	public static int preContainerPosition = 3100;
-	public static int postContainerPosition = 3200;
+	public static int preContainerPosition = 3030;
+	public static int postContainerPosition = 2465;
 	public static int topPosition = 3200;
 
 	public Arm()
@@ -81,9 +81,9 @@ public class Arm extends Subsystem {
 	{
 		double calc = pid.calculate(getPosition());
 		setMotorSpeed(-calc);
-		System.out.println("PID Output is "+calc);
+		/* System.out.println("PID Output is "+calc);
 		System.out.println("Position is "+getPosition());
 		System.out.println("Error is "+pid.getError());
-		System.out.println("Target is "+pid.getTarget());
+		System.out.println("Target is "+pid.getTarget()); */
 	}
 }

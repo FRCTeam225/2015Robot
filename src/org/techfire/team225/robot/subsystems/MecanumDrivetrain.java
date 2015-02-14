@@ -4,6 +4,7 @@ package org.techfire.team225.robot.subsystems;
 import org.techfire.team225.robot.PortMap;
 import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
 
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -15,6 +16,8 @@ public class MecanumDrivetrain extends Subsystem {
 	public DigitalInput photoLeft = new DigitalInput(PortMap.get("PHOTO_SENSOR_LEFT"));
     public DigitalInput photoRight = new DigitalInput(PortMap.get("PHOTO_SENSOR_RIGHT"));
     public DigitalInput photoBin = new DigitalInput(8);
+    
+    public BuiltInAccelerometer accelerometer  = new BuiltInAccelerometer();
     
     public Encoder encoderL = new Encoder(PortMap.get("ENCODER_LEFT_A"), PortMap.get("ENCODER_LEFT_B"));
     public Encoder encoderR = new Encoder(PortMap.get("ENCODER_RIGHT_A"), PortMap.get("ENCODER_RIGHT_B"));
@@ -110,6 +113,10 @@ public class MecanumDrivetrain extends Subsystem {
 	
 	public void resetAngle() {
 		gyro.reset();
+	}
+	
+	public double getAccelerometerY() {
+		return accelerometer.getY();
 	}
 
 	@Override
