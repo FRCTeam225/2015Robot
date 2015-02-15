@@ -19,14 +19,18 @@ public class Arm extends Subsystem {
 	Solenoid wingsSolenoid = new Solenoid(PortMap.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
 	
-	public static int floorPosition = 2065;
-	public static int firstPosition = 2450;
-	public static int preContainerPosition = 3030;
-	public static int postContainerPosition = 2465;
-	public static int topPosition = 3200;
+	public static int floorPosition;
+	public static int firstPosition;
+	public static int preContainerPosition;
+	public static int postContainerPosition;
+	public static int topPosition;
 
-	public Arm()
-	{
+	public Arm() {
+		floorPosition = PortMap.get("FLOOR_POSITION");
+		firstPosition = PortMap.get("FIRST_POSITION");
+		preContainerPosition = PortMap.get("PRE_CONTAINER_POSITION");
+		postContainerPosition = PortMap.get("POST_CONTAINER_POSITION");
+		topPosition = PortMap.get("TOP_POSITION");
 	}
 	
 	
@@ -81,9 +85,9 @@ public class Arm extends Subsystem {
 	{
 		double calc = pid.calculate(getPosition());
 		setMotorSpeed(-calc);
-		/* System.out.println("PID Output is "+calc);
+		System.out.println("PID Output is "+calc);
 		System.out.println("Position is "+getPosition());
 		System.out.println("Error is "+pid.getError());
-		System.out.println("Target is "+pid.getTarget()); */
+		System.out.println("Target is "+pid.getTarget());
 	}
 }

@@ -5,7 +5,7 @@ import org.techfire.team225.robot.commands.autonomous.Chokehold;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
 import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
 
-import redis.clients.jedis.Jedis;
+//import redis.clients.jedis.Jedis;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	
-	public static Jedis jedis;
+	//public static Jedis jedis;
 	PowerDistributionPanel pdp;
     Command autonomousCommand;
     CommandGroup[] autonomi;
@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
         		new StrafeAndStack(),
         		new Chokehold()
         };
-    	
+    	/*
     	try {
     		jedis = new Jedis("localhost");
         	jedis.del("autonomi");
@@ -57,9 +57,7 @@ public class Robot extends IterativeRobot {
         	}
     	} catch ( Exception e ) {
     		System.err.println("Jedis init error");
-    	}
-    	
-
+    	}*/
     }
 	
 	public void disabledPeriodic() {
@@ -67,7 +65,7 @@ public class Robot extends IterativeRobot {
 	}
 	
     public void autonomousInit() {
-    	int i = 0;
+    	/*int i = 0;
     	try {
     		i = Integer.parseInt(jedis.get("currentAuto"));
     	} catch (Exception e){
@@ -75,7 +73,7 @@ public class Robot extends IterativeRobot {
     	}
     	autonomousCommand = autonomi[i];
     	new PIDArmControl().start();
-    	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
+    	CommandBase.arm.setTarget(CommandBase.arm.getPosition());*/
     	CommandBase.mecanumDrivetrain.resetAngle();
     	autonomousCommand.start();
     }
@@ -112,7 +110,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	System.out.println("Current Gs on the Y axis" + CommandBase.mecanumDrivetrain.getAccelerometerY());
+    	// System.out.println("Current Gs on the Y axis" + CommandBase.mecanumDrivetrain.getAccelerometerY());
         writeJedis();
         Scheduler.getInstance().run();
     }
@@ -126,7 +124,7 @@ public class Robot extends IterativeRobot {
     
     private void writeJedis() {
     	MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
-    	try
+    	/*try
     	{
     		
     		jedis.set("atBin", (mecanumDrivetrain.atBin()?"yes":"no"));
@@ -171,6 +169,6 @@ public class Robot extends IterativeRobot {
     	} catch( Exception e ) {
     		e.printStackTrace();
     		System.err.println("Redis error");
-    	}
+    	}*/
     }
 }

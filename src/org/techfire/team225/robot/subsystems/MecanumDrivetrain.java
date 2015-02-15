@@ -23,9 +23,6 @@ public class MecanumDrivetrain extends Subsystem {
     public Encoder encoderL;
     public Encoder encoderR;
     public Encoder encoderF;
-
-    
-    public double driveScale = 0.5;
     
     //GyroProvider gyro;
     Gyro gyro;
@@ -62,10 +59,9 @@ public class MecanumDrivetrain extends Subsystem {
 		return photoBin.get();
 	}
 	
-	public void setMotorSpeeds(double xIn, double yIn, double rotation, double scaleMultiplier, boolean fieldCentric) {
+	public void setMotorSpeeds(double xIn, double yIn, double rotation, double driveScale, boolean fieldCentric) {
 		double x;
 		double y;
-		driveScale *= scaleMultiplier;
 		
 		double gyroAngle = getGyro();
 		
