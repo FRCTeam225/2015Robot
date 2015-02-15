@@ -22,11 +22,13 @@ public class PortMap {
 				Class<PracticeRobotConstants> constants = PracticeRobotConstants.class;
 				Field constantField = constants.getField(key);
 				PracticeRobotConstants portMap = new PracticeRobotConstants();
+				System.out.println(key+" "+ constantField.getInt(portMap));
 				return constantField.getInt(portMap);
 			} else {
 				Class<CompetitionRobotConstants> constants = CompetitionRobotConstants.class;
 				Field constantField = constants.getField(key);
 				CompetitionRobotConstants portMap = new CompetitionRobotConstants();
+				System.out.println(key+" "+ constantField.getInt(portMap));
 				return constantField.getInt(portMap);
 			}
 		} catch (Exception e) {

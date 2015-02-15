@@ -17,7 +17,7 @@ public class DriveToBin extends CommandBase {
 
 	@Override
 	protected void execute() {
-		mecanumDrivetrain.setMotorSpeeds(0, -0.4, 0, false);
+		mecanumDrivetrain.setMotorSpeeds(0, -0.4, 0, 1, false);
 		
 	}
 
@@ -28,7 +28,7 @@ public class DriveToBin extends CommandBase {
 
 	@Override
 	protected void end() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, false);
+		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 1, false);
 		
 	}
 

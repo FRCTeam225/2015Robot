@@ -20,7 +20,7 @@ public class WaitForArmAndHoldPosition extends WaitForArm {
 	public void execute()
 	{
 		super.execute();
-		mecanumDrivetrain.setMotorSpeeds(0, -pidY.calculate(mecanumDrivetrain.getAverageForwardEncoders()), 0, false);	
+		mecanumDrivetrain.setMotorSpeeds(0, -pidY.calculate(mecanumDrivetrain.getAverageForwardEncoders()), 0, 1, false);	
 	}
 
 }

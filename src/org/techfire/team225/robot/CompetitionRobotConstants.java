@@ -18,11 +18,11 @@ public class CompetitionRobotConstants {
     public static int ARM_FORWARD_MOTOR = 4; // PWM
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
-    public static int WINGS_SOLENOID = 0; // PCM
+    public static int WINGS_SOLENOID = 2; // PCM
     
     // gripper
-    public static int GRIPPER_SOLENOID_LEFT = 4; // PCM  
-    public static int GRIPPER_SOLENOID_RIGHT = 5; // PCM
+    public static int GRIPPER_SOLENOID_LEFT = 1; // PCM  
+    public static int GRIPPER_SOLENOID_RIGHT = 0; // PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 14; // PDP

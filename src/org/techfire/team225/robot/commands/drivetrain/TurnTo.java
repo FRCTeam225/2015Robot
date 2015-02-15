@@ -20,7 +20,7 @@ public class TurnTo extends CommandBase {
 
 	@Override
 	protected void execute() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), false);
+		mecanumDrivetrain.setMotorSpeeds(0, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), 1, false);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class TurnTo extends CommandBase {
 
 	@Override
 	protected void end() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, false);
+		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 
 	}
 

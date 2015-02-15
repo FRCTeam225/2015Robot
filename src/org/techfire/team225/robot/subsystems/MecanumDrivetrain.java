@@ -13,17 +13,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class MecanumDrivetrain extends Subsystem {
 
-	public DigitalInput photoLeft = new DigitalInput(PortMap.get("PHOTO_SENSOR_LEFT"));
-    public DigitalInput photoRight = new DigitalInput(PortMap.get("PHOTO_SENSOR_RIGHT"));
-    public DigitalInput photoBin = new DigitalInput(8);
+	
+	public DigitalInput photoLeft;
+    public DigitalInput photoRight;
+    public DigitalInput photoBin;
     
-    public BuiltInAccelerometer accelerometer  = new BuiltInAccelerometer();
+    public BuiltInAccelerometer accelerometer;
     
-    public Encoder encoderL = new Encoder(PortMap.get("ENCODER_LEFT_A"), PortMap.get("ENCODER_LEFT_B"));
-    public Encoder encoderR = new Encoder(PortMap.get("ENCODER_RIGHT_A"), PortMap.get("ENCODER_RIGHT_B"));
-    public Encoder encoderF = new Encoder(PortMap.get("ENCODER_FOLLOW_A"), PortMap.get("ENCODER_FOLLOW_B"));
+    public Encoder encoderL;
+    public Encoder encoderR;
+    public Encoder encoderF;
+
     
-    public double driveScale = 0.5;
+    public double driveScale = 1;
     
     //GyroProvider gyro;
     Gyro gyro;
@@ -34,6 +36,18 @@ public class MecanumDrivetrain extends Subsystem {
 	boolean pidEnabled = false;
 	
 	public MecanumDrivetrain() {
+		 photoLeft = new DigitalInput(6);
+	     photoRight = new DigitalInput(7);
+	     photoBin = new DigitalInput(8);
+	    
+	     accelerometer  = new BuiltInAccelerometer();
+	    
+	     encoderL = new Encoder(PortMap.get("ENCODER_LEFT_A"), PortMap.get("ENCODER_LEFT_B"));
+	     encoderR = new Encoder(PortMap.get("ENCODER_RIGHT_A"), PortMap.get("ENCODER_RIGHT_B"));
+	     encoderF = new Encoder(PortMap.get("ENCODER_FOLLOW_A"), PortMap.get("ENCODER_FOLLOW_B"));
+		
+		
+		
 		victorLeft[0] = new Victor(PortMap.get("LEFT_FORWARD_MOTOR"));
 		victorLeft[1] = new Victor(PortMap.get("LEFT_BACK_MOTOR"));
 		victorRight[0] = new Victor(PortMap.get("RIGHT_FORWARD_MOTOR"));
@@ -48,9 +62,10 @@ public class MecanumDrivetrain extends Subsystem {
 		return photoBin.get();
 	}
 	
-	public void setMotorSpeeds(double xIn, double yIn, double rotation, boolean fieldCentric) {
+	public void setMotorSpeeds(double xIn, double yIn, double rotation, double scaleMultiplier, boolean fieldCentric) {
 		double x;
 		double y;
+		driveScale *= scaleMultiplier;
 		
 		double gyroAngle = getGyro();
 		

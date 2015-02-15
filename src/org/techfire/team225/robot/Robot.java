@@ -28,15 +28,20 @@ public class Robot extends IterativeRobot {
     CommandGroup[] autonomi;
     int selected = 0;
 
+    public Robot()
+    {
+    	PortMap.init();
+    	CommandBase.init();
+    	OI.init();
+    	Constants.init();
+    }
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	PortMap.init();
-    	CommandBase.init();
-    	OI.init();
-    	Constants.init();
+
     	pdp = new PowerDistributionPanel();
     	CommandBase.mecanumDrivetrain.resetAngle();
     	autonomi = new CommandGroup[] {

@@ -43,7 +43,7 @@ public class StrafeUntilSee extends CommandBase {
 					speed = -1.5;
 				else if ( mecanumDrivetrain.getRightEye() && invertDirection)
 					speed = 1.5;
-				mecanumDrivetrain.setMotorSpeeds(speed, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), false);
+				mecanumDrivetrain.setMotorSpeeds(speed, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), 1, false);
 				if ( mecanumDrivetrain.getLeftEye() && mecanumDrivetrain.getRightEye() )
 				{
 					timeout.reset();
@@ -52,7 +52,7 @@ public class StrafeUntilSee extends CommandBase {
 				}
 				break;
 			case 1: 
-				mecanumDrivetrain.setMotorSpeeds(0, 0, 0, false);
+				mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 				if ( mecanumDrivetrain.getLeftEye() && mecanumDrivetrain.getRightEye() )
 					loopsStable++;
 				else
@@ -69,7 +69,7 @@ public class StrafeUntilSee extends CommandBase {
 					speed = 0.85;
 				else if ( mecanumDrivetrain.getRightEye() && invertDirection)
 					speed = -0.85;
-				mecanumDrivetrain.setMotorSpeeds(speed, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), false);
+				mecanumDrivetrain.setMotorSpeeds(speed, 0, -pidTheta.calculate(mecanumDrivetrain.getGyro()), 1, false);
 				if ( mecanumDrivetrain.getLeftEye() && mecanumDrivetrain.getRightEye() )
 				{
 					done = true;
@@ -87,7 +87,7 @@ public class StrafeUntilSee extends CommandBase {
 
 	@Override
 	protected void end() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, false);
+		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 	}
 
 }

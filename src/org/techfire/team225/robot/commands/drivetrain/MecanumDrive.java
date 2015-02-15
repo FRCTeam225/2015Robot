@@ -21,6 +21,8 @@ public class MecanumDrive extends CommandBase {
 		double yThrottle = OI.getDriverForwardThrottle(); // forward and backwards
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
+		// omni-directional scaling
+		double scaleMultiplier = Math.abs(xThrottle) * 2;
 		// gyro correction, holds the robot at the angle the driver wants it to be at
 		/*if ( Math.abs(rotationThrottle) > 0.1 )
 		{
@@ -30,7 +32,7 @@ public class MecanumDrive extends CommandBase {
 		{
 			rotationThrottle = (mecanumDrivetrain.getGyro()-targetAngle)*-0.01;
 		}*/
-		mecanumDrivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, false);
+		mecanumDrivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scaleMultiplier, false);
 	}
 
 	@Override
@@ -40,6 +42,6 @@ public class MecanumDrive extends CommandBase {
 
 	@Override
 	protected void end() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, false);
+		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 	}
 }
