@@ -25,7 +25,7 @@ public class MecanumDrivetrain extends Subsystem {
     public Encoder encoderF;
 
     
-    public double driveScale = 1;
+    public double driveScale = 0.5;
     
     //GyroProvider gyro;
     Gyro gyro;
