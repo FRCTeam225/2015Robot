@@ -21,7 +21,8 @@ public class Chokehold extends CommandGroup {
 		addSequential(new SetArm(Arm.postContainerPosition));
 		addSequential(new WaitForArm());
 		addSequential(new ResetEncoders());
-		addParallel(new ListenForBumpAndSetArm());
+		addSequential(new SlowDriveYDistance(850, 0));
+		addSequential(new SetArm(Arm.postContainerPosition + 300));
 		addSequential(new SlowDriveYDistance(2460, 0));
 		addSequential(new SetArm(Arm.topPosition));
 		addSequential(new WaitForArm());
