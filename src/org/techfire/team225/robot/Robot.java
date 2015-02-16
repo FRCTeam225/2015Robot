@@ -3,7 +3,9 @@ package org.techfire.team225.robot;
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
 import org.techfire.team225.robot.commands.autonomous.Chokehold;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
-import org.techfire.team225.robot.subsystems.MecanumDrivetrain;
+import org.techfire.team225.robot.commands.drivetrain.Calibrate;
+import org.techfire.team225.robot.subsystems.Drivetrain;
+
 
 //import redis.clients.jedis.Jedis;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -43,7 +45,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 
     	pdp = new PowerDistributionPanel();
-    	CommandBase.mecanumDrivetrain.resetAngle();
+    	CommandBase.drivetrain.resetAngle();
     	autonomi = new CommandGroup[] {
         		new StrafeAndStack(),
         		new Chokehold()
@@ -71,10 +73,10 @@ public class Robot extends IterativeRobot {
     	} catch (Exception e){
     		
     	}*/
-    	autonomousCommand = new Chokehold();//autonomi[i];
+    	autonomousCommand = new Calibrate();//autonomi[i];
     	new PIDArmControl().start();
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
-    	CommandBase.mecanumDrivetrain.resetAngle();
+    	CommandBase.drivetrain.resetAngle();
     	autonomousCommand.start();
     }
     
@@ -123,7 +125,7 @@ public class Robot extends IterativeRobot {
     }
     
     private void writeJedis() {
-    	MecanumDrivetrain mecanumDrivetrain = CommandBase.mecanumDrivetrain;
+    	Drivetrain mecanumDrivetrain = CommandBase.drivetrain;
     	/*try
     	{
     		

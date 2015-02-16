@@ -34,11 +34,10 @@ public class StrafeAndStack extends CommandGroup{
 		addSequential(new StrafeUntilSee());
 		
 		// second tote
-		addSequential(new DriveToBin());
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(-200, 0));
+		addSequential(new DriveYDistance(-250, 0));
 		addSequential(new SetArm(Arm.firstPosition - 50));
-		addSequential(new WaitForArm());//AndHoldPosition());
+		addSequential(new WaitForArm());
 		addSequential(new OpenGripper());
 		addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
@@ -54,11 +53,10 @@ public class StrafeAndStack extends CommandGroup{
 		addSequential(new StrafeUntilSee());
 		
 		// third tote
-		addSequential(new DriveToBin());
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(-200, 0));
+		addSequential(new DriveYDistance(-250, 0));
 		addSequential(new SetArm(Arm.firstPosition - 50));
-		addSequential(new WaitForArm());//AndHoldPosition());
+		addSequential(new WaitForArm());
 		addSequential(new OpenGripper());
 		addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
@@ -69,10 +67,11 @@ public class StrafeAndStack extends CommandGroup{
 		addSequential(new DriveYDistance(100,0));
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.5));
+		addSequential(new SetArm(Arm.firstPosition));
 		
 		// pull totes into scoring area
 		addSequential(new SetArm(Arm.floorPosition + 200));
-		addSequential(new DriveYDistance(-300,0));
+		addSequential(new DriveYDistance(-400,0));
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new OpenGripper());
 		addSequential(new WaitForArm());	

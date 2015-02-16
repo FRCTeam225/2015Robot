@@ -14,7 +14,7 @@ public class ListenForBump extends CommandBase {
 
 	@Override
 	protected void execute() {
-		if (mecanumDrivetrain.getAccelerometerY() > 0.5) {
+		if (drivetrain.getAccelerometerY() > 1) {
 			wasBumped = true;
 		}
 	}

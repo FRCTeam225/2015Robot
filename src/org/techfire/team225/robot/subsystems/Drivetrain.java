@@ -2,7 +2,7 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.PortMap;
-import org.techfire.team225.robot.commands.drivetrain.MecanumDrive;
+import org.techfire.team225.robot.commands.drivetrain.FireDrive;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class MecanumDrivetrain extends Subsystem {
+public class Drivetrain extends Subsystem {
 
 	
 	public DigitalInput photoLeft;
@@ -32,7 +32,7 @@ public class MecanumDrivetrain extends Subsystem {
 	
 	boolean pidEnabled = false;
 	
-	public MecanumDrivetrain() {
+	public Drivetrain() {
 		 photoLeft = new DigitalInput(6);
 	     photoRight = new DigitalInput(7);
 	     photoBin = new DigitalInput(8);
@@ -64,7 +64,7 @@ public class MecanumDrivetrain extends Subsystem {
 		double y;
 		
 		double gyroAngle = getGyro();
-		
+				
 		if (fieldCentric) {
 			gyroAngle = Math.toRadians(gyroAngle);
 			x = xIn * Math.cos(gyroAngle) - yIn * Math.sin(gyroAngle);
@@ -86,11 +86,11 @@ public class MecanumDrivetrain extends Subsystem {
 	}
 	
 	public boolean getRightEye() {
-		return photoRight.get();
+		return !photoRight.get();
 	}
 	
 	public boolean getLeftEye() {
-		return photoLeft.get();
+		return !photoLeft.get();
 	}
 	
 	public int getLeftEncoder() {
@@ -132,6 +132,6 @@ public class MecanumDrivetrain extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand()  {
-		setDefaultCommand(new MecanumDrive());
+		setDefaultCommand(new FireDrive());
 	}
 }

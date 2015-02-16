@@ -5,7 +5,7 @@ import org.techfire.team225.robot.SimplePID;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class StrafeUntilSee extends CommandBase {
+public class SlowStrafeUntilSee extends CommandBase {
 
 	boolean invertDirection = false;
 	public SimplePID pidTheta = new SimplePID(0.1, 0, 0);
@@ -16,12 +16,12 @@ public class StrafeUntilSee extends CommandBase {
 	Timer timeout = new Timer();
 	
 	
-	public StrafeUntilSee() {
+	public SlowStrafeUntilSee() {
 		requires(drivetrain);
 		pidTheta.setTarget(0);
 	}
 	
-	public StrafeUntilSee(boolean invertDirection)
+	public SlowStrafeUntilSee(boolean invertDirection)
 	{
 		this();
 		this.invertDirection = invertDirection;

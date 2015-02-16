@@ -6,8 +6,8 @@ public class ResetEncoders extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		mecanumDrivetrain.resetAngle();
-		mecanumDrivetrain.resetForwardEncoders();
+		drivetrain.resetAngle();
+		drivetrain.resetForwardEncoders();
 		
 	}
 

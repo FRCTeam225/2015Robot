@@ -6,7 +6,7 @@ public class CenterGyro extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		mecanumDrivetrain.resetAngle();
+		drivetrain.resetAngle();
 	}
 
 	@Override

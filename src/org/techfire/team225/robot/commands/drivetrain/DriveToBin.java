@@ -6,7 +6,7 @@ public class DriveToBin extends CommandBase {
 
 	public DriveToBin()
 	{
-		requires(mecanumDrivetrain);
+		requires(drivetrain);
 	}
 	
 	@Override
@@ -17,18 +17,18 @@ public class DriveToBin extends CommandBase {
 
 	@Override
 	protected void execute() {
-		mecanumDrivetrain.setMotorSpeeds(0, -0.4, 0, 1, false);
+		drivetrain.setMotorSpeeds(0, -0.4, 0, 1, false);
 		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return mecanumDrivetrain.atBin();
+		return drivetrain.atBin();
 	}
 
 	@Override
 	protected void end() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 1, false);
+		drivetrain.setMotorSpeeds(0, 0, 0, 1, false);
 		
 	}
 

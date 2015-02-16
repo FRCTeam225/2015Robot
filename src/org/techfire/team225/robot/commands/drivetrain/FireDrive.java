@@ -3,17 +3,17 @@ package org.techfire.team225.robot.commands.drivetrain;
 import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.OI;
 
-public class MecanumDrive extends CommandBase {
+public class FireDrive extends CommandBase {
 
-	public MecanumDrive() {
-		requires(mecanumDrivetrain);
-	}
-	
 	double targetAngle = 0;
-	
+
+	public FireDrive() {
+		requires(drivetrain);
+	}
+		
 	@Override
 	protected void initialize() {
-		targetAngle = mecanumDrivetrain.getGyro();
+		targetAngle = drivetrain.getGyro();
 	}
 
 	@Override
@@ -21,18 +21,28 @@ public class MecanumDrive extends CommandBase {
 		double yThrottle = OI.getDriverForwardThrottle(); // forward and backwards
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
-		// omni-directional scaling
+		
+		// joystick check
+		if (yThrottle < 0.1)
+			yThrottle = 0;
+		if (xThrottle < 0.1)
+			xThrottle = 0;
+		if (rotationThrottle < 0.1)
+			rotationThrottle = 0;
+		
+		// omni-directional mecanum scaling
 		double scale = 0.5 + (Math.abs(xThrottle) * 0.5);
+		
 		// gyro correction, holds the robot at the angle the driver wants it to be at
-		/*if ( Math.abs(rotationThrottle) > 0.1 )
+		if (Math.abs(rotationThrottle) > 0.1)
 		{
-			targetAngle = mecanumDrivetrain.getGyro();
+			targetAngle = drivetrain.getGyro();
 		}
 		else
 		{
-			rotationThrottle = (mecanumDrivetrain.getGyro()-targetAngle)*-0.01;
-		}*/
-		mecanumDrivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scale, false);
+			rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.01;
+		}
+		drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scale, false);
 	}
 
 	@Override
@@ -42,6 +52,6 @@ public class MecanumDrive extends CommandBase {
 
 	@Override
 	protected void end() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 0, false);
+		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 	}
 }

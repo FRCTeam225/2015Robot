@@ -13,7 +13,7 @@ public class DriveYDistance extends CommandBase {
 	{
 		pidY.setTarget(dist);
 		pidTheta.setTarget(theta);
-		requires(mecanumDrivetrain);
+		requires(drivetrain);
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class DriveYDistance extends CommandBase {
 
 	@Override
 	protected void execute() {
-		mecanumDrivetrain.setMotorSpeeds(0, -pidY.calculate(mecanumDrivetrain.getAverageForwardEncoders()), -pidTheta.calculate(mecanumDrivetrain.getGyro()), 1, false);
+		drivetrain.setMotorSpeeds(0, -pidY.calculate(drivetrain.getAverageForwardEncoders()), -pidTheta.calculate(drivetrain.getGyro()), 1, false);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class DriveYDistance extends CommandBase {
 
 	@Override
 	protected void end() {
-		mecanumDrivetrain.setMotorSpeeds(0, 0, 0, 0, false);
+		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 
 	}
 
