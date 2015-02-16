@@ -70,10 +70,10 @@ public class Robot extends IterativeRobot {
     		i = Integer.parseInt(jedis.get("currentAuto"));
     	} catch (Exception e){
     		
-    	}
-    	autonomousCommand = autonomi[i];
+    	}*/
+    	autonomousCommand = new Chokehold();//autonomi[i];
     	new PIDArmControl().start();
-    	CommandBase.arm.setTarget(CommandBase.arm.getPosition());*/
+    	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.mecanumDrivetrain.resetAngle();
     	autonomousCommand.start();
     }

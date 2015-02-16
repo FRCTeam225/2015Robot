@@ -28,6 +28,7 @@ public class CompetitionRobotConstants {
     // gripper
     public static int GRIPPER_SOLENOID_LEFT = 1; // PCM  
     public static int GRIPPER_SOLENOID_RIGHT = 0; // PCM
+    public static int CONTAINER_SOLENOID = 3; //PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 14; // PDP

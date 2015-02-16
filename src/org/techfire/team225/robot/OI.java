@@ -4,8 +4,10 @@ import org.techfire.team225.robot.commands.arm.SetWings;
 import org.techfire.team225.robot.commands.arm.OverridePot;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
+import org.techfire.team225.robot.commands.gripper.ContainerHold;
 import org.techfire.team225.robot.commands.gripper.HalfGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
+import org.techfire.team225.robot.commands.gripper.OpenHalfGripper;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -27,7 +29,9 @@ public class OI {
 		new JoystickButton(driver, 3).whenPressed(new OpenGripper());
 		new JoystickButton(driver, 2).whenPressed(new CloseGripper());
 		new JoystickButton(driver, 1).whenPressed(new HalfGripper());
-		
+		new JoystickButton(driver, 4).whenPressed(new OpenHalfGripper());
+		new JoystickButton(driver, 9).whenPressed(new ContainerHold(false));
+		new JoystickButton(driver, 10).whenPressed(new ContainerHold(true));
 	}
 	
 	public static boolean getDriverPreciseMode() {
