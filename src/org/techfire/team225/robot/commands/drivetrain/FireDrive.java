@@ -22,12 +22,13 @@ public class FireDrive extends CommandBase {
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
 		
+		
 		// joystick check
-		if (yThrottle < 0.1)
+		if (Math.abs(yThrottle) < 0.1)
 			yThrottle = 0;
-		if (xThrottle < 0.1)
+		if (Math.abs(xThrottle) < 0.1)
 			xThrottle = 0;
-		if (rotationThrottle < 0.1)
+		if (Math.abs(rotationThrottle) < 0.1)
 			rotationThrottle = 0;
 		
 		// omni-directional mecanum scaling
@@ -40,7 +41,7 @@ public class FireDrive extends CommandBase {
 		}
 		else
 		{
-			rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.01;
+			rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.02;
 		}
 		drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scale, false);
 	}
@@ -55,3 +56,4 @@ public class FireDrive extends CommandBase {
 		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 	}
 }
+

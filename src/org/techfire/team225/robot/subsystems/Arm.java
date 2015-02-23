@@ -13,28 +13,26 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 
-	Victor victorForward = new Victor(PortMap.get("ARM_FORWARD_MOTOR"));
-	Victor victorBack = new Victor(PortMap.get("ARM_BACK_MOTOR"));
+	private Victor victorForward = new Victor(PortMap.get("ARM_FORWARD_MOTOR"));
+	private Victor victorBack = new Victor(PortMap.get("ARM_BACK_MOTOR"));
 	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
 	Solenoid wingsSolenoid = new Solenoid(PortMap.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
 	
 	public static int floorPosition;
 	public static int firstPosition;
-	public static int preContainerPosition;
 	public static int postContainerPosition;
 	public static int topPosition;
 
 	public Arm() {
 		floorPosition = PortMap.get("FLOOR_POSITION");
 		firstPosition = PortMap.get("FIRST_POSITION");
-		preContainerPosition = PortMap.get("PRE_CONTAINER_POSITION");
 		postContainerPosition = PortMap.get("POST_CONTAINER_POSITION");
 		topPosition = PortMap.get("TOP_POSITION");
 	}
 	
 	
-	SimplePID pid = new SimplePID(0.006, 0, 0);
+	private SimplePID pid = new SimplePID(0.006, 0, 0);
 	
 	public int getPosition()
 	{

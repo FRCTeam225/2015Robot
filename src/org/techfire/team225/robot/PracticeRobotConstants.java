@@ -24,11 +24,11 @@ public class PracticeRobotConstants {
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
     public static int WINGS_SOLENOID = 0; // PCM
-    public static int FLOOR_POSITION = 2065;
+    public static int FLOOR_POSITION = 1950;
     public static int FIRST_POSITION = 2450;
     public static int POST_CONTAINER_POSITION = 2465;
     public static int PRE_CONTAINER_POSITION = 3030;
-    public static int TOP_POSITION = 3200;
+    public static int TOP_POSITION = 3000;
     
     // gripper
     public static int GRIPPER_SOLENOID_LEFT = 4; // PCM  

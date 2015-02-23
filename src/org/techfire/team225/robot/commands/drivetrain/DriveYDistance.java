@@ -3,28 +3,44 @@ package org.techfire.team225.robot.commands.drivetrain;
 import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.SimplePID;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class DriveYDistance extends CommandBase {
 
 	double dist;
-	public SimplePID pidY = new SimplePID(0.04, 0.001, 0);
-	public SimplePID pidTheta = new SimplePID(0.1, 0, 0);
-	
-	public DriveYDistance(double dist, double theta)
+	public SimplePID pidY = new SimplePID(0.0008,0, 0);
+	public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
+	Timer t = new Timer();
+	public DriveYDistance(double dist, double theta, double maxSpeed)
 	{
 		pidY.setTarget(dist);
 		pidTheta.setTarget(theta);
+		pidY.setOutputConstraints(maxSpeed, -maxSpeed);
 		requires(drivetrain);
+	}
+	
+	public DriveYDistance(double dist, double theta)
+	{
+		this(dist, theta, 1);
 	}
 	
 	@Override
 	protected void initialize() {
 		
-		
+		t.reset();
+		t.start();
 	}
 
 	@Override
 	protected void execute() {
-		drivetrain.setMotorSpeeds(0, -pidY.calculate(drivetrain.getAverageForwardEncoders()), -pidTheta.calculate(drivetrain.getGyro()), 1, false);
+		double pidSpeed =  -pidY.calculate(drivetrain.getAverageForwardEncoders());
+		if ( t.get() > 1 )
+			t.stop();
+		else
+			pidSpeed *= t.get();
+		
+		
+		drivetrain.setMotorSpeeds(0, pidSpeed, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
 	}
 
 	@Override

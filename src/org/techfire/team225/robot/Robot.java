@@ -1,18 +1,32 @@
 package org.techfire.team225.robot;
 
+
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
+import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.autonomous.Chokehold;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
 import org.techfire.team225.robot.commands.drivetrain.Calibrate;
+import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
+import org.techfire.team225.robot.commands.drivetrain.TurnTo;
+import org.techfire.team225.robot.subsystems.Arm;
 import org.techfire.team225.robot.subsystems.Drivetrain;
 
 
+
+
+
+
+
+
+
+import redis.clients.jedis.Jedis;
 //import redis.clients.jedis.Jedis;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -73,8 +87,8 @@ public class Robot extends IterativeRobot {
     	} catch (Exception e){
     		
     	}*/
-    	autonomousCommand = new Calibrate();//autonomi[i];
     	new PIDArmControl().start();
+    	autonomousCommand = new Chokehold();//autonomi[i];
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
     	autonomousCommand.start();
@@ -85,13 +99,21 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        CommandBase.arm.updatePID();
         writeJedis();
     }
-
-    public void teleopInit() {
+    
+    public void resetSubsystem(Subsystem s)
+    {
     	Command c;
     	if ( (c = CommandBase.arm.getCurrentCommand()) != null )
     		c.cancel();
+    }
+
+    public void teleopInit() {
+    	CommandBase.drivetrain.resetAngle();
+    	resetSubsystem(CommandBase.drivetrain);
+    	resetSubsystem(CommandBase.arm);
     	
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
@@ -125,8 +147,8 @@ public class Robot extends IterativeRobot {
     }
     
     private void writeJedis() {
-    	Drivetrain mecanumDrivetrain = CommandBase.drivetrain;
-    	/*try
+    	/*Drivetrain mecanumDrivetrain = CommandBase.drivetrain;
+    	try
     	{
     		
     		jedis.set("atBin", (mecanumDrivetrain.atBin()?"yes":"no"));

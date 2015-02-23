@@ -11,18 +11,14 @@ public class ArmControl extends CommandBase {
 	
 	@Override
 	protected void initialize() {
-		arm.setTarget(arm.getPosition());
 	}
 
 	@Override
 	protected void execute() {
+		
 		double throttle = OI.driver.getRawAxis(2)- OI.driver.getRawAxis(3);
-		if (throttle != 0) {
-			arm.setTarget(arm.getPosition());
-			arm.setMotorSpeed(throttle);
-		} else {
-			arm.updatePID();
-		}
+		System.out.println("throttle is "+throttle);
+		arm.setMotorSpeed(throttle);
 	}
 
 	@Override

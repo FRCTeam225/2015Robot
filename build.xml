@@ -23,6 +23,9 @@
   
   <property file="${user.home}/wpilib/wpilib.properties"/>
   <property file="build.properties"/>
+	
+  <!--<property name="classpath" value="${user.home}/wpilib/java/current/lib/WPILib.jar:${user.home}/wpilib/java/current/lib/NetworkTables.jar:jedis-2.6.2.jar"/> -->	
+	
   <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
   
   <import file="${wpilib.ant.dir}/build.xml"/>
