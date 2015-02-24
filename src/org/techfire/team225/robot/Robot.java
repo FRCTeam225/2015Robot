@@ -78,6 +78,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		writeJedis();
+		System.out.println("" + CommandBase.arm.getPosition());
 	}
 	
     public void autonomousInit() {
@@ -112,6 +113,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
     	CommandBase.drivetrain.resetAngle();
+		System.out.println("" + CommandBase.arm.getPosition());
     	resetSubsystem(CommandBase.drivetrain);
     	resetSubsystem(CommandBase.arm);
     	

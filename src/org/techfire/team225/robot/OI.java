@@ -22,16 +22,25 @@ public class OI {
 	public static Joystick operator = new Joystick(1);
 	
 	public static void init() {
+		// driver
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
 		new JoystickButton(driver, 5).whenPressed(new SetWings(true));
 		new JoystickButton(driver, 6).whenPressed(new SetWings(false));
-		new JoystickButton(driver, 3).whenPressed(new OpenGripper());
+		/*new JoystickButton(driver, 3).whenPressed(new OpenGripper());
 		new JoystickButton(driver, 2).whenPressed(new CloseGripper());
 		new JoystickButton(driver, 1).whenPressed(new HalfGripper());
 		new JoystickButton(driver, 4).whenPressed(new OpenHalfGripper());
 		new JoystickButton(driver, 9).whenPressed(new ContainerHold(false));
-		new JoystickButton(driver, 10).whenPressed(new ContainerHold(true));
+		new JoystickButton(driver, 10).whenPressed(new ContainerHold(true));*/
+		
+		// operator
+		new JoystickButton(operator, 4).whenPressed(new OpenGripper());
+		new JoystickButton(operator, 1).whenPressed(new CloseGripper());
+		new JoystickButton(operator, 3).whenPressed(new HalfGripper());
+		new JoystickButton(operator, 2).whenPressed(new OpenHalfGripper());
+		new JoystickButton(operator, 9).whenPressed(new ContainerHold(false));
+		new JoystickButton(operator, 10).whenPressed(new ContainerHold(true));
 	}
 	
 	public static boolean getDriverPreciseMode() {
