@@ -1,22 +1,20 @@
 package org.techfire.team225.robot.subsystems;
 
-import org.techfire.team225.robot.PortMap;
+import org.techfire.team225.robot.ConstantsProvider;
 import org.techfire.team225.robot.SimplePID;
 import org.techfire.team225.robot.commands.arm.ArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 
-	private Victor victorForward = new Victor(PortMap.get("ARM_FORWARD_MOTOR"));
-	private Victor victorBack = new Victor(PortMap.get("ARM_BACK_MOTOR"));
-	AnalogInput pot = new AnalogInput(PortMap.get("ARM_POT"));
-	Solenoid wingsSolenoid = new Solenoid(PortMap.get("WINGS_SOLENOID"));
+	Victor victorForward = new Victor(ConstantsProvider.get("ARM_FORWARD_MOTOR"));
+	Victor victorBack = new Victor(ConstantsProvider.get("ARM_BACK_MOTOR"));
+	AnalogInput pot = new AnalogInput(ConstantsProvider.get("ARM_POT"));
+	Solenoid wingsSolenoid = new Solenoid(ConstantsProvider.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
 	
 	public static int floorPosition;
@@ -25,10 +23,10 @@ public class Arm extends Subsystem {
 	public static int topPosition;
 
 	public Arm() {
-		floorPosition = PortMap.get("FLOOR_POSITION");
-		firstPosition = PortMap.get("FIRST_POSITION");
-		postContainerPosition = PortMap.get("POST_CONTAINER_POSITION");
-		topPosition = PortMap.get("TOP_POSITION");
+		floorPosition = ConstantsProvider.get("FLOOR_POSITION");
+		firstPosition = ConstantsProvider.get("FIRST_POSITION");
+		postContainerPosition = ConstantsProvider.get("POST_CONTAINER_POSITION");
+		topPosition = ConstantsProvider.get("TOP_POSITION");
 	}
 	
 	

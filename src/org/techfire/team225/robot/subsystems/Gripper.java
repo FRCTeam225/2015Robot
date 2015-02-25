@@ -1,6 +1,6 @@
 package org.techfire.team225.robot.subsystems;
 
-import org.techfire.team225.robot.PortMap;
+import org.techfire.team225.robot.ConstantsProvider;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,9 +12,9 @@ public class Gripper extends Subsystem {
 	Solenoid containerSolenoid;
 
 	public Gripper() {
-		gripperSolenoidLeft = new Solenoid(PortMap.get("GRIPPER_SOLENOID_LEFT"));
-		gripperSolenoidRight = new Solenoid(PortMap.get("GRIPPER_SOLENOID_RIGHT"));
-		containerSolenoid = new Solenoid(PortMap.get("CONTAINER_SOLENOID"));
+		gripperSolenoidLeft = new Solenoid(ConstantsProvider.get("GRIPPER_SOLENOID_LEFT"));
+		gripperSolenoidRight = new Solenoid(ConstantsProvider.get("GRIPPER_SOLENOID_RIGHT"));
+		containerSolenoid = new Solenoid(ConstantsProvider.get("CONTAINER_SOLENOID"));
 	}
 	
 	public void setGripper(boolean left, boolean right) {

@@ -1,7 +1,7 @@
 
 package org.techfire.team225.robot.subsystems;
 
-import org.techfire.team225.robot.PortMap;
+import org.techfire.team225.robot.ConstantsProvider;
 import org.techfire.team225.robot.commands.drivetrain.FireDrive;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -39,19 +39,19 @@ public class Drivetrain extends Subsystem {
 	    
 	     accelerometer  = new BuiltInAccelerometer();
 	    
-	     encoderL = new Encoder(PortMap.get("ENCODER_LEFT_A"), PortMap.get("ENCODER_LEFT_B"));
-	     encoderR = new Encoder(PortMap.get("ENCODER_RIGHT_A"), PortMap.get("ENCODER_RIGHT_B"));
-	     encoderF = new Encoder(PortMap.get("ENCODER_FOLLOW_A"), PortMap.get("ENCODER_FOLLOW_B"));
+	     encoderL = new Encoder(ConstantsProvider.get("ENCODER_LEFT_A"), ConstantsProvider.get("ENCODER_LEFT_B"));
+	     encoderR = new Encoder(ConstantsProvider.get("ENCODER_RIGHT_A"), ConstantsProvider.get("ENCODER_RIGHT_B"));
+	     encoderF = new Encoder(ConstantsProvider.get("ENCODER_FOLLOW_A"), ConstantsProvider.get("ENCODER_FOLLOW_B"));
 		
 		
 		
-		victorLeft[0] = new Victor(PortMap.get("LEFT_FORWARD_MOTOR"));
-		victorLeft[1] = new Victor(PortMap.get("LEFT_BACK_MOTOR"));
-		victorRight[0] = new Victor(PortMap.get("RIGHT_FORWARD_MOTOR"));
-		victorRight[1] = new Victor(PortMap.get("RIGHT_BACK_MOTOR"));
+		victorLeft[0] = new Victor(ConstantsProvider.get("LEFT_FORWARD_MOTOR"));
+		victorLeft[1] = new Victor(ConstantsProvider.get("LEFT_BACK_MOTOR"));
+		victorRight[0] = new Victor(ConstantsProvider.get("RIGHT_FORWARD_MOTOR"));
+		victorRight[1] = new Victor(ConstantsProvider.get("RIGHT_BACK_MOTOR"));
 		
 		//gyro = new GyroProvider();
-		gyro = new Gyro(PortMap.get("GYRO"));
+		gyro = new Gyro(ConstantsProvider.get("GYRO"));
 	}
 	
 	public boolean atBin()

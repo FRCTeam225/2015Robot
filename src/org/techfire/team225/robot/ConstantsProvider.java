@@ -3,7 +3,7 @@ package org.techfire.team225.robot;
 import java.io.File;
 import java.lang.reflect.Field;
 
-public class PortMap {
+public class ConstantsProvider {
 	static boolean isCompBot;
     
 	public static void init() {

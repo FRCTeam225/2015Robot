@@ -2,29 +2,11 @@ package org.techfire.team225.robot;
 
 
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
-import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.autonomous.Chokehold;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
-import org.techfire.team225.robot.commands.drivetrain.Calibrate;
-import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
-import org.techfire.team225.robot.commands.drivetrain.TurnTo;
-import org.techfire.team225.robot.subsystems.Arm;
-import org.techfire.team225.robot.subsystems.Drivetrain;
 
-
-
-
-
-
-
-
-
-import redis.clients.jedis.Jedis;
-//import redis.clients.jedis.Jedis;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -38,56 +20,37 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 	
-	//public static Jedis jedis;
-	PowerDistributionPanel pdp;
     Command autonomousCommand;
-    CommandGroup[] autonomi;
+    Command[] autonomi;
     int selected = 0;
-
-    public Robot()
-    {
-    	PortMap.init();
-    	CommandBase.init();
-    	OI.init();
-    	Constants.init();
-    }
     
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	ConstantsProvider.init();
+    	CommandBase.init();
+    	OI.init();
+    	JedisProvider.init();
 
-    	pdp = new PowerDistributionPanel();
-    	CommandBase.drivetrain.resetAngle();
-    	autonomi = new CommandGroup[] {
+    	autonomi = new Command[] {
         		new StrafeAndStack(),
         		new Chokehold()
         };
-    	/*
-    	try {
-    		jedis = new Jedis("localhost");
-        	jedis.del("autonomi");
-        	for (int i = 0; i < autonomi.length; i++) {
-            	jedis.rpush("autonomi", autonomi[i].toString());
-        	}
-    	} catch ( Exception e ) {
-    		System.err.println("Jedis init error");
-    	}*/
+    	
+    	JedisProvider.autonomousInit(autonomi);
+    	
+    	CommandBase.drivetrain.resetAngle();
+
     }
 	
 	public void disabledPeriodic() {
-		writeJedis();
-		System.out.println("" + CommandBase.arm.getPosition());
+		JedisProvider.write();
 	}
 	
     public void autonomousInit() {
-    	/*int i = 0;
-    	try {
-    		i = Integer.parseInt(jedis.get("currentAuto"));
-    	} catch (Exception e){
-    		
-    	}*/
+    	autonomousCommand = autonomi[JedisProvider.getSelectedAutonomous()];
     	new PIDArmControl().start();
     	autonomousCommand = new Chokehold();//autonomi[i];
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
@@ -101,7 +64,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         CommandBase.arm.updatePID();
-        writeJedis();
+        JedisProvider.write();
     }
     
     public void resetSubsystem(Subsystem s)
@@ -136,8 +99,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	// System.out.println("Current Gs on the Y axis" + CommandBase.mecanumDrivetrain.getAccelerometerY());
-        writeJedis();
+        JedisProvider.write();
         Scheduler.getInstance().run();
     }
     
@@ -146,55 +108,5 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-    }
-    
-    private void writeJedis() {
-    	/*Drivetrain mecanumDrivetrain = CommandBase.drivetrain;
-    	try
-    	{
-    		
-    		jedis.set("atBin", (mecanumDrivetrain.atBin()?"yes":"no"));
-    		
-	    	jedis.set("Gyro", String.format("%2.3f", mecanumDrivetrain.getGyro()));
-	        jedis.set("PhotosensorLeft", 
-	        		"" + mecanumDrivetrain.getLeftEye());
-	        jedis.set("PhotosensorRight", 
-	        		"" + mecanumDrivetrain.getRightEye());
-	        
-	        // encoders
-	        jedis.set("EncoderLeft", "" + mecanumDrivetrain.getLeftEncoder());
-	        jedis.set("EncoderRight", "" + mecanumDrivetrain.getRightEncoder());
-	        jedis.set("EncoderFollow", "" + mecanumDrivetrain.getFollowEncoder());
-	        jedis.set("EncoderAvg", String.valueOf(mecanumDrivetrain.getAverageForwardEncoders()));
-	        
-	        // pdp totals
-	        jedis.set("Voltage", String.format("%2.3f", pdp.getVoltage()));
-	        jedis.set("Temperature", String.format("%2.3f", pdp.getTemperature()));
-	        jedis.set("TotalCurrent", "" + pdp.getTotalCurrent());
-	        jedis.set("TotalPower", "" + pdp.getTotalPower());
-	        jedis.set("TotalEnergy", "" + pdp.getTotalEnergy());
-	        
-	        // pdp individual components
-	        double currentFL = pdp.getCurrent(PortMap.get("LEFT_FORWARD_MOTOR_POWER"));
-	        double currentFR = pdp.getCurrent(PortMap.get("RIGHT_FORWARD_MOTOR_POWER"));
-	        double currentBL = pdp.getCurrent(PortMap.get("LEFT_BACK_MOTOR_POWER"));
-	        double currentBR = pdp.getCurrent(PortMap.get("RIGHT_BACK_MOTOR_POWER"));
-	        jedis.set("FrontLeftMotorCurrent", "" + pdp.getCurrent(PortMap.get("LEFT_FORWARD_MOTOR_POWER")));
-	        jedis.set("FrontRightMotorCurrent", "" + pdp.getCurrent(PortMap.get("RIGHT_FORWARD_MOTOR_POWER")));
-	        jedis.set("BackLeftMotorCurrent", "" + pdp.getCurrent(PortMap.get("LEFT_BACK_MOTOR_POWER")));
-	        jedis.set("BackRightMotorCurrent", "" + pdp.getCurrent(PortMap.get("RIGHT_BACK_MOTOR_POWER")));
-	        jedis.set("DrivetrainTotalCurrent", "" + (currentFL + currentFR + currentBL + currentBR));
-	        
-	        double armCurrent1 = pdp.getCurrent(PortMap.get("ARM_FORWARD_MOTOR_POWER"));
-	        double armCurrent2 = pdp.getCurrent(PortMap.get("ARM_BACK_MOTOR_POWER"));
-	        jedis.set("ArmMotorOneCurrent", "" + armCurrent1);
-	        jedis.set("ArmMotorTwoCurrent", "" + armCurrent2);
-	        jedis.set("ArmTotalCurrent", "" + (armCurrent1 + armCurrent2));
-	        
-	        jedis.set("ArmPosition", String.valueOf(CommandBase.arm.getPosition()));
-    	} catch( Exception e ) {
-    		e.printStackTrace();
-    		System.err.println("Redis error");
-    	}*/
     }
 }
