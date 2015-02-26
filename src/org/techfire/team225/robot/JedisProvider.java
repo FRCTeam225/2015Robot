@@ -18,18 +18,18 @@ public class JedisProvider {
 	private static PowerDistributionPanel pdp;
 	
 	public static void init() {
-		try {
+		/*try {
 			jedis = new Jedis("localhost");
 		} catch (Exception e) {
 			System.err.println("Jedis init error");
 			e.printStackTrace();
 		}
 		
-		pdp = new PowerDistributionPanel();
+		pdp = new PowerDistributionPanel();*/
 	}
 	
 	public static void autonomousInit(Command[] autonomi) {
-		try {
+		/*try {
         	jedis.del("autonomi");
         	for (int i = 0; i < autonomi.length; i++) {
             	jedis.rpush("autonomi", autonomi[i].toString());
@@ -37,21 +37,22 @@ public class JedisProvider {
     	} catch ( Exception e ) {
     		System.err.println("Jedis autonmous init error");
     		e.printStackTrace();
-    	}
+    	}*/
 	}
 	
 	public static int getSelectedAutonomous() {
-		try {
+		/*try {
 			return Integer.parseInt(jedis.get("currentAuto"));
 		} catch (Exception e) {
 			System.err.println("Jedis autonomous get error");
 			e.printStackTrace();
 			return 0;
-		}
+		}*/
+		return 0;
 	}
 	
 	public static void write() {
-    	Drivetrain mecanumDrivetrain = CommandBase.drivetrain;
+    	/*Drivetrain mecanumDrivetrain = CommandBase.drivetrain;
     	try
     	{
     		// sensors
@@ -93,6 +94,6 @@ public class JedisProvider {
     	} catch( Exception e ) {
     		System.err.println("Jedis write error");
     		e.printStackTrace();
-    	}
+    	}*/
     }
 }

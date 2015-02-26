@@ -19,9 +19,9 @@ public class CompetitionRobotConstants {
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
     public static int WINGS_SOLENOID = 2; // PCM
-    public static int FLOOR_POSITION = 2260; //1950;
+    public static int FLOOR_POSITION = 2425; //1950;
     public static int FIRST_POSITION = FLOOR_POSITION + 300;
-    public static int TOP_POSITION = 3364; //3000;
+    public static int TOP_POSITION = 3530; //3000;
     public static int POST_CONTAINER_POSITION = TOP_POSITION - 300;
     
     // gripper

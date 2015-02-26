@@ -47,6 +47,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		JedisProvider.write();
+		System.out.println("" + CommandBase.arm.getPosition());
 	}
 	
     public void autonomousInit() {
