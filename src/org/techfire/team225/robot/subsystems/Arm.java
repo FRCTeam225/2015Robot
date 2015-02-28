@@ -81,9 +81,9 @@ public class Arm extends Subsystem {
 	{
 		double calc = pid.calculate(getPosition());
 		setMotorSpeed(-calc);
-		System.out.println("PID Output is "+calc);
+		/*System.out.println("PID Output is "+calc);
 		System.out.println("Position is "+getPosition());
 		System.out.println("Error is "+pid.getError());
-		System.out.println("Target is "+pid.getTarget());
+		System.out.println("Target is "+pid.getTarget());*/
 	}
 }

@@ -6,7 +6,6 @@ public class ResetEncoders extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		drivetrain.resetAngle();
 		drivetrain.resetForwardEncoders();
 		
 	}

@@ -4,6 +4,9 @@ package org.techfire.team225.robot;
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
 import org.techfire.team225.robot.commands.autonomous.Chokehold;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
+import org.techfire.team225.robot.commands.autonomous.StraightStack;
+import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
+import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -47,15 +50,15 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		JedisProvider.write();
-		System.out.println("" + CommandBase.arm.getPosition());
 	}
 	
     public void autonomousInit() {
     	autonomousCommand = autonomi[JedisProvider.getSelectedAutonomous()];
     	new PIDArmControl().start();
-    	autonomousCommand = new Chokehold();//autonomi[i];
+    	autonomousCommand = new StraightStack();//autonomi[i];
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
+    	CommandBase.drivetrain.resetForwardEncoders();
     	autonomousCommand.start();
     }
     
@@ -77,7 +80,6 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
     	CommandBase.drivetrain.resetAngle();
-		System.out.println("" + CommandBase.arm.getPosition());
     	resetSubsystem(CommandBase.drivetrain);
     	resetSubsystem(CommandBase.arm);
     	
@@ -102,6 +104,10 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         JedisProvider.write();
         Scheduler.getInstance().run();
+        
+        /*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
+        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
     }
     
     /**

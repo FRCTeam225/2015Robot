@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class DriveYDistance extends CommandBase {
 
 	double dist;
-	public SimplePID pidY = new SimplePID(0.0008,0, 0);
+	public SimplePID pidY = new SimplePID(0.0012,0.001, 0);
 	public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
 	Timer t = new Timer();
 	public DriveYDistance(double dist, double theta, double maxSpeed)
@@ -34,18 +34,20 @@ public class DriveYDistance extends CommandBase {
 	@Override
 	protected void execute() {
 		double pidSpeed =  -pidY.calculate(drivetrain.getAverageForwardEncoders());
-		if ( t.get() > 1 )
+		/*if ( t.get() > 1 )
 			t.stop();
 		else
-			pidSpeed *= t.get();
-		
+			pidSpeed *= t.get();*/
 		
 		drivetrain.setMotorSpeeds(0, pidSpeed, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
+		System.out.println("Target is: " + pidY.getTarget());
+        System.out.println("Location is: " + CommandBase.drivetrain.getAverageForwardEncoders());
+        System.out.println("Error is: " + pidY.getError());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(pidY.getError()) < 10;
+		return Math.abs(pidY.getError()) < 50;
 	}
 
 	@Override

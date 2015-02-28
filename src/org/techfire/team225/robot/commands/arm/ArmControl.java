@@ -16,8 +16,7 @@ public class ArmControl extends CommandBase {
 	@Override
 	protected void execute() {
 		
-		double throttle = OI.driver.getRawAxis(2)- OI.driver.getRawAxis(3);
-		System.out.println("throttle is "+throttle);
+		double throttle = OI.getArmThrottle();
 		arm.setMotorSpeed(throttle);
 	}
 

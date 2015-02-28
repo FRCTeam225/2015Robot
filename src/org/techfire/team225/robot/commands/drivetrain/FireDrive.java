@@ -41,7 +41,7 @@ public class FireDrive extends CommandBase {
 		}
 		else
 		{
-			rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.02;
+			//rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.02;
 		}
 		drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scale, false);
 	}

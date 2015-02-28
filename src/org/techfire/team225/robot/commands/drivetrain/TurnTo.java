@@ -5,11 +5,17 @@ import org.techfire.team225.robot.SimplePID;
 
 public class TurnTo extends CommandBase {
 
-	public SimplePID pidTheta = new SimplePID(0.011, 0, 0);
+	public SimplePID pidTheta = new SimplePID(0.025, 0.0001, 0);
 	
 	public TurnTo(double theta)
 	{
+		this(theta, 1.0);
+	}
+	
+	public TurnTo(double theta, double maxSpeed)
+	{
 		pidTheta.setTarget(theta);
+		pidTheta.setOutputConstraints(maxSpeed, -maxSpeed);
 		requires(drivetrain);
 	}
 	
@@ -25,7 +31,7 @@ public class TurnTo extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(pidTheta.getError()) < 1;
+		return Math.abs(pidTheta.getError()) < 5;
 	}
 
 	@Override
