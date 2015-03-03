@@ -1,18 +1,18 @@
-package org.techfire.team225.robot.commands.gripper;
+package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class ContainerHold extends CommandBase {
+public class SetAlignmentBar extends CommandBase {
 
-	boolean set;
+	boolean set = false;
 	
-	public ContainerHold(boolean set) {
+	public SetAlignmentBar(boolean set) {
 		this.set = set;
 	}
 	
 	@Override
 	protected void initialize() {
-		gripper.setContainerHold(set);
+		drivetrain.setAlignmentBar(set);
 	}
 
 	@Override

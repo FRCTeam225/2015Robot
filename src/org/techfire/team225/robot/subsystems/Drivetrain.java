@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -32,6 +33,8 @@ public class Drivetrain extends Subsystem {
 	
 	boolean pidEnabled = false;
 	
+ 	Solenoid alignmentSolenoid = new Solenoid(ConstantsProvider.get("ALIGNMENT_SOLENOID"));
+	
 	public Drivetrain() {
 		 photoLeft = new DigitalInput(6);
 	     photoRight = new DigitalInput(7);
@@ -42,7 +45,6 @@ public class Drivetrain extends Subsystem {
 	     encoderL = new Encoder(ConstantsProvider.get("ENCODER_LEFT_A"), ConstantsProvider.get("ENCODER_LEFT_B"));
 	     encoderR = new Encoder(ConstantsProvider.get("ENCODER_RIGHT_A"), ConstantsProvider.get("ENCODER_RIGHT_B"));
 	     encoderF = new Encoder(ConstantsProvider.get("ENCODER_FOLLOW_A"), ConstantsProvider.get("ENCODER_FOLLOW_B"));
-		
 		
 		
 		victorLeft[0] = new Victor(ConstantsProvider.get("LEFT_FORWARD_MOTOR"));
@@ -128,6 +130,10 @@ public class Drivetrain extends Subsystem {
 	
 	public double getAccelerometerY() {
 		return accelerometer.getY();
+	}
+	
+	public void setAlignmentBar(boolean set) {
+		alignmentSolenoid.set(set);
 	}
 
 	@Override

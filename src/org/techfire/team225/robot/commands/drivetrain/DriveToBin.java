@@ -11,7 +11,6 @@ public class DriveToBin extends CommandBase {
 	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
 		
 	}
 

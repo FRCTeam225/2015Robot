@@ -1,18 +1,18 @@
-package org.techfire.team225.robot.commands.arm;
+package org.techfire.team225.robot.commands.chokehold;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class SetWings extends CommandBase {
+public class SetChokehold extends CommandBase {
 
-	boolean set = false;
+	boolean set;
 	
-	public SetWings(boolean set) {
+	public SetChokehold(boolean set) {
 		this.set = set;
 	}
 	
 	@Override
 	protected void initialize() {
-		arm.setWings(set);
+		chokehold.set(set);
 	}
 
 	@Override

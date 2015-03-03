@@ -1,10 +1,11 @@
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.commands.arm.SetWings;
 import org.techfire.team225.robot.commands.arm.OverridePot;
+import org.techfire.team225.robot.commands.chokehold.SetChokehold;
+import org.techfire.team225.robot.commands.drivetrain.AutoAlign;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
+import org.techfire.team225.robot.commands.drivetrain.SetAlignmentBar;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
-import org.techfire.team225.robot.commands.gripper.ContainerHold;
 import org.techfire.team225.robot.commands.gripper.HalfGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
 import org.techfire.team225.robot.commands.gripper.OpenHalfGripper;
@@ -25,16 +26,17 @@ public class OI {
 		// driver
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
+		new JoystickButton(driver, 2).whenPressed(new AutoAlign());
 		
 		// operator
-		new JoystickButton(operator, 6).whenPressed(new SetWings(true));
-		new JoystickButton(operator, 5).whenPressed(new SetWings(false));
+		new JoystickButton(operator, 6).whenPressed(new SetAlignmentBar(true));
+		new JoystickButton(operator, 5).whenPressed(new SetAlignmentBar(false));
 		new JoystickButton(operator, 1).whenPressed(new OpenGripper());
 		new JoystickButton(operator, 4).whenPressed(new CloseGripper());
 		new JoystickButton(operator, 3).whenPressed(new HalfGripper());
 		new JoystickButton(operator, 2).whenPressed(new OpenHalfGripper());
-		new JoystickButton(operator, 9).whenPressed(new ContainerHold(false));
-		new JoystickButton(operator, 10).whenPressed(new ContainerHold(true));
+		new JoystickButton(operator, 9).whenPressed(new SetChokehold(false));
+		new JoystickButton(operator, 10).whenPressed(new SetChokehold(true));
 	}
 	
 	public static boolean getDriverPreciseMode() {

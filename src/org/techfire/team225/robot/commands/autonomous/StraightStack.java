@@ -1,10 +1,10 @@
 package org.techfire.team225.robot.commands.autonomous;
 
 import org.techfire.team225.robot.commands.arm.SetArm;
-import org.techfire.team225.robot.commands.arm.SetWings;
 import org.techfire.team225.robot.commands.arm.WaitForArm;
 import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.ResetEncoders;
+import org.techfire.team225.robot.commands.drivetrain.SetAlignmentBar;
 import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
@@ -28,7 +28,7 @@ public class StraightStack extends CommandGroup {
 		addSequential(new TurnTo(turnAngle));
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new ResetEncoders());
-		addSequential(new SetWings(true));
+		addSequential(new SetAlignmentBar(true));
 		addSequential(new WaitCommand(0.5));
 		addSequential(new DriveYDistance(700, turnAngle, 0.8));
 		addSequential(new ResetEncoders());
@@ -37,7 +37,7 @@ public class StraightStack extends CommandGroup {
 		addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
-		addSequential(new SetWings(false));
+		addSequential(new SetAlignmentBar(false));
 		addSequential(new WaitCommand(0.5));
 		
 		addSequential(new SetArm(Arm.floorPosition));
@@ -66,7 +66,7 @@ public class StraightStack extends CommandGroup {
 		addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
-		addSequential(new SetWings(false));
+		addSequential(new SetAlignmentBar(false));
 		addSequential(new WaitCommand(0.5));
 		
 		addSequential(new SetArm(Arm.floorPosition));

@@ -2,7 +2,7 @@ package org.techfire.team225.robot;
 
 
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
-import org.techfire.team225.robot.commands.autonomous.Chokehold;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAuton;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 
     	autonomi = new Command[] {
         		new StrafeAndStack(),
-        		new Chokehold()
+        		new ChokeholdAuton()
         };
     	
     	JedisProvider.autonomousInit(autonomi);

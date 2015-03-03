@@ -1,11 +1,11 @@
 package org.techfire.team225.robot.subsystems;
 
+import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.ConstantsProvider;
 import org.techfire.team225.robot.SimplePID;
 import org.techfire.team225.robot.commands.arm.ArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -14,7 +14,6 @@ public class Arm extends Subsystem {
 	Victor victorForward = new Victor(ConstantsProvider.get("ARM_FORWARD_MOTOR"));
 	Victor victorBack = new Victor(ConstantsProvider.get("ARM_BACK_MOTOR"));
 	AnalogInput pot = new AnalogInput(ConstantsProvider.get("ARM_POT"));
-	Solenoid wingsSolenoid = new Solenoid(ConstantsProvider.get("WINGS_SOLENOID"));
 	public boolean potOverride = false;
 	
 	public static int floorPosition;
@@ -60,7 +59,7 @@ public class Arm extends Subsystem {
 			victorForward.set(speed * 0.75);
 			victorBack.set(-speed * 0.75);
 			if (getPosition() < firstPosition - 100) {
-				setWings(false);
+				CommandBase.drivetrain.setAlignmentBar(false);
 			}
 		} else if (getPosition() <= topPosition && speed < 0) {
 			victorForward.set(speed);
@@ -71,9 +70,6 @@ public class Arm extends Subsystem {
 		}
 	}
 	
-	public void setWings(boolean set) {
-		wingsSolenoid.set(set);
-	}
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new ArmControl());
