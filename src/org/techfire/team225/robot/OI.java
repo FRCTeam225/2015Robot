@@ -27,8 +27,8 @@ public class OI {
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
 		
 		// operator
-		new JoystickButton(operator, 5).whenPressed(new SetWings(true));
-		new JoystickButton(operator, 6).whenPressed(new SetWings(false));
+		new JoystickButton(operator, 6).whenPressed(new SetWings(true));
+		new JoystickButton(operator, 5).whenPressed(new SetWings(false));
 		new JoystickButton(operator, 1).whenPressed(new OpenGripper());
 		new JoystickButton(operator, 4).whenPressed(new CloseGripper());
 		new JoystickButton(operator, 3).whenPressed(new HalfGripper());
@@ -58,7 +58,7 @@ public class OI {
 	}
 	
 	public static double getArmThrottle() {
-		return operator.getRawAxis(2)- OI.operator.getRawAxis(3);
+		return operator.getRawAxis(1);
 	}
 }
 

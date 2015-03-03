@@ -59,6 +59,9 @@ public class Arm extends Subsystem {
 		} else if (getPosition() >= floorPosition && speed > 0) {
 			victorForward.set(speed * 0.75);
 			victorBack.set(-speed * 0.75);
+			if (getPosition() < firstPosition - 100) {
+				setWings(false);
+			}
 		} else if (getPosition() <= topPosition && speed < 0) {
 			victorForward.set(speed);
 			victorBack.set(-speed);

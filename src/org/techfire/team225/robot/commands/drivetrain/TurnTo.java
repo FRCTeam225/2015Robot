@@ -5,7 +5,7 @@ import org.techfire.team225.robot.SimplePID;
 
 public class TurnTo extends CommandBase {
 
-	public SimplePID pidTheta = new SimplePID(0.025, 0.0001, 0);
+	public SimplePID pidTheta = new SimplePID(0.025, 0.00015, 0);
 	
 	public TurnTo(double theta)
 	{
@@ -27,6 +27,9 @@ public class TurnTo extends CommandBase {
 	@Override
 	protected void execute() {
 		drivetrain.setMotorSpeeds(0, 0, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
+		System.out.println("Target is: " + pidTheta.getTarget());
+        System.out.println("Location is: " + CommandBase.drivetrain.getGyro());
+        System.out.println("Error is: " + pidTheta.getError());
 	}
 
 	@Override

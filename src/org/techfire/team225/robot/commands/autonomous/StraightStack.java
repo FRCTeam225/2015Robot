@@ -21,11 +21,12 @@ public class StraightStack extends CommandGroup {
 		
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.8));
-		addSequential(new SetArm(Arm.firstPosition));
+		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new WaitForArm());
 		addSequential(new DriveYDistance(470, 0));
 		
 		addSequential(new TurnTo(turnAngle));
+		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new ResetEncoders());
 		addSequential(new SetWings(true));
 		addSequential(new WaitCommand(0.5));
@@ -43,17 +44,18 @@ public class StraightStack extends CommandGroup {
 		addSequential(new WaitForArm());
 		
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(200, turnAngle));
+		addSequential(new DriveYDistance(250, turnAngle));
 		
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(1.0));
-		addSequential(new SetArm(Arm.floorPosition+145));
+		addSequential(new SetArm(Arm.floorPosition+180));
 		addSequential(new WaitForArm());
-		addSequential(new TurnTo(0, slowTurnSpeed));
+		addSequential(new TurnTo(-5, slowTurnSpeed));
 		addSequential(new ResetEncoders());
-		addSequential(new SetArm(Arm.firstPosition+100));
+		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new WaitForArm());
 		addSequential(new TurnTo(turnAngle));
+		addSequential(new SetArm(Arm.firstPosition+50));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1200, turnAngle, 0.8));
 		
@@ -84,7 +86,7 @@ public class StraightStack extends CommandGroup {
 		
 		addSequential(new TurnTo(turnAngle+90, slowTurnSpeed));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1500, turnAngle+90));
+		addSequential(new DriveYDistance(1400, turnAngle+90));
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new WaitForArm());
 		addSequential(new OpenGripper());

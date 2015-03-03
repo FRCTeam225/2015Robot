@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class DriveYDistance extends CommandBase {
 
 	double dist;
-	public SimplePID pidY = new SimplePID(0.0012,0.001, 0);
+	public SimplePID pidY = new SimplePID(0.0012,0.0015, 0);
 	public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
 	Timer t = new Timer();
 	public DriveYDistance(double dist, double theta, double maxSpeed)
