@@ -11,6 +11,8 @@ public class DriveYDistance extends CommandBase {
 	public SimplePID pidY = new SimplePID(0.0012,0.0015, 0);
 	public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
 	Timer t = new Timer();
+	boolean needsAngle = false;
+	
 	public DriveYDistance(double dist, double theta, double maxSpeed)
 	{
 		pidY.setTarget(dist);
@@ -24,9 +26,16 @@ public class DriveYDistance extends CommandBase {
 		this(dist, theta, 1);
 	}
 	
+	public DriveYDistance(double dist) {
+		this(dist, 0, 1);
+		needsAngle = true;
+	}
+	
 	@Override
 	protected void initialize() {
-		
+		if (needsAngle) {
+			pidTheta.setTarget(drivetrain.getGyro());
+		}
 		t.reset();
 		t.start();
 	}

@@ -6,13 +6,16 @@ public class SetArm extends CommandBase {
 
 	int target;
 	
+	public SetArm() {
+		this.target = 0;
+	}
+	
 	public SetArm(int target) {
 		this.target = target;
 	}
 	
 	@Override
 	protected void initialize() {
-		System.out.println("Set arm to "+target);
 		arm.setTarget(target);
 	}
 

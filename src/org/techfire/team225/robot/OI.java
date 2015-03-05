@@ -1,14 +1,16 @@
 package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.arm.OverridePot;
+import org.techfire.team225.robot.commands.automation.AutoLift;
+import org.techfire.team225.robot.commands.automation.AutoPullOut;
+import org.techfire.team225.robot.commands.automation.HighAutoLift;
 import org.techfire.team225.robot.commands.chokehold.SetChokehold;
-import org.techfire.team225.robot.commands.drivetrain.AutoAlign;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 import org.techfire.team225.robot.commands.drivetrain.SetAlignmentBar;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.HalfGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
-import org.techfire.team225.robot.commands.gripper.OpenHalfGripper;
+import org.techfire.team225.robot.commands.gripper.AlternateHalfGripper;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -26,7 +28,9 @@ public class OI {
 		// driver
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
-		new JoystickButton(driver, 2).whenPressed(new AutoAlign());
+		new JoystickButton(driver, 5).whenPressed(new AutoLift());
+		new JoystickButton(driver, 6).whenPressed(new HighAutoLift());
+		new JoystickButton(driver, 10).whenPressed(new AutoPullOut());
 		
 		// operator
 		new JoystickButton(operator, 6).whenPressed(new SetAlignmentBar(true));
@@ -34,7 +38,7 @@ public class OI {
 		new JoystickButton(operator, 1).whenPressed(new OpenGripper());
 		new JoystickButton(operator, 4).whenPressed(new CloseGripper());
 		new JoystickButton(operator, 3).whenPressed(new HalfGripper());
-		new JoystickButton(operator, 2).whenPressed(new OpenHalfGripper());
+		new JoystickButton(operator, 2).whenPressed(new AlternateHalfGripper());
 		new JoystickButton(operator, 9).whenPressed(new SetChokehold(false));
 		new JoystickButton(operator, 10).whenPressed(new SetChokehold(true));
 	}

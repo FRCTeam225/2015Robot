@@ -2,11 +2,12 @@ package org.techfire.team225.robot.commands.gripper;
 
 import org.techfire.team225.robot.CommandBase;
 
-public class OpenHalfGripper extends CommandBase {
+public class AlternateHalfGripper extends CommandBase {
 
 	@Override
 	protected void initialize() {
 		gripper.setGripper(false, true);
+		gripper.setState("alternate_half");
 	}
 
 	@Override
