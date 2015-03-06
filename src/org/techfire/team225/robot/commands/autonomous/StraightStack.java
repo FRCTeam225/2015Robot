@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class StraightStack extends CommandGroup {
+	private String name = "Straight Stack";
+	
 	public StraightStack()
 	{
 		double turnAngle = 35;
@@ -90,6 +92,9 @@ public class StraightStack extends CommandGroup {
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new WaitForArm());
 		addSequential(new OpenGripper());
-		
+	}
+	
+	public String toString() {
+		return name;
 	}
 }

@@ -40,6 +40,20 @@ public class JedisProvider {
     	}*/
 	}
 	
+	public static void updateAutonomous(int selected) {
+		//jedis.set("currentAuto", "" + selected);
+	}
+	
+	public static int checkAutonomous(int selected) {
+		/*int jedisSelected = Integer.parseInt(jedis.get("currentAuto"));
+		if (jedisSelected != selected) {
+			return jedisSelected;
+		} else {
+			return selected;
+		}*/
+		return 0;
+	}
+	
 	public static int getSelectedAutonomous() {
 		/*try {
 			return Integer.parseInt(jedis.get("currentAuto"));

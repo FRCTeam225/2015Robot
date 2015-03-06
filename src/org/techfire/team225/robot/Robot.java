@@ -3,6 +3,7 @@ package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAuton;
+import org.techfire.team225.robot.commands.autonomous.DoNothing;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
@@ -25,7 +26,7 @@ public class Robot extends IterativeRobot {
 	
     Command autonomousCommand;
     Command[] autonomi;
-    int selected = 0;
+    public int selected = 0;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -38,24 +39,35 @@ public class Robot extends IterativeRobot {
     	JedisProvider.init();
 
     	autonomi = new Command[] {
-        		new StrafeAndStack(),
-        		new ChokeholdAuton()
+    			new DoNothing(),
+        		new StraightStack(),
+        		new ChokeholdAuton(),
+    			new StrafeAndStack()
         };
     	
     	JedisProvider.autonomousInit(autonomi);
     	
     	CommandBase.drivetrain.resetAngle();
-
     }
 	
 	public void disabledPeriodic() {
 		JedisProvider.write();
+		
+		if (OI.driver.getRawButton(3) && selected < autonomi.length - 1) {
+			selected++;
+			JedisProvider.updateAutonomous(selected);
+			System.out.println("Selected autonomous is: " + autonomi[selected]);
+		} else if (OI.driver.getRawButton(2) && selected > 0) {
+			selected++;
+			JedisProvider.updateAutonomous(selected);
+			System.out.println("Selected autonomous is: " + autonomi[selected]);
+		}
+		JedisProvider.checkAutonomous(selected);
 	}
 	
     public void autonomousInit() {
-    	autonomousCommand = autonomi[JedisProvider.getSelectedAutonomous()];
+    	autonomousCommand = autonomi[selected];
     	new PIDArmControl().start();
-    	autonomousCommand = new StraightStack();//autonomi[i];
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
     	CommandBase.drivetrain.resetForwardEncoders();

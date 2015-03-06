@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class ChokeholdAuton extends CommandGroup {
 	private String name = "\"Chokehold\"";
+	
 	public ChokeholdAuton() {
 		addSequential(new SetAlignmentBar(true));
 		addSequential(new SetArm(Arm.postContainerPosition));
