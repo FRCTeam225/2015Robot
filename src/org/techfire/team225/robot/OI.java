@@ -3,7 +3,7 @@ package org.techfire.team225.robot;
 import org.techfire.team225.robot.commands.arm.OverridePot;
 import org.techfire.team225.robot.commands.automation.AutoLift;
 import org.techfire.team225.robot.commands.automation.AutoPullOut;
-import org.techfire.team225.robot.commands.automation.HighAutoLift;
+import org.techfire.team225.robot.commands.automation.AutoLiftHigh;
 import org.techfire.team225.robot.commands.chokehold.SetChokehold;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 import org.techfire.team225.robot.commands.drivetrain.SetAlignmentBar;
@@ -29,7 +29,7 @@ public class OI {
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
 		new JoystickButton(driver, 5).whenPressed(new AutoLift());
-		new JoystickButton(driver, 6).whenPressed(new HighAutoLift());
+		new JoystickButton(driver, 6).whenPressed(new AutoLiftHigh());
 		new JoystickButton(driver, 10).whenPressed(new AutoPullOut());
 		
 		// operator

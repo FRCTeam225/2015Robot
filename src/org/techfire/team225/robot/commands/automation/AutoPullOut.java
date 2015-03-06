@@ -1,10 +1,8 @@
 package org.techfire.team225.robot.commands.automation;
 
 import org.techfire.team225.robot.CommandBase;
-import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.arm.Unhook;
 import org.techfire.team225.robot.commands.arm.WaitForArm;
-import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

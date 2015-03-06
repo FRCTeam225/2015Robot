@@ -1,10 +1,8 @@
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.subsystems.Drivetrain;
-
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
+//import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
-import redis.clients.jedis.Jedis;
+//import redis.clients.jedis.Jedis;
 
 /**
  * A class for accessing redis, through the jedis library,
@@ -14,8 +12,8 @@ import redis.clients.jedis.Jedis;
  */
 public class JedisProvider {
 	
-	private static Jedis jedis;
-	private static PowerDistributionPanel pdp;
+	//private static Jedis jedis;
+	//private static PowerDistributionPanel pdp;
 	
 	public static void init() {
 		/*try {

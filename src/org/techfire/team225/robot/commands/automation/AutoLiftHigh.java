@@ -8,9 +8,9 @@ import org.techfire.team225.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class HighAutoLift extends CommandGroup {
+public class AutoLiftHigh extends CommandGroup {
 
-	public HighAutoLift() {
+	public AutoLiftHigh() {
 		setTimeout(7.0);
 		requires(CommandBase.arm);
 		addSequential(new SetArm(Arm.floorPosition));
