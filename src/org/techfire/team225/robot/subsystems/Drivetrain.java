@@ -17,7 +17,6 @@ public class Drivetrain extends Subsystem {
 	
 	public DigitalInput photoLeft;
     public DigitalInput photoRight;
-    public DigitalInput photoBin;
     
     public BuiltInAccelerometer accelerometer;
     
@@ -36,9 +35,8 @@ public class Drivetrain extends Subsystem {
  	Solenoid alignmentSolenoid = new Solenoid(ConstantsProvider.get("ALIGNMENT_SOLENOID"));
 	
 	public Drivetrain() {
-		 photoLeft = new DigitalInput(6);
-	     photoRight = new DigitalInput(7);
-	     photoBin = new DigitalInput(8);
+		 photoLeft = new DigitalInput(ConstantsProvider.get("PHOTO_LEFT"));
+	     photoRight = new DigitalInput(ConstantsProvider.get("PHOTO_RIGHT"));
 	    
 	     accelerometer  = new BuiltInAccelerometer();
 	    
@@ -88,11 +86,11 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public boolean getRightEye() {
-		return !photoRight.get();
+		return photoRight.get();
 	}
 	
 	public boolean getLeftEye() {
-		return !photoLeft.get();
+		return photoLeft.get();
 	}
 	
 	public int getLeftEncoder() {

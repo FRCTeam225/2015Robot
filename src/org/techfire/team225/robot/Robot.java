@@ -60,7 +60,11 @@ public class Robot extends IterativeRobot {
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
 		}
-		JedisProvider.checkAutonomous(selected);
+		//selected = JedisProvider.checkAutonomous(selected);
+		
+		System.out.print("Left banner sees: " + CommandBase.drivetrain.getLeftEye());
+        System.out.print("  Right banner sees: " + CommandBase.drivetrain.getRightEye());
+        System.out.println("  At Bin: " + CommandBase.drivetrain.atBin());
 	}
 	
     public void autonomousInit() {
@@ -114,6 +118,10 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         JedisProvider.write();
         Scheduler.getInstance().run();
+        
+        System.out.print("Left banner sees: " + CommandBase.drivetrain.getLeftEye());
+        System.out.print("  Right banner sees: " + CommandBase.drivetrain.getRightEye());
+        System.out.println("  At Bin: " + CommandBase.drivetrain.atBin());
         
         /*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
