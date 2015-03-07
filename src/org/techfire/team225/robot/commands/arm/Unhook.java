@@ -4,7 +4,7 @@ public class Unhook extends SetArm {
 	
 	@Override
 	protected void initialize() {
-		target = arm.getPosition() - 100;
+		target = arm.getPosition() - 120;
 		super.initialize();
 	}
 }

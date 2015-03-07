@@ -58,7 +58,7 @@ public class Drivetrain extends Subsystem {
 	
 	public boolean atBin()
 	{
-		return photoBin.get();
+		return photoLeft.get() && photoRight.get();
 	}
 	
 	public void setMotorSpeeds(double xIn, double yIn, double rotation, double driveScale, boolean fieldCentric) {
