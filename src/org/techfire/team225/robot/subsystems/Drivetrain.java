@@ -22,7 +22,6 @@ public class Drivetrain extends Subsystem {
     
     public Encoder encoderL;
     public Encoder encoderR;
-    public Encoder encoderF;
     
     //GyroProvider gyro;
     Gyro gyro;
@@ -35,15 +34,13 @@ public class Drivetrain extends Subsystem {
  	Solenoid alignmentSolenoid = new Solenoid(ConstantsProvider.get("ALIGNMENT_SOLENOID"));
 	
 	public Drivetrain() {
-		 photoLeft = new DigitalInput(ConstantsProvider.get("PHOTO_LEFT"));
-	     photoRight = new DigitalInput(ConstantsProvider.get("PHOTO_RIGHT"));
+		 photoLeft = new DigitalInput(ConstantsProvider.get("PHOTO_SENSOR_LEFT"));
+	     photoRight = new DigitalInput(ConstantsProvider.get("PHOTO_SENSOR_RIGHT"));
 	    
 	     accelerometer  = new BuiltInAccelerometer();
 	    
 	     encoderL = new Encoder(ConstantsProvider.get("ENCODER_LEFT_A"), ConstantsProvider.get("ENCODER_LEFT_B"));
 	     encoderR = new Encoder(ConstantsProvider.get("ENCODER_RIGHT_A"), ConstantsProvider.get("ENCODER_RIGHT_B"));
-	     encoderF = new Encoder(ConstantsProvider.get("ENCODER_FOLLOW_A"), ConstantsProvider.get("ENCODER_FOLLOW_B"));
-		
 		
 		victorLeft[0] = new Victor(ConstantsProvider.get("LEFT_FORWARD_MOTOR"));
 		victorLeft[1] = new Victor(ConstantsProvider.get("LEFT_BACK_MOTOR"));
@@ -56,7 +53,7 @@ public class Drivetrain extends Subsystem {
 	
 	public boolean atBin()
 	{
-		return photoLeft.get() && photoRight.get();
+		return photoLeft.get();
 	}
 	
 	public void setMotorSpeeds(double xIn, double yIn, double rotation, double driveScale, boolean fieldCentric) {
@@ -86,7 +83,8 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public boolean getRightEye() {
-		return photoRight.get();
+		return true;
+		//return photoRight.get();
 	}
 	
 	public boolean getLeftEye() {
@@ -110,14 +108,6 @@ public class Drivetrain extends Subsystem {
 		encoderR.reset();
 	}
 	
-	public void resetFollowerEncoder() {
-		encoderF.reset();
-	}
-	
-	public int getFollowEncoder() {
-		return encoderF.get();
-	}
-	
 	public double getGyro() {
 		return gyro.getAngle();
 	}
@@ -131,7 +121,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void setAlignmentBar(boolean set) {
-		alignmentSolenoid.set(set);
+		//alignmentSolenoid.set(set);
 	}
 
 	@Override

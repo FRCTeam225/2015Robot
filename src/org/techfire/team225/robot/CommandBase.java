@@ -21,6 +21,12 @@ public abstract class CommandBase extends Command {
 		chokehold = new Chokehold();
 	}
 
+	
+	public Command chainableSetTimeout(double t)
+	{
+		super.setTimeout(t);
+		return this;
+	}
 
 	@Override
 	protected void interrupted() {

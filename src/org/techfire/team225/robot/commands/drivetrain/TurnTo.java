@@ -5,8 +5,8 @@ import org.techfire.team225.robot.SimplePID;
 
 public class TurnTo extends CommandBase {
 
-	public SimplePID pidTheta = new SimplePID(0.025, 0.00015, 0);
-	
+	public SimplePID pidTheta = new SimplePID(0.027, 0.00015, 0);
+	int loopsStable = 0;
 	public TurnTo(double theta)
 	{
 		this(theta, 1.0);
@@ -34,7 +34,10 @@ public class TurnTo extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(pidTheta.getError()) < 5;
+		if  ( Math.abs(pidTheta.getError()) < 5 )
+			loopsStable++;
+		else loopsStable = 0;
+		return loopsStable > 5 || isTimedOut();
 	}
 
 	@Override

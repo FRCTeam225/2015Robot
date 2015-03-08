@@ -14,13 +14,13 @@ import org.techfire.team225.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class StraightStack extends CommandGroup {
+public class StraightStackOneCan extends CommandGroup {
 	private String name = "Straight Stack, with one can being removed";
 	
-	public StraightStack()
+	public StraightStackOneCan()
 	{
 		double turnAngle = 35;
-		double slowTurnSpeed = 0.55;
+		double slowTurnSpeed = 0.6;
 		
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.8));
@@ -49,15 +49,11 @@ public class StraightStack extends CommandGroup {
 		addSequential(new DriveYDistance(250, turnAngle));
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(0));
-		addSequential(new SetArm(Arm.firstPosition-100));
-		addSequential(new WaitCommand(0.5));
-		addSequential(new SetAlignmentBar(true));
-		
-		addSequential(new TurnTo(turnAngle));
+		addSequential(new WaitCommand(0.4));
 		
 		addSequential(new SetArm(Arm.firstPosition+50));
+		addSequential(new SetAlignmentBar(true));
+		addSequential(new WaitCommand(0.6));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1150, turnAngle, 1.0));
 		addSequential(new AutoAlignForPlacement());

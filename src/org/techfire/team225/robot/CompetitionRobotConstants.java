@@ -19,7 +19,7 @@ public class CompetitionRobotConstants {
     public static int ARM_FORWARD_MOTOR = 4; // PWM
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
-    public static int FLOOR_POSITION = 2435; //1950;
+    public static int FLOOR_POSITION = 1840;
     public static int FIRST_POSITION = FLOOR_POSITION + 400;
     public static int TOP_POSITION = FLOOR_POSITION + 1105;
     public static int POST_CONTAINER_POSITION = TOP_POSITION - 300;
@@ -40,12 +40,10 @@ public class CompetitionRobotConstants {
     public static int ENCODER_RIGHT_B = 1; // DIO
     public static int ENCODER_LEFT_A = 2; // DIO
     public static int ENCODER_LEFT_B = 3; // DIO
-    public static int ENCODER_FOLLOW_A = 4; // DIO
-    public static int ENCODER_FOLLOW_B = 5; // DIO
         
     // sensors
-    public static int PHOTO_SENSOR_LEFT = 9; // DIO
-    public static int PHOTO_SENSOR_RIGHT  = 8; // DIO
+    public static int PHOTO_SENSOR_LEFT = 4; // DIO
+    public static int PHOTO_SENSOR_RIGHT  = 5; // DIO
     public static int GYRO = 0; // Analog
     
     // compressor

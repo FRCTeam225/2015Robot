@@ -3,9 +3,11 @@ package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAuton;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDouble;
 import org.techfire.team225.robot.commands.autonomous.DoNothing;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
+import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -39,7 +41,9 @@ public class Robot extends IterativeRobot {
     	autonomi = new Command[] {
     			new DoNothing(),
         		new StraightStack(),
+        		new StraightStackOneCan(),
         		new ChokeholdAuton(),
+        		new ChokeholdAutonDouble(),
     			new StrafeAndStack()
         };
     	
@@ -51,24 +55,24 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		JedisProvider.write();
 		
-		if (OI.driver.getRawButton(3) && selected < autonomi.length - 1) {
+		if (OI.driver.getRawButton(2) && selected < autonomi.length - 1) {
 			selected++;
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
-		} else if (OI.driver.getRawButton(2) && selected > 0) {
-			selected++;
+		} else if (OI.driver.getRawButton(3) && selected > 0) {
+			selected--;
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
 		
-		System.out.print("Left banner sees: " + CommandBase.drivetrain.getLeftEye());
-        System.out.print("  Right banner sees: " + CommandBase.drivetrain.getRightEye());
-        System.out.println("  At Bin: " + CommandBase.drivetrain.atBin());
+		System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
+        System.out.println("Arm: "+CommandBase.arm.getPosition());
 	}
 	
     public void autonomousInit() {
-    	autonomousCommand = autonomi[selected];
+    	autonomousCommand = new StraightStack();//autonomi[selected];
     	new PIDArmControl().start();
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
@@ -109,7 +113,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+		System.out.println("Selected autonomous is: " + autonomi[selected]);
     }
 
     /**
@@ -119,13 +123,9 @@ public class Robot extends IterativeRobot {
         JedisProvider.write();
         Scheduler.getInstance().run();
         
-        System.out.print("Left banner sees: " + CommandBase.drivetrain.getLeftEye());
-        System.out.print("  Right banner sees: " + CommandBase.drivetrain.getRightEye());
-        System.out.println("  At Bin: " + CommandBase.drivetrain.atBin());
-        
-        /*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
+        System.out.println("Arm: "+CommandBase.arm.getPosition());
     }
     
     /**

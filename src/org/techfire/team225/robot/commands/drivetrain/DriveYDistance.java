@@ -19,7 +19,9 @@ public class DriveYDistance extends CommandBase {
 		pidTheta.setTarget(theta);
 		pidY.setOutputConstraints(maxSpeed, -maxSpeed);
 		requires(drivetrain);
+		setTimeout(5);
 	}
+	
 	
 	public DriveYDistance(double dist, double theta)
 	{
@@ -56,7 +58,7 @@ public class DriveYDistance extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(pidY.getError()) < 50;
+		return (Math.abs(pidY.getError()) < 100)|| isTimedOut();
 	}
 
 	@Override

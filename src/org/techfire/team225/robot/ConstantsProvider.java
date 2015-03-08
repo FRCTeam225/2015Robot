@@ -7,13 +7,16 @@ public class ConstantsProvider {
 	static boolean isCompBot;
     
 	public static void init() {
+		System.out.println("reading file...");
 		try {
 			File flag = new File("/PracticeRobot");
 			isCompBot = !flag.exists();
 			//Robot.jedis.set("isCompBot", "false");
 		} catch (Exception e) {
+			e.printStackTrace();
 			isCompBot = true;
 		}
+		System.out.println("COMP BOT: "+ isCompBot);
 	}
 	
 	public static int get(String key) {
