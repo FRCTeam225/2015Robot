@@ -8,6 +8,8 @@ import org.techfire.team225.robot.commands.autonomous.DoNothing;
 import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
+import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
+import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -73,6 +75,7 @@ public class Robot extends IterativeRobot {
 	
     public void autonomousInit() {
     	autonomousCommand = new StraightStack();//autonomi[selected];
+    	//autonomousCommand = new TurnTo(35);
     	new PIDArmControl().start();
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
@@ -124,6 +127,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
         System.out.println("Arm: "+CommandBase.arm.getPosition());
     }

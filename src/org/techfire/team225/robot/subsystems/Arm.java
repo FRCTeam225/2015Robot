@@ -46,6 +46,7 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setMotorSpeed(double speed) {
+
 		if (potOverride) {
 			if (speed > 0) {
 				victorForward.set(speed);

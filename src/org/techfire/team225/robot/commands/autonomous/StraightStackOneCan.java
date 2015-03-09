@@ -19,7 +19,7 @@ public class StraightStackOneCan extends CommandGroup {
 	
 	public StraightStackOneCan()
 	{
-		double turnAngle = 35;
+		double turnAngle = 32;
 		double slowTurnSpeed = 0.6;
 		
 		addSequential(new CloseGripper());
@@ -53,7 +53,7 @@ public class StraightStackOneCan extends CommandGroup {
 		
 		addSequential(new SetArm(Arm.firstPosition+50));
 		addSequential(new SetAlignmentBar(true));
-		addSequential(new WaitCommand(0.6));
+		addSequential(new WaitCommand(0.8));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1150, turnAngle, 1.0));
 		addSequential(new AutoAlignForPlacement());

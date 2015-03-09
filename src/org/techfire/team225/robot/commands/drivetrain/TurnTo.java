@@ -5,7 +5,7 @@ import org.techfire.team225.robot.SimplePID;
 
 public class TurnTo extends CommandBase {
 
-	public SimplePID pidTheta = new SimplePID(0.027, 0.00015, 0);
+	public SimplePID pidTheta = new SimplePID(0.03, 0.00015, 0);
 	int loopsStable = 0;
 	public TurnTo(double theta)
 	{
