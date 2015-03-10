@@ -10,7 +10,7 @@ public class Chokehold extends Subsystem {
 	Solenoid actuationSolenoid = new Solenoid(ConstantsProvider.get("CHOKEHOLD_SOLENOID"));
 	
 	public void set(boolean set) {
-		actuationSolenoid.set(set);
+		//actuationSolenoid.set(set);
 	}
 	
 	@Override

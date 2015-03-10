@@ -23,7 +23,7 @@ public class StraightStack extends CommandGroup {
 		double slowTurnSpeed = 0.55;
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.8));
+		addSequential(new WaitCommand(0.3));
 		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new DriveYDistance(470, 0));
 		
@@ -32,10 +32,11 @@ public class StraightStack extends CommandGroup {
 		addSequential(new ResetEncoders());
 		addSequential(new SetAlignmentBar(true));
 		addSequential(new WaitCommand(0.25));
-		addSequential(new DriveYDistance(770, turnAngle, 1.0));
+		addSequential(new DriveYDistance(700, turnAngle, 1.0));
 		addSequential(new AutoAlignForPlacement());
 		
 		addSequential(new SetArm(Arm.firstPosition-100));
+		addSequential(new WaitCommand(0.2));
 		//addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
@@ -49,9 +50,11 @@ public class StraightStack extends CommandGroup {
 		addSequential(new DriveYDistance(250, turnAngle));
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(0));
-		addSequential(new SetArm(Arm.firstPosition-75));
+		addSequential(new WaitCommand(0.3));
+		addSequential(new SetArm(Arm.firstPosition-300));
+		addSequential(new WaitCommand(0.2));
+		addSequential(new TurnTo(-5));
+		addSequential(new SetArm(Arm.firstPosition-120));
 		addSequential(new WaitCommand(0.6));
 		addSequential(new SetAlignmentBar(true));
 		
@@ -66,6 +69,7 @@ public class StraightStack extends CommandGroup {
 		addSequential(new ResetEncoders());
 		
 		addSequential(new SetArm(Arm.firstPosition-100));
+		addSequential(new WaitCommand(0.2));
 		//addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
@@ -79,7 +83,7 @@ public class StraightStack extends CommandGroup {
 		addSequential(new DriveYDistance(250, turnAngle));
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.5));
+		addSequential(new WaitCommand(0.3));
 		
 		addSequential(new SetArm(Arm.floorPosition+150));
 		addSequential(new WaitForArm());
