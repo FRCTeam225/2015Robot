@@ -29,4 +29,8 @@ public class ChokeholdAutonDouble extends ChokeholdAuton {
 		addSequential(new WaitCommand(0.5));
 		addSequential(new TurnTo(90));
 	}
+	
+	public String toString() {
+		return name;
+	}
 }
