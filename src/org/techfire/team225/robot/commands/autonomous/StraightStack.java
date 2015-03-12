@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class StraightStack extends CommandGroup {
-	private String name = "Straight Stack, with one can being removed";
+	private String name = "Straight Stack";
 	
 	public StraightStack()
 	{

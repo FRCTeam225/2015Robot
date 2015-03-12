@@ -8,8 +8,7 @@ import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class ChokeholdAutonDouble extends ChokeholdAuton {
-
-	String name = "Two side \"Chokehold\"";
+	private String name = "Two side \"Chokehold\"";
 	
 	public ChokeholdAutonDouble() {
 		super();

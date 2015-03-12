@@ -12,6 +12,7 @@ import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -52,30 +53,48 @@ public class Robot extends IterativeRobot {
     	JedisProvider.autonomousInit(autonomi);
     	
     	CommandBase.drivetrain.resetAngle();
+    	
+    	System.out.println("ROBOT READY!");
+    	System.out.println("~");
     }
 	
 	public void disabledPeriodic() {
 		JedisProvider.write();
 		
-		if (OI.driver.getRawButton(2) && selected < autonomi.length - 1) {
+		if (OI.driver.getRawButton(4) && selected < autonomi.length - 1) {
 			selected++;
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
+			System.out.println("~");
+			Timer.delay(0.5);
 		} else if (OI.driver.getRawButton(3) && selected > 0) {
 			selected--;
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
+			System.out.println("~");
+			Timer.delay(0.5);
+		} else if (OI.driver.getRawButton(1)) {
+			CommandBase.drivetrain.resetAngle();
+			System.out.println("GYRO RESET!");
+			System.out.println("GYRO: " + String.format("%2.3f", CommandBase.drivetrain.getGyro()));
+			System.out.println("~");
+			Timer.delay(0.5);
+		} else if (OI.driver.getRawButton(2)) {
+			CommandBase.drivetrain.resetAngle();
+			System.out.println("ENCODERS RESET!");
+			System.out.println("ENCODERS: " + CommandBase.drivetrain.getAverageForwardEncoders());
+			System.out.println("~");
+			Timer.delay(0.5);
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
 		
-		System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+		/*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());
+        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
 	}
 	
     public void autonomousInit() {
-    	autonomousCommand = new StraightStack();//autonomi[selected];
-    	//autonomousCommand = new TurnTo(35);
+    	autonomousCommand = autonomi[selected];
     	new PIDArmControl().start();
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
@@ -117,6 +136,8 @@ public class Robot extends IterativeRobot {
      */
     public void disabledInit(){
 		System.out.println("Selected autonomous is: " + autonomi[selected]);
+    	System.out.println("~");
+		selected = 0;
     }
 
     /**
@@ -126,10 +147,10 @@ public class Robot extends IterativeRobot {
         JedisProvider.write();
         Scheduler.getInstance().run();
         
-        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        /*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());
+        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
     }
     
     /**
