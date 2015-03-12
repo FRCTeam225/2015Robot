@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -64,12 +65,14 @@ public class Robot extends IterativeRobot {
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
 			System.out.println("~");
+	    	SmartDashboard.putString("SelectedAutonomous", "" + autonomi[selected]);
 			Timer.delay(0.5);
 		} else if (OI.driver.getRawButton(3) && selected > 0) {
 			selected--;
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
 			System.out.println("~");
+	    	SmartDashboard.putString("SelectedAutonomous", "" + autonomi[selected]);
 			Timer.delay(0.5);
 		} else if (OI.driver.getRawButton(1)) {
 			CommandBase.drivetrain.resetAngle();
@@ -133,9 +136,10 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
+		selected = 0;
 		System.out.println("Selected autonomous is: " + autonomi[selected]);
     	System.out.println("~");
-		selected = 0;
+    	SmartDashboard.putString("SelectedAutonomous", "" + autonomi[selected]);
     }
 
     /**
