@@ -19,10 +19,12 @@ public class CompetitionRobotConstants {
     public static int ARM_FORWARD_MOTOR = 4; // PWM
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
-    public static int FLOOR_POSITION = 1935;
+    public static int FLOOR_POSITION = 2440;
     public static int FIRST_POSITION = FLOOR_POSITION + 450;
-    public static int TOP_POSITION = FLOOR_POSITION + 1155;
-    public static int POST_CONTAINER_POSITION = TOP_POSITION - 300;
+    public static int TOP_POSITION = FLOOR_POSITION + 1085;
+    public static int PRE_CONTAINER_POSITION = FLOOR_POSITION + 690;
+    public static int POST_CONTAINER_POSITION = FLOOR_POSITION + 435;
+    public static int PICKUP_CONTAINER_POSITION = FLOOR_POSITION + 330;
     
     // gripper
     public static int GRIPPER_SOLENOID_LEFT = 1; // PCM  

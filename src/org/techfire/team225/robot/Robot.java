@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     Command[] autonomi;
     public int selected = 0;
+    //boolean armPIDenabled = false;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -99,14 +100,15 @@ public class Robot extends IterativeRobot {
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
 		
-		/*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+		System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
+        System.out.println("Arm: "+CommandBase.arm.getPosition());
 	}
 	
     public void autonomousInit() {
     	autonomousCommand = autonomi[selected];
     	new PIDArmControl().start();
+    	//armPIDenabled = true;
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
     	CommandBase.drivetrain.resetForwardEncoders();
@@ -134,6 +136,9 @@ public class Robot extends IterativeRobot {
     	CommandBase.drivetrain.resetAngle();
     	resetSubsystem(CommandBase.drivetrain);
     	resetSubsystem(CommandBase.arm);
+    	//if (!armPIDenabled) {
+    		//new PIDArmControl().start();
+    	//}
     	
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
@@ -160,10 +165,13 @@ public class Robot extends IterativeRobot {
         JedisProvider.write();
         Scheduler.getInstance().run();
         
-        /*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        //CommandBase.arm.updatePID();
+
+        
+        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
+        System.out.println("Arm: "+CommandBase.arm.getPosition());
     }
     
     /**

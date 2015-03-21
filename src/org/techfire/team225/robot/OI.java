@@ -1,6 +1,9 @@
 package org.techfire.team225.robot;
 
 import org.techfire.team225.robot.commands.arm.OverridePot;
+import org.techfire.team225.robot.commands.arm.PickupContainer;
+import org.techfire.team225.robot.commands.arm.SetPostContainer;
+import org.techfire.team225.robot.commands.arm.SetPreContainer;
 import org.techfire.team225.robot.commands.automation.AutoLift;
 import org.techfire.team225.robot.commands.automation.AutoPullOut;
 import org.techfire.team225.robot.commands.automation.AutoLiftHigh;
@@ -33,14 +36,14 @@ public class OI {
 		//new JoystickButton(driver, 10).whenPressed(new AutoPullOut());
 		
 		// operator
-		new JoystickButton(operator, 6).whenPressed(new SetAlignmentBar(true));
-		new JoystickButton(operator, 5).whenPressed(new SetAlignmentBar(false));
+		new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
+		new JoystickButton(operator, 5).whenPressed(new SetPostContainer());
 		new JoystickButton(operator, 1).whenPressed(new OpenGripper());
 		new JoystickButton(operator, 4).whenPressed(new CloseGripper());
 		new JoystickButton(operator, 3).whenPressed(new HalfGripper());
 		new JoystickButton(operator, 2).whenPressed(new AlternateHalfGripper());
-		new JoystickButton(operator, 9).whenPressed(new SetChokehold(false));
-		new JoystickButton(operator, 10).whenPressed(new SetChokehold(true));
+		//new JoystickButton(operator, 9).whenPressed(new SetChokehold(false));
+		new JoystickButton(operator, 10).whenPressed(new PickupContainer());
 	}
 	
 	public static boolean getDriverPreciseMode() {

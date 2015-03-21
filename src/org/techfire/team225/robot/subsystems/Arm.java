@@ -18,18 +18,22 @@ public class Arm extends Subsystem {
 	
 	public static int floorPosition;
 	public static int firstPosition;
-	public static int postContainerPosition;
 	public static int topPosition;
+	public static int postContainerPosition;
+	public static int preContainerPosition;
+	public static int pickupContainerPosition;
 
 	public Arm() {
 		floorPosition = ConstantsProvider.get("FLOOR_POSITION");
 		firstPosition = ConstantsProvider.get("FIRST_POSITION");
-		postContainerPosition = ConstantsProvider.get("POST_CONTAINER_POSITION");
 		topPosition = ConstantsProvider.get("TOP_POSITION");
+		postContainerPosition = ConstantsProvider.get("POST_CONTAINER_POSITION");
+		preContainerPosition = ConstantsProvider.get("PRE_CONTAINER_POSITION");
+		pickupContainerPosition = ConstantsProvider.get("PICKUP_CONTAINER_POSITION");
 	}
 	
 	
-	private SimplePID pid = new SimplePID(0.006, 0, 0);
+	private SimplePID pid = new SimplePID(0.008, 0, 0);
 	
 	public int getPosition()
 	{
