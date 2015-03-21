@@ -32,7 +32,7 @@ public class StraightStack extends CommandGroup {
 		addSequential(new ResetEncoders());
 		addSequential(new SetAlignmentBar(true));
 		addSequential(new WaitCommand(0.25));
-		addSequential(new DriveYDistance(700, turnAngle, 1.0));
+		addSequential(new DriveYDistance(680, turnAngle, 1.0));
 		addSequential(new AutoAlignForPlacement());
 		
 		addSequential(new SetArm(Arm.firstPosition-100));
@@ -54,11 +54,11 @@ public class StraightStack extends CommandGroup {
 		addSequential(new SetArm(Arm.firstPosition-300));
 		addSequential(new WaitCommand(0.2));
 		addSequential(new TurnTo(-5));
-		addSequential(new SetArm(Arm.firstPosition-120));
+		addSequential(new SetArm(Arm.firstPosition-200));
 		addSequential(new WaitCommand(0.6));
 		addSequential(new SetAlignmentBar(true));
-		
-		addSequential(new TurnTo(turnAngle));
+		addSequential(new DriveYDistance(150, -5));
+		addSequential(new TurnTo(turnAngle, 0.8));
 		
 		addSequential(new SetArm(Arm.firstPosition+50));
 		addSequential(new ResetEncoders());

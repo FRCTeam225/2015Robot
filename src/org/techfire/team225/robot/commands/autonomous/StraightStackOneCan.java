@@ -20,10 +20,10 @@ public class StraightStackOneCan extends CommandGroup {
 	public StraightStackOneCan()
 	{
 		double turnAngle = 32;
-		double slowTurnSpeed = 0.6;
+		double slowTurnSpeed = 0.55;
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.8));
+		addSequential(new WaitCommand(0.3));
 		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new DriveYDistance(470, 0));
 		
@@ -32,10 +32,11 @@ public class StraightStackOneCan extends CommandGroup {
 		addSequential(new ResetEncoders());
 		addSequential(new SetAlignmentBar(true));
 		addSequential(new WaitCommand(0.25));
-		addSequential(new DriveYDistance(770, turnAngle, 1.0));
+		addSequential(new DriveYDistance(680, turnAngle, 1.0));
 		addSequential(new AutoAlignForPlacement());
 		
 		addSequential(new SetArm(Arm.firstPosition-100));
+		addSequential(new WaitCommand(0.2));
 		//addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
@@ -49,11 +50,10 @@ public class StraightStackOneCan extends CommandGroup {
 		addSequential(new DriveYDistance(250, turnAngle));
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.4));
+		addSequential(new WaitCommand(0.3));
 		
 		addSequential(new SetArm(Arm.firstPosition+50));
-		addSequential(new SetAlignmentBar(true));
-		addSequential(new WaitCommand(0.8));
+		addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1150, turnAngle, 1.0));
 		addSequential(new AutoAlignForPlacement());
@@ -62,6 +62,7 @@ public class StraightStackOneCan extends CommandGroup {
 		addSequential(new ResetEncoders());
 		
 		addSequential(new SetArm(Arm.firstPosition-100));
+		addSequential(new WaitCommand(0.2));
 		//addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
@@ -75,7 +76,7 @@ public class StraightStackOneCan extends CommandGroup {
 		addSequential(new DriveYDistance(250, turnAngle));
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.5));
+		addSequential(new WaitCommand(0.3));
 		
 		addSequential(new SetArm(Arm.floorPosition+150));
 		addSequential(new WaitForArm());

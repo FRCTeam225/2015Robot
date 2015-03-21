@@ -28,9 +28,9 @@ public class OI {
 		// driver
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
-		new JoystickButton(driver, 5).whenPressed(new AutoLift());
-		new JoystickButton(driver, 6).whenPressed(new AutoLiftHigh());
-		new JoystickButton(driver, 10).whenPressed(new AutoPullOut());
+		//new JoystickButton(driver, 5).whenPressed(new AutoLift());
+		//new JoystickButton(driver, 6).whenPressed(new AutoLiftHigh());
+		//new JoystickButton(driver, 10).whenPressed(new AutoPullOut());
 		
 		// operator
 		new JoystickButton(operator, 6).whenPressed(new SetAlignmentBar(true));

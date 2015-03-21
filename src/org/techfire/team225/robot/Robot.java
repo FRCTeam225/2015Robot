@@ -2,12 +2,18 @@ package org.techfire.team225.robot;
 
 
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
+import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAuton;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonArmUp;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDouble;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDoubleArmUp;
 import org.techfire.team225.robot.commands.autonomous.DoNothing;
-import org.techfire.team225.robot.commands.autonomous.StrafeAndStack;
+import org.techfire.team225.robot.commands.autonomous.DriveBackward;
+import org.techfire.team225.robot.commands.autonomous.DriveForward;
+import org.techfire.team225.robot.commands.autonomous.PullCan;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
+import org.techfire.team225.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -45,8 +51,12 @@ public class Robot extends IterativeRobot {
         		new StraightStack(),
         		new StraightStackOneCan(),
         		new ChokeholdAuton(),
+        		new ChokeholdAutonArmUp(),
         		new ChokeholdAutonDouble(),
-    			new StrafeAndStack()
+        		new ChokeholdAutonDoubleArmUp(),
+        		new PullCan(),
+        		new DriveForward(),
+        		new DriveBackward()
         };
     	
     	JedisProvider.autonomousInit(autonomi);
@@ -59,7 +69,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		JedisProvider.write();
-		
+		 SmartDashboard.putDouble("Gyro", CommandBase.drivetrain.getGyro());
 		if (OI.driver.getRawButton(4) && selected < autonomi.length - 1) {
 			selected++;
 			JedisProvider.updateAutonomous(selected);
@@ -110,6 +120,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         CommandBase.arm.updatePID();
         JedisProvider.write();
+        SmartDashboard.putDouble("Gyro", CommandBase.drivetrain.getGyro());
     }
     
     public void resetSubsystem(Subsystem s)

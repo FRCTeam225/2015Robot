@@ -7,16 +7,16 @@ import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class ChokeholdAutonDouble extends ChokeholdAuton {
-	private String name = "Two side \"Chokehold\"";
+public class ChokeholdAutonDoubleArmUp extends ChokeholdAutonArmUp {
+	private String name = "Two side \"Chokehold\", with the arm raised";
 	
-	public ChokeholdAutonDouble() {
+	public ChokeholdAutonDoubleArmUp() {
 		super();
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(2650, 90));
+		addSequential(new DriveYDistance(2800, 90));
 		addSequential(new TurnTo(0));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(-1950, 0).chainableSetTimeout(5.0));
+		addSequential(new DriveYDistance(-1850, 0).chainableSetTimeout(5.0));
 		addSequential(new WaitCommand(0.25));
 		addSequential(new SetChokehold(true));
 		addSequential(new WaitCommand(0.7));
