@@ -1,7 +1,9 @@
 package org.techfire.team225.robot;
 
+import org.techfire.team225.robot.commands.arm.LegalTilt;
 import org.techfire.team225.robot.commands.arm.OverridePot;
 import org.techfire.team225.robot.commands.arm.PickupContainer;
+import org.techfire.team225.robot.commands.arm.SetArmTilt;
 import org.techfire.team225.robot.commands.arm.SetPostContainer;
 import org.techfire.team225.robot.commands.arm.SetPreContainer;
 import org.techfire.team225.robot.commands.automation.AutoLift;
@@ -9,7 +11,6 @@ import org.techfire.team225.robot.commands.automation.AutoPullOut;
 import org.techfire.team225.robot.commands.automation.AutoLiftHigh;
 import org.techfire.team225.robot.commands.chokehold.SetChokehold;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
-import org.techfire.team225.robot.commands.drivetrain.SetAlignmentBar;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.HalfGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
@@ -31,9 +32,8 @@ public class OI {
 		// driver
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
-		//new JoystickButton(driver, 5).whenPressed(new AutoLift());
-		//new JoystickButton(driver, 6).whenPressed(new AutoLiftHigh());
-		//new JoystickButton(driver, 10).whenPressed(new AutoPullOut());
+		new JoystickButton(driver, 5).whenPressed(new SetChokehold(false));
+		new JoystickButton(driver, 6).whenPressed(new SetChokehold(true));
 		
 		// operator
 		new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
@@ -42,8 +42,9 @@ public class OI {
 		new JoystickButton(operator, 4).whenPressed(new CloseGripper());
 		new JoystickButton(operator, 3).whenPressed(new HalfGripper());
 		new JoystickButton(operator, 2).whenPressed(new AlternateHalfGripper());
-		//new JoystickButton(operator, 9).whenPressed(new SetChokehold(false));
+		//new JoystickButton(operator, 9).whenPressed(new LegalTilt(false));
 		new JoystickButton(operator, 10).whenPressed(new PickupContainer());
+		//new JoystickButton(operator, 10).whenPressed(new LegalTilt(true));
 	}
 	
 	public static boolean getDriverPreciseMode() {

@@ -16,7 +16,7 @@ public class ChokeholdAutonDouble extends ChokeholdAuton {
 		addSequential(new DriveYDistance(2650, 90));
 		addSequential(new TurnTo(0));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(-1950, 0).chainableSetTimeout(5.0));
+		addSequential(new DriveYDistance(-2200, 0).chainableSetTimeout(5.0));
 		addSequential(new WaitCommand(0.25));
 		addSequential(new SetChokehold(true));
 		addSequential(new WaitCommand(0.7));

@@ -92,7 +92,7 @@ public class Robot extends IterativeRobot {
 			System.out.println("~");
 			Timer.delay(0.5);
 		} else if (OI.driver.getRawButton(2)) {
-			CommandBase.drivetrain.resetAngle();
+			CommandBase.drivetrain.resetForwardEncoders();
 			System.out.println("ENCODERS RESET!");
 			System.out.println("ENCODERS: " + CommandBase.drivetrain.getAverageForwardEncoders());
 			System.out.println("~");
@@ -100,9 +100,9 @@ public class Robot extends IterativeRobot {
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
 		
-		System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+		/*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());
+        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
 	}
 	
     public void autonomousInit() {

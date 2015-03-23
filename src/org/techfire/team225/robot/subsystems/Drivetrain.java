@@ -30,9 +30,7 @@ public class Drivetrain extends Subsystem {
 	Victor[] victorRight = new Victor[2];
 	
 	boolean pidEnabled = false;
-	
- 	Solenoid alignmentSolenoid = new Solenoid(ConstantsProvider.get("ALIGNMENT_SOLENOID"));
-	
+		
 	public Drivetrain() {
 		 photoLeft = new DigitalInput(ConstantsProvider.get("PHOTO_SENSOR_LEFT"));
 	     photoRight = new DigitalInput(ConstantsProvider.get("PHOTO_SENSOR_RIGHT"));
@@ -118,10 +116,6 @@ public class Drivetrain extends Subsystem {
 	
 	public double getAccelerometerY() {
 		return accelerometer.getY();
-	}
-	
-	public void setAlignmentBar(boolean set) {
-		//alignmentSolenoid.set(set);
 	}
 
 	@Override

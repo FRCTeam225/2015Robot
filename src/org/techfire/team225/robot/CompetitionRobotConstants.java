@@ -7,7 +7,6 @@ public class CompetitionRobotConstants {
     public static int LEFT_BACK_MOTOR = 3; // PWM
     public static int RIGHT_FORWARD_MOTOR = 0; // PWM
     public static int RIGHT_BACK_MOTOR = 1; // PWM
-    public static int ALIGNMENT_SOLENOID = 2; // PCM
     
     // drivetrain power
     public static int LEFT_FORWARD_MOTOR_POWER = 12; // PDP
@@ -19,12 +18,14 @@ public class CompetitionRobotConstants {
     public static int ARM_FORWARD_MOTOR = 4; // PWM
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
-    public static int FLOOR_POSITION = 2440;
-    public static int FIRST_POSITION = FLOOR_POSITION + 450;
-    public static int TOP_POSITION = FLOOR_POSITION + 1085;
+    public static int FLOOR_POSITION = 2560;
+    public static int FIRST_POSITION = FLOOR_POSITION + 380;
+    public static int TOP_POSITION = FLOOR_POSITION + 1035;
     public static int PRE_CONTAINER_POSITION = FLOOR_POSITION + 690;
     public static int POST_CONTAINER_POSITION = FLOOR_POSITION + 435;
     public static int PICKUP_CONTAINER_POSITION = FLOOR_POSITION + 330;
+    public static int TILT_POSITION = FLOOR_POSITION + 955;
+    public static int TILT_SOLENOID = 2; // PCM
     
     // gripper
     public static int GRIPPER_SOLENOID_LEFT = 1; // PCM  

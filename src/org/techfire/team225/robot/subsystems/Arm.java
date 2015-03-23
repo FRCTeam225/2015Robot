@@ -6,6 +6,7 @@ import org.techfire.team225.robot.SimplePID;
 import org.techfire.team225.robot.commands.arm.ArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,12 +17,15 @@ public class Arm extends Subsystem {
 	AnalogInput pot = new AnalogInput(ConstantsProvider.get("ARM_POT"));
 	public boolean potOverride = false;
 	
+	Solenoid tiltSolenoid = new Solenoid(ConstantsProvider.get("TILT_SOLENOID"));
+	
 	public static int floorPosition;
 	public static int firstPosition;
 	public static int topPosition;
 	public static int postContainerPosition;
 	public static int preContainerPosition;
 	public static int pickupContainerPosition;
+	public static int tiltPosition;
 
 	public Arm() {
 		floorPosition = ConstantsProvider.get("FLOOR_POSITION");
@@ -30,6 +34,10 @@ public class Arm extends Subsystem {
 		postContainerPosition = ConstantsProvider.get("POST_CONTAINER_POSITION");
 		preContainerPosition = ConstantsProvider.get("PRE_CONTAINER_POSITION");
 		pickupContainerPosition = ConstantsProvider.get("PICKUP_CONTAINER_POSITION");
+		tiltPosition = ConstantsProvider.get("TILT_POSITION");
+		
+		//victorForward.setSafetyEnabled(true);
+		//victorBack.setSafetyEnabled(true);
 	}
 	
 	
@@ -63,9 +71,6 @@ public class Arm extends Subsystem {
 		} else if (getPosition() >= floorPosition && speed > 0) {
 			victorForward.set(speed * 0.75);
 			victorBack.set(-speed * 0.75);
-			if (getPosition() < firstPosition - 100) {
-				CommandBase.drivetrain.setAlignmentBar(false);
-			}
 		} else if (getPosition() <= topPosition && speed < 0) {
 			victorForward.set(speed);
 			victorBack.set(-speed);
@@ -78,6 +83,10 @@ public class Arm extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new ArmControl());
+	}
+	
+	public void setArmTilt(boolean tilt) {
+		tiltSolenoid.set(tilt);
 	}
 
 	
