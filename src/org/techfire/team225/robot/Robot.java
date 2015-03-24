@@ -100,9 +100,9 @@ public class Robot extends IterativeRobot {
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
 		
-		/*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+		System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
+        System.out.println("Arm: "+CommandBase.arm.getPosition());
 	}
 	
     public void autonomousInit() {

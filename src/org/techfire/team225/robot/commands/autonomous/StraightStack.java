@@ -19,8 +19,8 @@ public class StraightStack extends CommandGroup {
 	
 	public StraightStack()
 	{
-		double turnAngle = 32;
-		double secondTurnAngle = 39;
+		double turnAngle = 34;
+		double secondTurnAngle = 41;
 		double slowTurnSpeed = 0.55;
 		
 		addSequential(new CloseGripper());
@@ -54,16 +54,17 @@ public class StraightStack extends CommandGroup {
 		addSequential(new WaitCommand(0.3));
 		addSequential(new SetArm(Arm.firstPosition-300));
 		addSequential(new WaitCommand(0.2));
-		addSequential(new TurnTo(0));
+		addSequential(new TurnTo(0).chainableSetTimeout(1.0));
 		addSequential(new SetArm(Arm.firstPosition-200));
 		addSequential(new WaitCommand(0.6));
 		addSequential(new SetArmTilt(true));
-		addSequential(new DriveYDistance(150, -5));
+		addSequential(new DriveYDistance(150, -5).chainableSetTimeout(1.0));
 		addSequential(new TurnTo(secondTurnAngle, 0.8));
 		
 		addSequential(new SetArm(Arm.firstPosition));
+		addSequential(new WaitCommand(0.3));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1050, secondTurnAngle, 1.0));
+		addSequential(new DriveYDistance(1000, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
 		addSequential(new AutoAlignForPlacement());
 		
 				
