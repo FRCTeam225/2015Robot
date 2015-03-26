@@ -14,7 +14,11 @@ public class PracticeRobotConstants extends CompetitionRobotConstants {
     public static int RIGHT_BACK_MOTOR_POWER = 2; // PDP
     
 	// arm
-    public static int FLOOR_POSITION = 2550;
+    public static int FLOOR_POSITION = 2365;
+    public static int TOP_POSITION = FLOOR_POSITION + 1335;
+    public static int PRE_CONTAINER_POSITION = FLOOR_POSITION + 540;
+    public static int POST_CONTAINER_POSITION = FLOOR_POSITION + 300;
+    public static int PICKUP_CONTAINER_POSITION = FLOOR_POSITION + 260;
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 14; // PDP
