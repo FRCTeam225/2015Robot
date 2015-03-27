@@ -1,8 +1,8 @@
 package org.techfire.team225.robot;
 
 
+import org.techfire.team225.SimpleTableServer;
 import org.techfire.team225.robot.commands.arm.PIDArmControl;
-import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAuton;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonArmUp;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDouble;
@@ -13,7 +13,6 @@ import org.techfire.team225.robot.commands.autonomous.DriveForward;
 import org.techfire.team225.robot.commands.autonomous.PullCan;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
-import org.techfire.team225.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -35,7 +34,24 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     Command[] autonomi;
     public int selected = 0;
+    boolean sendDebugData = true;
+    boolean sendExtendedDebugData = false;
+    
+    SimpleTableServer piTable;
+    DebugSenderThread debugSender;
+    
     //boolean armPIDenabled = false;
+    
+    public Robot()
+    {
+    	try {
+    		piTable = new SimpleTableServer();
+        	debugSender = new DebugSenderThread();
+        	debugSender.start();
+    	} catch (Exception e) {
+    		System.out.println("Pi Table init failed");
+    	}
+    }
     
     /**
      * This function is run when the robot is first started up and should be
@@ -71,6 +87,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		JedisProvider.write();
 		 SmartDashboard.putDouble("Gyro", CommandBase.drivetrain.getGyro());
+		 
 		if (OI.driver.getRawButton(4) && selected < autonomi.length - 1) {
 			selected++;
 			JedisProvider.updateAutonomous(selected);
@@ -106,6 +123,7 @@ public class Robot extends IterativeRobot {
 	}
 	
     public void autonomousInit() {
+    	sendDebugData = false;
     	autonomousCommand = autonomi[selected];
     	new PIDArmControl().start();
     	//armPIDenabled = true;
@@ -133,6 +151,8 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	sendDebugData = false;
+    	
     	CommandBase.drivetrain.resetAngle();
     	resetSubsystem(CommandBase.drivetrain);
     	resetSubsystem(CommandBase.arm);
@@ -152,6 +172,8 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
+    	sendDebugData = true;
+    	
 		selected = 0;
 		System.out.println("Selected autonomous is: " + autonomi[selected]);
     	System.out.println("~");
@@ -174,10 +196,39 @@ public class Robot extends IterativeRobot {
         System.out.println("Arm: "+CommandBase.arm.getPosition());
     }
     
+    public void testInit()
+    {
+    	sendDebugData = true;
+    	sendExtendedDebugData = true;
+    }
+    
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    public class DebugSenderThread extends Thread {
+    	
+    	public void run()
+    	{
+    		while (true)
+    		{
+	    		try {
+	    			if ( sendDebugData || sendExtendedDebugData )
+	    			{
+	    				piTable.put("Gyro", String.valueOf(CommandBase.drivetrain.getGyro()));
+	    				if ( sendExtendedDebugData )
+	    				{
+	    					// send encoders, arm pos, etc
+	    				}
+	    			}
+	    			Thread.sleep(200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+    		}
+    	}
     }
 }
