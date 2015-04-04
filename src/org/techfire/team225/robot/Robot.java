@@ -14,6 +14,7 @@ import org.techfire.team225.robot.commands.autonomous.PullCan;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -40,17 +41,13 @@ public class Robot extends IterativeRobot {
     SimpleTableServer piTable;
     DebugSenderThread debugSender;
     
+    DigitalInput resetButton;
+    
     //boolean armPIDenabled = false;
     
     public Robot()
     {
-    	try {
-    		piTable = new SimpleTableServer();
-        	debugSender = new DebugSenderThread();
-        	debugSender.start();
-    	} catch (Exception e) {
-    		System.out.println("Pi Table init failed");
-    	}
+
     }
     
     /**
@@ -79,6 +76,15 @@ public class Robot extends IterativeRobot {
     	JedisProvider.autonomousInit(autonomi);
     	
     	CommandBase.drivetrain.resetAngle();
+    	resetButton = new DigitalInput(ConstantsProvider.get("RESET_BUTTON"));
+    	
+    	try {
+    		piTable = new SimpleTableServer();
+        	debugSender = new DebugSenderThread();
+        	debugSender.start();
+    	} catch (Exception e) {
+    		System.out.println("Pi Table init failed");
+    	}
     	
     	System.out.println("ROBOT READY!");
     	System.out.println("~");
@@ -90,6 +96,13 @@ public class Robot extends IterativeRobot {
 		 
 		if (OI.driver.getRawButton(4) && selected < autonomi.length - 1) {
 			selected++;
+			
+			try { 
+				piTable.put("selectedAutonomous", selected);
+			} catch ( Exception e ) {
+				
+			}
+			
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
 			System.out.println("~");
@@ -97,13 +110,20 @@ public class Robot extends IterativeRobot {
 			Timer.delay(0.5);
 		} else if (OI.driver.getRawButton(3) && selected > 0) {
 			selected--;
+			
+			try { 
+				piTable.put("selectedAutonomous", selected);
+			} catch ( Exception e ) {
+				
+			}
+			
 			JedisProvider.updateAutonomous(selected);
 			System.out.println("Selected autonomous is: " + autonomi[selected]);
 			System.out.println("~");
 	    	SmartDashboard.putString("SelectedAutonomous", "" + autonomi[selected]);
 			Timer.delay(0.5);
-		} else if (OI.driver.getRawButton(1)) {
-			CommandBase.drivetrain.resetAngle();
+		} else if (OI.driver.getRawButton(1) ) {
+			CommandBase.drivetrain.recalGyro();
 			System.out.println("GYRO RESET!");
 			System.out.println("GYRO: " + String.format("%2.3f", CommandBase.drivetrain.getGyro()));
 			System.out.println("~");
@@ -188,7 +208,6 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         //CommandBase.arm.updatePID();
-
         
         System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
@@ -213,15 +232,30 @@ public class Robot extends IterativeRobot {
     	
     	public void run()
     	{
+    		
+    		String autolist = "";
+    		for ( int i = 0; i < autonomi.length; i++ )
+    		{
+    			autolist += autonomi[i].toString();
+    			if ( i != autonomi.length-1 )
+    				autolist += ",";
+    		}
+    		
     		while (true)
     		{
 	    		try {
+	    			if ( !resetButton.get() )
+	    				CommandBase.drivetrain.recalGyro();
+	    				
 	    			if ( sendDebugData || sendExtendedDebugData )
 	    			{
 	    				piTable.put("Gyro", String.valueOf(CommandBase.drivetrain.getGyro()));
+	    				
+	    				piTable.put("autonomi", autolist);
+	    				//selected = Integer.parseInt(piTable.get("currentAuto"));
 	    				if ( sendExtendedDebugData )
 	    				{
-	    					// send encoders, arm pos, etc
+	    					// TODO: add other debug lines here
 	    				}
 	    			}
 	    			Thread.sleep(200);

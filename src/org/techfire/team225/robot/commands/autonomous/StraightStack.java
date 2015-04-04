@@ -20,20 +20,20 @@ public class StraightStack extends CommandGroup {
 	public StraightStack()
 	{
 		double turnAngle = 34;
-		double secondTurnAngle = 41;
+		double secondTurnAngle = 39;
 		double slowTurnSpeed = 0.55;
 		
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.3));
 		addSequential(new SetArm(Arm.firstPosition-100));
-		addSequential(new DriveYDistance(470, 0));
+		addSequential(new DriveYDistance(530, 0));
 		
 		addSequential(new TurnTo(turnAngle));
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new ResetEncoders());
 		addSequential(new SetArmTilt(true));
 		addSequential(new WaitCommand(0.25));
-		addSequential(new DriveYDistance(680, turnAngle, 1.0));
+		addSequential(new DriveYDistance(630, turnAngle, 1.0));
 		addSequential(new AutoAlignForPlacement());
 		
 		addSequential(new SetArm(Arm.firstPosition-130));
@@ -58,13 +58,14 @@ public class StraightStack extends CommandGroup {
 		addSequential(new SetArm(Arm.firstPosition-200));
 		addSequential(new WaitCommand(0.6));
 		addSequential(new SetArmTilt(true));
-		addSequential(new DriveYDistance(150, -5).chainableSetTimeout(1.0));
+		addSequential(new DriveYDistance(200, -5).chainableSetTimeout(2.0));
+		// second turn angle?
 		addSequential(new TurnTo(secondTurnAngle, 0.8));
 		
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new WaitCommand(0.3));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1000, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
+		addSequential(new DriveYDistance(1050, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
 		addSequential(new AutoAlignForPlacement());
 		
 				
@@ -90,7 +91,7 @@ public class StraightStack extends CommandGroup {
 		addSequential(new SetArm(Arm.floorPosition+70));
 		//addSequential(new WaitForArm());
 		
-		addSequential(new TurnTo(turnAngle+90, slowTurnSpeed));
+		addSequential(new TurnTo(turnAngle+90, slowTurnSpeed).chainableSetTimeout(1.0));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1400, turnAngle+90));
 		addSequential(new SetArm(Arm.floorPosition));

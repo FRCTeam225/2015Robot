@@ -117,6 +117,12 @@ public class Drivetrain extends Subsystem {
 	public double getAccelerometerY() {
 		return accelerometer.getY();
 	}
+	
+	public void recalGyro()
+	{
+		gyro.free();
+		gyro = new Gyro(ConstantsProvider.get("GYRO"));
+	}
 
 	@Override
 	protected void initDefaultCommand()  {

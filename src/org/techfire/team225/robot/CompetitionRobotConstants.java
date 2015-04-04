@@ -48,6 +48,7 @@ public class CompetitionRobotConstants {
     public static int PHOTO_SENSOR_LEFT = 4; // DIO
     public static int PHOTO_SENSOR_RIGHT  = 5; // DIO
     public static int GYRO = 0; // Analog
+    public static int RESET_BUTTON = 9; // DIO
     
     // compressor
     public static int COMPRESSOR_POWER = 0; // PDP

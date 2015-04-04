@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.NetworkInterface;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -33,8 +34,14 @@ public class SimpleTableServer extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	public void put(String key, int value)
+	{
+		put(key, String.valueOf(value));
+	}
 
 	public String get(String key)
+	
 	{
 		return pairs.get(key);
 	}
@@ -54,16 +61,9 @@ public class SimpleTableServer extends Thread {
 			    String[] keyvalue = data.split("~");
 			    if ( keyvalue.length == 2 )
 			    	pairs.put(keyvalue[0], keyvalue[1]);
-			    
-			    Iterator<String> it = pairs.keySet().iterator();
-			    while ( it.hasNext() )
-			    {
-			    	String k = it.next();
-			    	String v = pairs.get(k);
-			    	System.out.println(k+"="+v);
-			    }
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Server error!");
 		}
 	}

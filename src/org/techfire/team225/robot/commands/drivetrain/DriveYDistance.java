@@ -58,7 +58,7 @@ public class DriveYDistance extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(pidY.getError()) < 100)|| isTimedOut();
+		return (Math.abs(pidY.getError()) < 85)|| isTimedOut();
 	}
 
 	@Override
