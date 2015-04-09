@@ -1,21 +1,29 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.ConstantsProvider;
+import org.techfire.team225.robot.commands.chokehold.ChokeholdControl;
+import org.techfire.team225.robot.commands.drivetrain.FireDrive;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chokehold extends Subsystem {
 
-	Solenoid actuationSolenoid = new Solenoid(ConstantsProvider.get("CHOKEHOLD_SOLENOID"));
+	Victor rightMotor = new Victor(ConstantsProvider.get("CHOKEHOLD_MOTOR_RIGHT"));
+	Victor leftMotor = new Victor(ConstantsProvider.get("CHOKEHOLD_MOTOR_LEFT"));
 	
-	public void set(boolean set) {
-		actuationSolenoid.set(set);
+	public void setRightMotor(double speed) {
+		rightMotor.set(speed);
+	}
+	
+	public void setLeftMotor(double speed) {
+		leftMotor.set(speed);
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
-		
+		setDefaultCommand(new ChokeholdControl());
 	}
 
 }

@@ -58,5 +58,9 @@ public class FireDrive extends CommandBase {
 	protected void end() {
 		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 	}
+	
+	public void reset() {
+		initialize();
+	}
 }
 

@@ -16,13 +16,11 @@ public class ChokeholdAuton extends CommandGroup {
 	public ChokeholdAuton() {
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(-380, 0).chainableSetTimeout(0.8));
-		addSequential(new SetChokehold(true));
-		addSequential(new WaitCommand(1.25));
+		addSequential(new SetChokehold(1.0, 1.0));
+		addSequential(new WaitCommand(1.0));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1500, 0));
-		addSequential(new SetChokehold(false));
-		addSequential(new WaitCommand(0.5));
+		addSequential(new DriveYDistance(1300, 0));
+		addSequential(new SetChokehold(-0.5, -0.5));
 		addSequential(new TurnTo(90));
 	}
 	

@@ -134,6 +134,20 @@ public class Robot extends IterativeRobot {
 			System.out.println("ENCODERS: " + CommandBase.drivetrain.getAverageForwardEncoders());
 			System.out.println("~");
 			Timer.delay(0.5);
+		} else if (OI.driver.getRawButton(6)) {
+			OI.setNeutralChokeholdSpeed(0.0);
+			System.out.println("NEUTRAL CHOKEHOLD SPEED SET!");
+			System.out.println("SPEED: " + OI.getNeutralChokeholdSpeed());
+			System.out.println("~");
+	    	SmartDashboard.putString("NeutralChokeholdSpeed", "" + OI.getNeutralChokeholdSpeed());
+			Timer.delay(0.5);
+		} else if (OI.driver.getRawButton(5)) {
+			OI.setNeutralChokeholdSpeed(-0.5);
+			System.out.println("NEUTRAL CHOKEHOLD SPEED SET!");
+			System.out.println("SPEED: " + OI.getNeutralChokeholdSpeed());
+			System.out.println("~");
+	    	SmartDashboard.putString("NeutralChokeholdSpeed", "" + OI.getNeutralChokeholdSpeed());
+			Timer.delay(0.5);
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
 		
@@ -171,6 +185,8 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	System.out.println("TeleopInit");
+    	
     	sendDebugData = false;
     	
     	CommandBase.drivetrain.resetAngle();
@@ -209,10 +225,10 @@ public class Robot extends IterativeRobot {
         
         //CommandBase.arm.updatePID();
         
-        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        /*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());
+        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
     }
     
     public void testInit()
@@ -232,7 +248,7 @@ public class Robot extends IterativeRobot {
     	
     	public void run()
     	{
-    		
+    	
     		String autolist = "";
     		for ( int i = 0; i < autonomi.length; i++ )
     		{

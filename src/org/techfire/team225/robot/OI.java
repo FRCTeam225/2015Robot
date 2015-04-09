@@ -27,13 +27,12 @@ public class OI {
     
 	public static Joystick driver = new Joystick(0);
 	public static Joystick operator = new Joystick(1);
+	public static double neutralChokeholdSpeed = 0;
 	
 	public static void init() {
 		// driver
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
-		new JoystickButton(driver, 5).whenPressed(new SetChokehold(false));
-		new JoystickButton(driver, 6).whenPressed(new SetChokehold(true));
 		
 		// operator
 		new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
@@ -69,6 +68,24 @@ public class OI {
 	
 	public static double getArmThrottle() {
 		return operator.getRawAxis(1);
+	}
+	
+	public static double getChokeholdThrottle() {
+		if (driver.getRawButton(6)) {
+			return 1.0;
+		} else if (driver.getRawButton(5)) {
+			return -0.5;
+		} else {
+			return neutralChokeholdSpeed;
+		}
+	}
+	
+	public static double getNeutralChokeholdSpeed() {
+		return neutralChokeholdSpeed;
+	}
+	
+	public static void setNeutralChokeholdSpeed(double newNeutralChokeholdSpeed) {
+		neutralChokeholdSpeed = newNeutralChokeholdSpeed;
 	}
 }
 
