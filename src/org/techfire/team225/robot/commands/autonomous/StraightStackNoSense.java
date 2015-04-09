@@ -15,16 +15,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class StraightStackNoSense extends CommandGroup {
-	private String name = "Straight Stack";
+	private String name = "Straight Stack with no photosensor use";
 	
 	public StraightStackNoSense()
 	{
 		double turnAngle = 34;
-		double secondTurnAngle = 39;
+		double secondTurnAngle = 34;
 		double slowTurnSpeed = 0.55;
 		
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.3));
+		addSequential(new WaitCommand(0.6));
 		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new DriveYDistance(530, 0));
 		
@@ -58,14 +58,14 @@ public class StraightStackNoSense extends CommandGroup {
 		addSequential(new SetArm(Arm.firstPosition-200));
 		addSequential(new WaitCommand(0.6));
 		addSequential(new SetArmTilt(true));
-		addSequential(new DriveYDistance(200, -5).chainableSetTimeout(2.0));
+		//addSequential(new DriveYDistance(200, -5).chainableSetTimeout(2.0));
 		// second turn angle?
 		addSequential(new TurnTo(secondTurnAngle, 0.8));
 		
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new WaitCommand(0.3));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1050, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
+		addSequential(new DriveYDistance(1150, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
 		//addSequential(new AutoAlignForPlacement());
 		
 				

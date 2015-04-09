@@ -10,18 +10,19 @@ import org.techfire.team225.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class ChokeholdAutonArmUp extends CommandGroup {
-	private String name = "One side \"Chokehold\", with the arm raised";
+public class ChokeholdAutonScoringPlatform extends CommandGroup {
+	private String name = "One side \"Chokehold\", starting on the scoring platform";
 	
-	public ChokeholdAutonArmUp() {
+	public ChokeholdAutonScoringPlatform() {
+		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new ResetEncoders());
+		addSequential(new DriveYDistance(-350, 0));
 		addSequential(new SetChokehold(1.0, 1.0));
-		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(-250, 0));		
+		addSequential(new WaitCommand(1.0));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1300, 0));
 		addSequential(new SetChokehold(-0.5, -0.5));
-		addSequential(new TurnTo(90));
+		addSequential(new TurnTo(120));
 	}
 	
 	public String toString() {

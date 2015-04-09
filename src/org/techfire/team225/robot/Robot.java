@@ -7,11 +7,16 @@ import org.techfire.team225.robot.commands.autonomous.ChokeholdAuton;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonArmUp;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDouble;
 import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDoubleArmUp;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDoubleArmUpW_GetOutTheWay;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonDoubleW_GetOutTheWay;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonScoringPlatform;
+import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonScoringPlatformW_GetOutTheWay;
 import org.techfire.team225.robot.commands.autonomous.DoNothing;
 import org.techfire.team225.robot.commands.autonomous.DriveBackward;
 import org.techfire.team225.robot.commands.autonomous.DriveForward;
 import org.techfire.team225.robot.commands.autonomous.PullCan;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
+import org.techfire.team225.robot.commands.autonomous.StraightStackNoSense;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -63,11 +68,16 @@ public class Robot extends IterativeRobot {
     	autonomi = new Command[] {
     			new DoNothing(),
         		new StraightStack(),
+        		new StraightStackNoSense(),
         		new StraightStackOneCan(),
         		new ChokeholdAuton(),
+        		new ChokeholdAutonScoringPlatform(),
+        		new ChokeholdAutonScoringPlatformW_GetOutTheWay(),
         		new ChokeholdAutonArmUp(),
         		new ChokeholdAutonDouble(),
         		new ChokeholdAutonDoubleArmUp(),
+        		new ChokeholdAutonDoubleW_GetOutTheWay(),
+        		new ChokeholdAutonDoubleArmUpW_GetOutTheWay(),
         		new PullCan(),
         		new DriveForward(),
         		new DriveBackward()
@@ -85,15 +95,15 @@ public class Robot extends IterativeRobot {
     	} catch (Exception e) {
     		System.out.println("Pi Table init failed");
     	}
-    	
+    	    	
     	System.out.println("ROBOT READY!");
     	System.out.println("~");
     }
 	
 	public void disabledPeriodic() {
 		JedisProvider.write();
-		 SmartDashboard.putDouble("Gyro", CommandBase.drivetrain.getGyro());
-		 
+		SmartDashboard.putDouble("Gyro", CommandBase.drivetrain.getGyro());
+	    	
 		if (OI.driver.getRawButton(4) && selected < autonomi.length - 1) {
 			selected++;
 			
@@ -133,20 +143,6 @@ public class Robot extends IterativeRobot {
 			System.out.println("ENCODERS RESET!");
 			System.out.println("ENCODERS: " + CommandBase.drivetrain.getAverageForwardEncoders());
 			System.out.println("~");
-			Timer.delay(0.5);
-		} else if (OI.driver.getRawButton(6)) {
-			OI.setNeutralChokeholdSpeed(0.0);
-			System.out.println("NEUTRAL CHOKEHOLD SPEED SET!");
-			System.out.println("SPEED: " + OI.getNeutralChokeholdSpeed());
-			System.out.println("~");
-	    	SmartDashboard.putString("NeutralChokeholdSpeed", "" + OI.getNeutralChokeholdSpeed());
-			Timer.delay(0.5);
-		} else if (OI.driver.getRawButton(5)) {
-			OI.setNeutralChokeholdSpeed(-0.5);
-			System.out.println("NEUTRAL CHOKEHOLD SPEED SET!");
-			System.out.println("SPEED: " + OI.getNeutralChokeholdSpeed());
-			System.out.println("~");
-	    	SmartDashboard.putString("NeutralChokeholdSpeed", "" + OI.getNeutralChokeholdSpeed());
 			Timer.delay(0.5);
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
@@ -225,10 +221,10 @@ public class Robot extends IterativeRobot {
         
         //CommandBase.arm.updatePID();
         
-        /*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
+        System.out.println("Arm: "+CommandBase.arm.getPosition());
     }
     
     public void testInit()
