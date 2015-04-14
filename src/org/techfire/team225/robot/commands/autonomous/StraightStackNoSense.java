@@ -6,6 +6,7 @@ import org.techfire.team225.robot.commands.arm.WaitForArm;
 import org.techfire.team225.robot.commands.automation.AutoAlignForPlacement;
 import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.ResetEncoders;
+import org.techfire.team225.robot.commands.drivetrain.SmallDriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
@@ -20,7 +21,7 @@ public class StraightStackNoSense extends CommandGroup {
 	public StraightStackNoSense()
 	{
 		double turnAngle = 34;
-		double secondTurnAngle = 34;
+		double secondTurnAngle = 36;
 		double slowTurnSpeed = 0.55;
 		
 		addSequential(new CloseGripper());
@@ -58,14 +59,14 @@ public class StraightStackNoSense extends CommandGroup {
 		addSequential(new SetArm(Arm.firstPosition-200));
 		addSequential(new WaitCommand(0.6));
 		addSequential(new SetArmTilt(true));
-		//addSequential(new DriveYDistance(200, -5).chainableSetTimeout(2.0));
+		addSequential(new SmallDriveYDistance(200, -5).chainableSetTimeout(1.5));
 		// second turn angle?
 		addSequential(new TurnTo(secondTurnAngle, 0.8));
 		
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new WaitCommand(0.3));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1150, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
+		addSequential(new DriveYDistance(1075, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
 		//addSequential(new AutoAlignForPlacement());
 		
 				

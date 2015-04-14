@@ -15,6 +15,7 @@ import org.techfire.team225.robot.commands.autonomous.DoNothing;
 import org.techfire.team225.robot.commands.autonomous.DriveBackward;
 import org.techfire.team225.robot.commands.autonomous.DriveForward;
 import org.techfire.team225.robot.commands.autonomous.PullCan;
+import org.techfire.team225.robot.commands.autonomous.SmallDriveForward;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackNoSense;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
