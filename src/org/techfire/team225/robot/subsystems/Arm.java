@@ -21,6 +21,7 @@ public class Arm extends Subsystem {
 	
 	public static int floorPosition;
 	public static int firstPosition;
+	public static int secondPosition;
 	public static int topPosition;
 	public static int postContainerPosition;
 	public static int preContainerPosition;
@@ -30,6 +31,7 @@ public class Arm extends Subsystem {
 	public Arm() {
 		floorPosition = ConstantsProvider.get("FLOOR_POSITION");
 		firstPosition = ConstantsProvider.get("FIRST_POSITION");
+		secondPosition = ConstantsProvider.get("SECOND_POSITION");
 		topPosition = ConstantsProvider.get("TOP_POSITION");
 		postContainerPosition = ConstantsProvider.get("POST_CONTAINER_POSITION");
 		preContainerPosition = ConstantsProvider.get("PRE_CONTAINER_POSITION");

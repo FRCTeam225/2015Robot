@@ -16,6 +16,7 @@ public class PracticeRobotConstants extends CompetitionRobotConstants {
 	// arm
     public static int FLOOR_POSITION = 2015;
     public static int FIRST_POSITION = FLOOR_POSITION + 400;
+    public static int SECOND_POSITION = FLOOR_POSITION + 685;
     public static int TOP_POSITION = FLOOR_POSITION + 1145; // can-capping position, 1125 for normal
     public static int PRE_CONTAINER_POSITION = FLOOR_POSITION + 690;
     public static int POST_CONTAINER_POSITION = FLOOR_POSITION + 375;

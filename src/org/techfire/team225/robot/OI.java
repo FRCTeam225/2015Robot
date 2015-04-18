@@ -9,6 +9,7 @@ import org.techfire.team225.robot.commands.arm.SetPreContainer;
 import org.techfire.team225.robot.commands.automation.AutoLift;
 import org.techfire.team225.robot.commands.automation.AutoPullOut;
 import org.techfire.team225.robot.commands.automation.AutoLiftHigh;
+import org.techfire.team225.robot.commands.automation.AutoStack;
 import org.techfire.team225.robot.commands.chokehold.SetChokehold;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
@@ -43,6 +44,8 @@ public class OI {
 		//new JoystickButton(operator, 9).whenPressed(new LegalTilt(false));
 		new JoystickButton(operator, 10).whenPressed(new PickupContainer());
 		//new JoystickButton(operator, 10).whenPressed(new LegalTilt(true));
+		//new AxisButton(operator, 3, -0.5).whenPressed(new AutoStack());
+		new JoystickButton(operator, 9).whenPressed(new AutoStack());
 	}
 	
 	public static boolean getDriverPreciseMode() {
