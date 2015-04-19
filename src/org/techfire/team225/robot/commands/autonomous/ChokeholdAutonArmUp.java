@@ -21,7 +21,6 @@ public class ChokeholdAutonArmUp extends CommandGroup {
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1300, 0));
 		addSequential(new SetChokehold(-0.5, -0.5));
-		addSequential(new TurnTo(90));
 	}
 	
 	public String toString() {

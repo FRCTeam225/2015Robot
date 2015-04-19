@@ -13,8 +13,9 @@ public class ChokeholdAutonDouble extends ChokeholdAuton {
 	
 	public ChokeholdAutonDouble() {
 		super();
+		addSequential(new TurnTo(90));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(2300, 90));
+		addSequential(new DriveYDistance(2570, 90));
 		addSequential(new TurnTo(0));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(-2200, 0).chainableSetTimeout(5.0));
@@ -24,12 +25,13 @@ public class ChokeholdAutonDouble extends ChokeholdAuton {
 		addSequential(new SetChokehold(1.0, 1.0));
 		addSequential(new WaitCommand(1.0));
 		addSequential(new ResetEncoders());
-		addSequential(new SmallDriveYDistance(250, 0).chainableSetTimeout(2.0));
-		addSequential(new TurnTo(8).chainableSetTimeout(0.7));
+		addSequential(new SmallDriveYDistance(300, 0).chainableSetTimeout(2.0));
+		addSequential(new WaitCommand(0.5));
+		/*addSequential(new TurnTo(8).chainableSetTimeout(0.7));
 		addSequential(new TurnTo(-8).chainableSetTimeout(0.7));
-		addSequential(new TurnTo(0).chainableSetTimeout(0.7));
+		addSequential(new TurnTo(0).chainableSetTimeout(0.7));*/
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1500, 0));
+		addSequential(new DriveYDistance(700, 0));
 		addSequential(new SetChokehold(-0.5, 0.5));
 		//addSequential(new WaitCommand(0.5));
 		//addSequential(new TurnTo(120));

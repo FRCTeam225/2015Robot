@@ -12,6 +12,7 @@ public class ChokeholdAutonDoubleArmUpW_GetOutTheWay extends ChokeholdAutonArmUp
 	
 	public ChokeholdAutonDoubleArmUpW_GetOutTheWay() {
 		super();
+		addSequential(new TurnTo(90));
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(2650, 90));
 		addSequential(new TurnTo(0));

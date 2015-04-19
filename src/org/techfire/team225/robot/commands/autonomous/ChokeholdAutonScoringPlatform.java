@@ -23,7 +23,10 @@ public class ChokeholdAutonScoringPlatform extends CommandGroup {
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(1300, 0)); // 1300 for on the field, set to smaller for practice field
 		addSequential(new SetChokehold(-0.5, -0.5));
-		//addSequential(new TurnTo(120));
+		addSequential(new WaitCommand(2.0));
+		addSequential(new TurnTo(-90));
+		addSequential(new ResetEncoders());
+		addSequential(new DriveYDistance(1200));
 	}
 	
 	public String toString() {

@@ -13,11 +13,6 @@ public class Chokehold extends Subsystem {
 	Victor rightMotor = new Victor(ConstantsProvider.get("CHOKEHOLD_MOTOR_RIGHT"));
 	Victor leftMotor = new Victor(ConstantsProvider.get("CHOKEHOLD_MOTOR_LEFT"));
 	Solenoid retainerSolenoid = new Solenoid(ConstantsProvider.get("CHOKEHOLD_RETAINER_SOLENOID"));
-	Solenoid chokeholdSolenoid = new Solenoid(ConstantsProvider.get("CHOKEHOLD_SOLENOID"));
-	
-	public void set(boolean set) {
-		chokeholdSolenoid.set(set);
-	}
 	
 	public void setRightMotor(double speed) {
 		rightMotor.set(-speed);

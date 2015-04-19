@@ -36,7 +36,6 @@ public class CompetitionRobotConstants {
     public static int CHOKEHOLD_MOTOR_RIGHT = 7; // PWM
     public static int CHOKEHOLD_MOTOR_LEFT = 6; // PWM
     public static int CHOKEHOLD_RETAINER_SOLENOID = 3; // PCM
-    public static int CHOKEHOLD_SOLENOID = 5; // PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 14; // PDP
