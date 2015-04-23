@@ -6,6 +6,7 @@ import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.ResetEncoders;
 import org.techfire.team225.robot.commands.drivetrain.SmallDriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.TurnTo;
+import org.techfire.team225.robot.commands.drivetrain.TurnToNoStable;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
 import org.techfire.team225.robot.subsystems.Arm;
@@ -13,27 +14,27 @@ import org.techfire.team225.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class SideStack extends CommandGroup {
-String name = new String("Side Stack");
+public class SideStackNoStable extends CommandGroup {
+String name = new String("Side Stack no stable");
 	
 	
 	double turnAngle = 32.5;
 	double returnAngle = 7.25;
 	
-	public SideStack() {
+	public SideStackNoStable() {
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.6));
 		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new WaitCommand(0.2));
 		addSequential(new DriveYDistance(-275, 0));
 		//addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(turnAngle).chainableSetTimeout(0.70));
+		addSequential(new TurnToNoStable(turnAngle));
 		addSequential(new SetArm(Arm.firstPosition));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1205, turnAngle));
+		addSequential(new DriveYDistance(1240, turnAngle));
 		//addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(returnAngle));
+		addSequential(new TurnTo(returnAngle-1));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition-130));
 		addSequential(new WaitForArm());
@@ -46,7 +47,7 @@ String name = new String("Side Stack");
 		addSequential(new DriveYDistance(300, returnAngle));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.4));
+		addSequential(new WaitCommand(0.3));
 		//addSequential(new TurnTo(15).chainableSetTimeout(0.5));
 		////addSequential(new TurnTo(-15).chainableSetTimeout(0.5));
 		//addSequential(new TurnTo(-7.5).chainableSetTimeout(0.5));
@@ -58,13 +59,13 @@ String name = new String("Side Stack");
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(-300));
 		//addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(turnAngle+3.5).chainableSetTimeout(0.75));
+		addSequential(new TurnToNoStable(turnAngle+3.5));
 		addSequential(new SetArm(Arm.firstPosition+50));
 		
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1170, turnAngle+3));
+		addSequential(new DriveYDistance(1235, turnAngle+3)); // 1185
 		//addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(returnAngle));
+		addSequential(new TurnTo(returnAngle+1));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition-130));
 		addSequential(new WaitForArm());
@@ -78,7 +79,7 @@ String name = new String("Side Stack");
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.4));
-		addSequential(new SetArm(Arm.floorPosition+50));
+		addSequential(new SetArm(Arm.floorPosition+100));
 		addSequential(new WaitForArm());
 		addSequential(new TurnTo(turnAngle+45, 0.75));
 		addSequential(new SetArm(Arm.floorPosition));

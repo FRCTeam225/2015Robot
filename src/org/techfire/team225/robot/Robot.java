@@ -16,6 +16,7 @@ import org.techfire.team225.robot.commands.autonomous.DriveBackward;
 import org.techfire.team225.robot.commands.autonomous.DriveForward;
 import org.techfire.team225.robot.commands.autonomous.PullCan;
 import org.techfire.team225.robot.commands.autonomous.SideStack;
+import org.techfire.team225.robot.commands.autonomous.SideStackNoStable;
 import org.techfire.team225.robot.commands.autonomous.SmallDriveForward;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackNoSense;
@@ -70,6 +71,7 @@ public class Robot extends IterativeRobot {
     	autonomi = new Command[] {
     			new DoNothing(),
     			new SideStack(),
+    			new SideStackNoStable(),
         		new StraightStack(),
         		new StraightStackNoSense(),
         		new StraightStackOneCan(),
@@ -247,7 +249,6 @@ public class Robot extends IterativeRobot {
     	
     	public void run()
     	{
-    	/*
     		String autolist = "";
     		for ( int i = 0; i < autonomi.length; i++ )
     		{
@@ -277,7 +278,7 @@ public class Robot extends IterativeRobot {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-    		}*/
+    		}
     	}
     }
 }
