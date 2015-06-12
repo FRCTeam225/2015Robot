@@ -9,11 +9,13 @@ public class Gripper extends Subsystem {
 
 	Solenoid gripperSolenoidLeft;
 	Solenoid gripperSolenoidRight;
+	Solenoid forwardCangrabberSolenoid;
 	String state = "open";
 
 	public Gripper() {
 		gripperSolenoidLeft = new Solenoid(ConstantsProvider.get("GRIPPER_SOLENOID_LEFT"));
 		gripperSolenoidRight = new Solenoid(ConstantsProvider.get("GRIPPER_SOLENOID_RIGHT"));
+		forwardCangrabberSolenoid = new Solenoid(ConstantsProvider.get("FORWARD_CANGRABBER_SOLENOID"));
 	}
 	
 	public void setGripper(boolean left, boolean right) {
@@ -27,6 +29,10 @@ public class Gripper extends Subsystem {
 	
 	public String getState() {
 		return state;
+	}
+	
+	public void SetCangrab(boolean set) {
+		forwardCangrabberSolenoid.set(set);
 	}
 	
 	@Override

@@ -16,6 +16,7 @@ import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.HalfGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
 import org.techfire.team225.robot.commands.gripper.AlternateHalfGripper;
+import org.techfire.team225.robot.commands.gripper.SetCangrabber;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -35,8 +36,10 @@ public class OI {
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
 		
 		// operator
-		new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
-		new JoystickButton(operator, 5).whenPressed(new SetPostContainer());
+		//new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
+		//new JoystickButton(operator, 5).whenPressed(new SetPostContainer());
+		new JoystickButton(operator, 6).whenPressed(new SetCangrabber(true));
+		new JoystickButton(operator, 5).whenPressed(new SetCangrabber(false));
 		new JoystickButton(operator, 1).whenPressed(new OpenGripper());
 		new JoystickButton(operator, 4).whenPressed(new CloseGripper());
 		new JoystickButton(operator, 3).whenPressed(new HalfGripper());
@@ -72,4 +75,3 @@ public class OI {
 		return operator.getRawAxis(1);
 	}
 }
-

@@ -26,11 +26,12 @@ public class CompetitionRobotConstants {
     public static int POST_CONTAINER_POSITION = FLOOR_POSITION + 385;
     public static int PICKUP_CONTAINER_POSITION = FLOOR_POSITION + 280;
     public static int TILT_POSITION = FLOOR_POSITION + 955;
-    public static int TILT_SOLENOID = 2; // PCM
+    public static int TILT_SOLENOID = 4; // PCM
     
     // gripper
     public static int GRIPPER_SOLENOID_LEFT = 1; // PCM  
     public static int GRIPPER_SOLENOID_RIGHT = 0; // PCM
+    public static int FORWARD_CANGRABBER_SOLENOID = 2; // PCM
     
     // chokehold
     public static int CHOKEHOLD_MOTOR_RIGHT = 7; // PWM
