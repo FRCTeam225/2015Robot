@@ -22,7 +22,7 @@ String name = new String("Side Stack");
 	
 	public SideStack() {
 		addSequential(new CloseGripper());
-		addSequential(new WaitCommand(0.6));
+		addSequential(new WaitCommand(0.7));
 		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new WaitCommand(0.2));
 		addSequential(new DriveYDistance(-275, 0));
@@ -62,9 +62,9 @@ String name = new String("Side Stack");
 		addSequential(new SetArm(Arm.firstPosition+50));
 		
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1200, turnAngle+3));
+		addSequential(new DriveYDistance(1230, turnAngle+3));
 		//addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(returnAngle-2));
+		addSequential(new TurnTo(returnAngle-1.5));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition-130));
 		addSequential(new WaitForArm());
@@ -82,7 +82,7 @@ String name = new String("Side Stack");
 		addSequential(new WaitForArm());
 		addSequential(new TurnTo(turnAngle+45, 0.75));
 		addSequential(new SetArm(Arm.floorPosition));
-		addSequential(new DriveYDistance(1700));
+		addSequential(new DriveYDistance(1800));
 		addSequential(new OpenGripper());
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(-200));

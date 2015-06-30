@@ -27,6 +27,7 @@ public class Arm extends Subsystem {
 	public static int preContainerPosition;
 	public static int pickupContainerPosition;
 	public static int tiltPosition;
+	public static int forwardCanburglarPosition;
 
 	public Arm() {
 		floorPosition = ConstantsProvider.get("FLOOR_POSITION");
@@ -37,6 +38,7 @@ public class Arm extends Subsystem {
 		preContainerPosition = ConstantsProvider.get("PRE_CONTAINER_POSITION");
 		pickupContainerPosition = ConstantsProvider.get("PICKUP_CONTAINER_POSITION");
 		tiltPosition = ConstantsProvider.get("TILT_POSITION");
+		forwardCanburglarPosition = ConstantsProvider.get("FORWARD_CANBURGLAR_POSITION");
 		
 		//victorForward.setSafetyEnabled(true);
 		//victorBack.setSafetyEnabled(true);

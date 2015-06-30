@@ -36,10 +36,10 @@ public class OI {
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
 		
 		// operator
-		//new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
-		//new JoystickButton(operator, 5).whenPressed(new SetPostContainer());
-		new JoystickButton(operator, 6).whenPressed(new SetCangrabber(true));
-		new JoystickButton(operator, 5).whenPressed(new SetCangrabber(false));
+		new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
+		new JoystickButton(operator, 5).whenPressed(new SetPostContainer());
+		//new JoystickButton(operator, 6).whenPressed(new SetCangrabber(true));
+		//new JoystickButton(operator, 5).whenPressed(new SetCangrabber(false));
 		new JoystickButton(operator, 1).whenPressed(new OpenGripper());
 		new JoystickButton(operator, 4).whenPressed(new CloseGripper());
 		new JoystickButton(operator, 3).whenPressed(new HalfGripper());

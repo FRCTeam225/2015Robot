@@ -18,7 +18,7 @@ public class SideStackNoStable extends CommandGroup {
 String name = new String("Side Stack no stable");
 	
 	
-	double turnAngle = 32.5;
+	double turnAngle = 35.5;
 	double returnAngle = 7.25;
 	
 	public SideStackNoStable() {
@@ -32,7 +32,7 @@ String name = new String("Side Stack no stable");
 		addSequential(new SetArm(Arm.firstPosition));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1240, turnAngle));
+		addSequential(new DriveYDistance(1320, turnAngle));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new TurnTo(returnAngle-1));
 		//addSequential(new WaitCommand(0.5));
@@ -63,9 +63,9 @@ String name = new String("Side Stack no stable");
 		addSequential(new SetArm(Arm.firstPosition+50));
 		
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1235, turnAngle+3)); // 1185
+		addSequential(new DriveYDistance(1320, turnAngle+3)); // 1185
 		//addSequential(new WaitCommand(0.5));
-		addSequential(new TurnTo(returnAngle+1));
+		addSequential(new TurnTo(returnAngle-1));
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition-130));
 		addSequential(new WaitForArm());
@@ -79,11 +79,11 @@ String name = new String("Side Stack no stable");
 		//addSequential(new WaitCommand(0.5));
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.4));
-		addSequential(new SetArm(Arm.floorPosition+100));
+		addSequential(new SetArm(Arm.floorPosition+80));
 		addSequential(new WaitForArm());
 		addSequential(new TurnTo(turnAngle+45, 0.75));
 		addSequential(new SetArm(Arm.floorPosition));
-		addSequential(new DriveYDistance(1700));
+		addSequential(new DriveYDistance(1800));
 		addSequential(new OpenGripper());
 		addSequential(new ResetEncoders());
 		addSequential(new DriveYDistance(-200));

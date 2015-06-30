@@ -197,6 +197,7 @@ public class Robot extends IterativeRobot {
     	CommandBase.drivetrain.resetAngle();
     	resetSubsystem(CommandBase.drivetrain);
     	resetSubsystem(CommandBase.arm);
+    	CommandBase.gripper.setGripper(false, false);
     	//if (!armPIDenabled) {
     		//new PIDArmControl().start();
     	//}
