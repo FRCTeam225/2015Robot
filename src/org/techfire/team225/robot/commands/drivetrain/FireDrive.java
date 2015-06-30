@@ -22,9 +22,9 @@ public class FireDrive extends CommandBase {
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
 		
-		if (OI.driver.getRawButton(10)) {
+		//if (OI.driver.getRawButton(10)) {
 			drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, 1, false);
-		} else {
+		/*} else {
 			// joystick check
 			if (Math.abs(yThrottle) < 0.1)
 				yThrottle = 0;
@@ -46,7 +46,7 @@ public class FireDrive extends CommandBase {
 				//rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.02;
 			}
 			drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scale, false);
-		}
+		}*/
 	}
 
 	@Override

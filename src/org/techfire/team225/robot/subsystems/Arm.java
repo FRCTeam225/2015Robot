@@ -73,8 +73,8 @@ public class Arm extends Subsystem {
 			}
 		// the arm will overshoot the set pot value by about 10 to 20
 		} else if (getPosition() >= floorPosition && speed > 0) {
-			victorForward.set(speed * 0.75);
-			victorBack.set(-speed * 0.75);
+			victorForward.set(speed); // formerly restricted to 75% speed
+			victorBack.set(-speed); // formerly restricted to 75% speed
 		} else if (getPosition() <= topPosition && speed < 0) {
 			victorForward.set(speed);
 			victorBack.set(-speed);
