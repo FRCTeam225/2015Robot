@@ -1,55 +1,30 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
+import org.techfire.team225.robot.OI;
 import org.techfire.team225.robot.SimplePID;
 
-import edu.wpi.first.wpilibj.Timer;
-
-public class DriveYDistance extends CommandBase {
-
-	double dist;
+public class StableMode extends CommandBase {
+	
 	public SimplePID pidY = new SimplePID(0.0012,0.0015, 0);
 	public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
-	Timer t = new Timer();
-	boolean needsAngle = false;
 	
-	public DriveYDistance(double dist, double theta, double maxSpeed)
-	{
-		pidY.setTarget(dist);
-		pidTheta.setTarget(theta);
-		pidY.setOutputConstraints(maxSpeed, -maxSpeed);
+	public StableMode() {
+		pidTheta.setTarget(drivetrain.getGyro());
+		pidY.setOutputConstraints(0.5, -0.5);
 		requires(drivetrain);
-		setTimeout(5);
-	}
-	
-	
-	public DriveYDistance(double dist, double theta)
-	{
-		this(dist, theta, 1);
-	}
-	
-	public DriveYDistance(double dist) {
-		this(dist, 0, 1);
-		needsAngle = true;
 	}
 	
 	@Override
 	protected void initialize() {
-		if (needsAngle) {
-			pidTheta.setTarget(drivetrain.getGyro());
-		}
-		t.reset();
-		t.start();
+		drivetrain.resetForwardEncoders((int) (Math.sin(arm.getPosition() - 1560) * -730.614));
+		System.out.println("Stable mode enabled");
 	}
 
 	@Override
 	protected void execute() {
+		pidY.setTarget(Math.sin(arm.getPosition() - 1560) * -730.614); // y = -730.614sin(x)
 		double pidSpeed =  -pidY.calculate(drivetrain.getAverageForwardEncoders());
-		/*if ( t.get() > 1 )
-			t.stop();
-		else
-			pidSpeed *= t.get();*/
-		
 		drivetrain.setMotorSpeeds(0, pidSpeed, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
 		System.out.println("Target is: " + pidY.getTarget());
         System.out.println("Location is: " + CommandBase.drivetrain.getAverageForwardEncoders());
@@ -58,12 +33,13 @@ public class DriveYDistance extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(pidY.getError()) < 85)|| isTimedOut();
+		return Math.abs(OI.getDriverForwardThrottle()) > 0.2;
 	}
 
 	@Override
-	protected void end() {
+	protected void end() {	
 		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
+		System.out.println("Stable mode disabled");
 	}
 
 }

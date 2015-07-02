@@ -2,6 +2,7 @@
 package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.ConstantsProvider;
+import org.techfire.team225.robot.SettableEncoder;
 import org.techfire.team225.robot.commands.drivetrain.FireDrive;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -20,8 +21,8 @@ public class Drivetrain extends Subsystem {
     
     public BuiltInAccelerometer accelerometer;
     
-    public Encoder encoderL;
-    public Encoder encoderR;
+    public SettableEncoder encoderL;
+    public SettableEncoder encoderR;
     
     //GyroProvider gyro;
     Gyro gyro;
@@ -37,8 +38,8 @@ public class Drivetrain extends Subsystem {
 	    
 	     accelerometer  = new BuiltInAccelerometer();
 	    
-	     encoderL = new Encoder(ConstantsProvider.get("ENCODER_LEFT_A"), ConstantsProvider.get("ENCODER_LEFT_B"));
-	     encoderR = new Encoder(ConstantsProvider.get("ENCODER_RIGHT_A"), ConstantsProvider.get("ENCODER_RIGHT_B"));
+	     encoderL = new SettableEncoder(ConstantsProvider.get("ENCODER_LEFT_A"), ConstantsProvider.get("ENCODER_LEFT_B"));
+	     encoderR = new SettableEncoder(ConstantsProvider.get("ENCODER_RIGHT_A"), ConstantsProvider.get("ENCODER_RIGHT_B"));
 		
 		victorLeft[0] = new Victor(ConstantsProvider.get("LEFT_FORWARD_MOTOR"));
 		victorLeft[1] = new Victor(ConstantsProvider.get("LEFT_BACK_MOTOR"));
@@ -99,6 +100,11 @@ public class Drivetrain extends Subsystem {
 	
 	public int getAverageForwardEncoders() {
 		return (encoderL.get() - encoderR.get())/2;
+	}
+	
+	public void resetForwardEncoders(int offset) {
+		encoderL.reset(offset);
+		encoderR.reset(-offset);
 	}
 	
 	public void resetForwardEncoders() {

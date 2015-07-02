@@ -12,6 +12,7 @@ import org.techfire.team225.robot.commands.automation.AutoLiftHigh;
 import org.techfire.team225.robot.commands.automation.AutoStack;
 import org.techfire.team225.robot.commands.chokehold.SetChokehold;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
+import org.techfire.team225.robot.commands.drivetrain.StableMode;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.HalfGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
@@ -34,6 +35,7 @@ public class OI {
 		// driver
 		new JoystickButton(driver, 8).whenPressed(new CenterGyro());
 		new JoystickButton(driver, 7).whenPressed(new OverridePot());
+		new JoystickButton(driver, 9).whenPressed(new StableMode());
 		
 		// operator
 		new JoystickButton(operator, 6).whenPressed(new SetPreContainer());
