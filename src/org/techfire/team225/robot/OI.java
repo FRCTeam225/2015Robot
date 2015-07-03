@@ -10,6 +10,7 @@ import org.techfire.team225.robot.commands.automation.AutoLift;
 import org.techfire.team225.robot.commands.automation.AutoPullOut;
 import org.techfire.team225.robot.commands.automation.AutoLiftHigh;
 import org.techfire.team225.robot.commands.automation.AutoStack;
+import org.techfire.team225.robot.commands.cangrabber.SetCangrabber;
 import org.techfire.team225.robot.commands.chokehold.SetChokehold;
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
 import org.techfire.team225.robot.commands.drivetrain.StableMode;
@@ -17,7 +18,7 @@ import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.HalfGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
 import org.techfire.team225.robot.commands.gripper.AlternateHalfGripper;
-import org.techfire.team225.robot.commands.gripper.SetCangrabber;
+import org.techfire.team225.robot.commands.toteholder.SetToteHolder;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -51,10 +52,10 @@ public class OI {
 		//new JoystickButton(operator, 10).whenPressed(new LegalTilt(true));
 		//new AxisButton(operator, 3, -0.5).whenPressed(new AutoStack());
 		new JoystickButton(operator, 9).whenPressed(new AutoStack());
-	}
-	
-	public static boolean getDriverPreciseMode() {
-		return driver.getRawButton(8);
+		new AxisButton(operator, 6, 0.5).whenPressed(new SetCangrabber(true));
+		new AxisButton(operator, 6, -0.5).whenPressed(new SetCangrabber(false));
+		new AxisButton(operator, 2, 0.5).whenPressed(new SetToteHolder(false));
+		new AxisButton(operator, 3, 0.5).whenPressed(new SetToteHolder(true));
 	}
 	
 	public static double getDriverStrafeThrottle() {

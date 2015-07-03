@@ -1,12 +1,12 @@
 package org.techfire.team225.robot.commands.autonomous;
 
 import org.techfire.team225.robot.commands.arm.SetArm;
+import org.techfire.team225.robot.commands.cangrabber.SetCangrabber;
 import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.ResetEncoders;
 import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 import org.techfire.team225.robot.commands.gripper.CloseGripper;
 import org.techfire.team225.robot.commands.gripper.OpenGripper;
-import org.techfire.team225.robot.commands.gripper.SetCangrabber;
 import org.techfire.team225.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
