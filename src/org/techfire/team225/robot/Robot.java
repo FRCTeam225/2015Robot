@@ -22,6 +22,7 @@ import org.techfire.team225.robot.commands.autonomous.SideStackOldNewLoop;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackNoSense;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
+import org.techfire.team225.robot.commands.drivetrain.DrivePath;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -88,7 +89,8 @@ public class Robot extends IterativeRobot {
         		new ChokeholdAutonDoubleArmUpW_GetOutTheWay(),
         		new PullCan(),
         		new DriveForward(),
-        		new DriveBackward()
+        		new DriveBackward(),
+        		new DrivePath(5, 8, 4, 0)
         };
     	
     	JedisProvider.autonomousInit(autonomi);
@@ -215,7 +217,7 @@ public class Robot extends IterativeRobot {
     public void disabledInit(){
     	sendDebugData = true;
     	
-		selected = 0;
+		selected = autonomi.length-1;
 		System.out.println("Selected autonomous is: " + autonomi[selected]);
     	System.out.println("~");
     	SmartDashboard.putString("SelectedAutonomous", "" + autonomi[selected]);
@@ -229,11 +231,11 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         //CommandBase.arm.updatePID();
-        
-        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        System.out.println(CommandBase.drivetrain.getFeetDistance());
+       /* System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
         System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());
+        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
     }
     
     public void testInit()
