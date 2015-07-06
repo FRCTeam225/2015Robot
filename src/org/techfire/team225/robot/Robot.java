@@ -22,7 +22,7 @@ import org.techfire.team225.robot.commands.autonomous.SideStackOldNewLoop;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackNoSense;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
-import org.techfire.team225.robot.commands.drivetrain.DrivePath;
+import org.techfire.team225.robot.commands.drivetrain.ProfiledDriveDistance;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -90,7 +90,7 @@ public class Robot extends IterativeRobot {
         		new PullCan(),
         		new DriveForward(),
         		new DriveBackward(),
-        		new DrivePath(5, 8, 4, 0)
+        		new ProfiledDriveDistance(5, 8, 4, 0)
         };
     	
     	JedisProvider.autonomousInit(autonomi);
