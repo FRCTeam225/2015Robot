@@ -17,13 +17,15 @@ public class StableMode extends CommandBase {
 	
 	@Override
 	protected void initialize() {
-		drivetrain.resetForwardEncoders((int) (Math.sin(arm.getPosition() - 1560) * -730.614));
+		int absolutePosition = arm.getPosition() - 1560;
+		drivetrain.resetForwardEncoders((int) (Math.sin(absolutePosition/783.439) * 729.0));
 		System.out.println("Stable mode enabled");
 	}
 
 	@Override
 	protected void execute() {
-		pidY.setTarget(Math.sin(arm.getPosition() - 1560) * -730.614); // y = -730.614sin(x)
+		int absolutePosition = arm.getPosition() - 1560;
+		pidY.setTarget(Math.sin(absolutePosition/783.439) * 729.0); // y = 729sin(x/783.439)
 		double pidSpeed =  -pidY.calculate(drivetrain.getAverageForwardEncoders());
 		drivetrain.setMotorSpeeds(0, pidSpeed, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
 		System.out.println("Target is: " + pidY.getTarget());
