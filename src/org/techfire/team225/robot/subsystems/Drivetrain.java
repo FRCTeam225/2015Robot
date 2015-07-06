@@ -130,6 +130,14 @@ public class Drivetrain extends Subsystem {
 		gyro = new Gyro(ConstantsProvider.get("GYRO"));
 	}
 
+
+	public double getFeetDistance()
+	{
+		double pos = (getAverageForwardEncoders()/256.0);
+		pos *= (16.0/22.0);
+		return (pos*(Math.PI*6.0))/12.0;
+	}
+	
 	@Override
 	protected void initDefaultCommand()  {
 		setDefaultCommand(new FireDrive());

@@ -18,7 +18,7 @@ public class ChokeholdControl extends CommandBase {
 
 	@Override
 	protected void execute() {
-		if (OI.driver.getRawButton(6)) {
+		/*if (OI.driver.getRawButton(6)) {
 			chokeholdSpeed = 1.0;
 			chokehold.setRetainer(false);
 		} else if (OI.driver.getRawButton(5)) {
@@ -29,7 +29,7 @@ public class ChokeholdControl extends CommandBase {
 		}
 		
 		chokehold.setLeftMotor(chokeholdSpeed);
-		chokehold.setRightMotor(chokeholdSpeed);
+		chokehold.setRightMotor(chokeholdSpeed);*/
 	}
 
 	@Override

@@ -6,11 +6,11 @@ import org.techfire.team225.robot.SimplePID;
 
 public class StableMode extends CommandBase {
 	
-	public SimplePID pidY = new SimplePID(0.0012,0.0015, 0);
+	public SimplePID pidY = new SimplePID(0.0012, 0.0015, 0); // I = 0.0015
 	public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
 	
 	public StableMode() {
-		pidTheta.setTarget(drivetrain.getGyro());
+		
 		pidY.setOutputConstraints(0.5, -0.5);
 		requires(drivetrain);
 	}
@@ -20,6 +20,7 @@ public class StableMode extends CommandBase {
 		int absolutePosition = arm.getPosition() - 1560;
 		drivetrain.resetForwardEncoders((int) (Math.sin(absolutePosition/783.439) * 729.0));
 		System.out.println("Stable mode enabled");
+		pidTheta.setTarget(drivetrain.getGyro());
 	}
 
 	@Override

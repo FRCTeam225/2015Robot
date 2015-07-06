@@ -10,7 +10,7 @@ public class ReleaseRetainer extends CommandBase {
 	
 	@Override
 	protected void initialize() {
-		chokehold.setRetainer(false);
+		//chokehold.setRetainer(false);
 	}
 
 	@Override

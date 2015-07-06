@@ -1,4 +1,4 @@
-package org.techfire.team225.robot.commands.gripper;
+package org.techfire.team225.robot.commands.cangrabber;
 
 import org.techfire.team225.robot.CommandBase;
 
@@ -12,7 +12,7 @@ public class SetCangrabber extends CommandBase {
 	
 	@Override
 	protected void initialize() {
-		gripper.SetCangrab(set);;
+		cangrabber.SetCangrab(set);;
 	}
 
 	@Override

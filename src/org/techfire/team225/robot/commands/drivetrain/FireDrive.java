@@ -1,12 +1,17 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.OI;
+
+import edu.wpi.first.wpilibj.Timer;
 
 public class FireDrive extends CommandBase {
 
 	double targetAngle = 0;
-
+	FileWriter writer;
 	public FireDrive() {
 		requires(drivetrain);
 	}
@@ -21,6 +26,7 @@ public class FireDrive extends CommandBase {
 		double yThrottle = OI.getDriverForwardThrottle(); // forward and backwards
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
+		
 		
 		//if (OI.driver.getRawButton(10)) {
 			drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, 1, false);

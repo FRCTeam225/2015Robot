@@ -26,18 +26,22 @@ public class CompetitionRobotConstants {
     public static int POST_CONTAINER_POSITION = FLOOR_POSITION + 385;
     public static int PICKUP_CONTAINER_POSITION = FLOOR_POSITION + 280;
     public static int FORWARD_CANBURGLAR_POSITION = FLOOR_POSITION + 300;
-    public static int TILT_POSITION = FLOOR_POSITION + 955;
-    public static int TILT_SOLENOID = 4; // PCM
+    //public static int TILT_POSITION = FLOOR_POSITION + 955;
+    //public static int TILT_SOLENOID = 4; // PCM
+    
+    // feeder station holder
+    public static int TOTE_HOLDER_SOLENOID = 3; // PCM
     
     // gripper
     public static int GRIPPER_SOLENOID_LEFT = 1; // PCM  
     public static int GRIPPER_SOLENOID_RIGHT = 0; // PCM
     public static int FORWARD_CANGRABBER_SOLENOID = 2; // PCM
     
+    
     // chokehold
-    public static int CHOKEHOLD_MOTOR_RIGHT = 7; // PWM
-    public static int CHOKEHOLD_MOTOR_LEFT = 6; // PWM
-    public static int CHOKEHOLD_RETAINER_SOLENOID = 3; // PCM
+    //public static int CHOKEHOLD_MOTOR_RIGHT = 7; // PWM
+    //public static int CHOKEHOLD_MOTOR_LEFT = 6; // PWM
+    //public static int CHOKEHOLD_RETAINER_SOLENOID = 3; // PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 14; // PDP
