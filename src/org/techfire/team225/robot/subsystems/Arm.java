@@ -16,9 +16,7 @@ public class Arm extends Subsystem {
 	Victor victorBack = new Victor(ConstantsProvider.get("ARM_BACK_MOTOR"));
 	AnalogInput pot = new AnalogInput(ConstantsProvider.get("ARM_POT"));
 	public boolean potOverride = false;
-	
-	Solenoid tiltSolenoid = new Solenoid(ConstantsProvider.get("TILT_SOLENOID"));
-	
+		
 	public static int floorPosition;
 	public static int firstPosition;
 	public static int secondPosition;
@@ -26,7 +24,6 @@ public class Arm extends Subsystem {
 	public static int postContainerPosition;
 	public static int preContainerPosition;
 	public static int pickupContainerPosition;
-	public static int tiltPosition;
 	public static int forwardCanburglarPosition;
 
 	public Arm() {
@@ -37,7 +34,6 @@ public class Arm extends Subsystem {
 		postContainerPosition = ConstantsProvider.get("POST_CONTAINER_POSITION");
 		preContainerPosition = ConstantsProvider.get("PRE_CONTAINER_POSITION");
 		pickupContainerPosition = ConstantsProvider.get("PICKUP_CONTAINER_POSITION");
-		tiltPosition = ConstantsProvider.get("TILT_POSITION");
 		forwardCanburglarPosition = ConstantsProvider.get("FORWARD_CANBURGLAR_POSITION");
 		
 		//victorForward.setSafetyEnabled(true);
@@ -88,11 +84,6 @@ public class Arm extends Subsystem {
 	protected void initDefaultCommand() {
 		setDefaultCommand(new ArmControl());
 	}
-	
-	public void setArmTilt(boolean tilt) {
-		tiltSolenoid.set(tilt);
-	}
-
 	
 	public void updatePID()
 	{

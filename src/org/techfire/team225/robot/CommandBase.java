@@ -24,6 +24,7 @@ public abstract class CommandBase extends Command {
 		gripper = new Gripper();
 		chokehold = new Chokehold();
 		toteHolder = new ToteHolder();
+		cangrabber = new Cangrabber();
 	}
 
 	

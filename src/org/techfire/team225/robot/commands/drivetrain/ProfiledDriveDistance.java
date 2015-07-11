@@ -1,6 +1,7 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
 import org.techfire.team225.robot.CommandBase;
+import org.techfire.team225.robot.SimplePID;
 
 import edu.wpi.first.wpilibj.Timer;
 
@@ -25,9 +26,10 @@ public class ProfiledDriveDistance extends CommandBase
     double startT = 0;
     double tToCruise, dRamping, dCruising, tCruising;
     double theta;
-
+    public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
     public ProfiledDriveDistance(double target, double vcruise, double maxAccel, double theta)
     {
+    	requires(drivetrain);
         this.target = target;
         this.vcruise = vcruise;
         this.maxAccel = maxAccel;
@@ -51,6 +53,7 @@ public class ProfiledDriveDistance extends CommandBase
         }
         tCruising = dCruising / vcruise;
         startT = Timer.getFPGATimestamp();
+        pidTheta.setTarget(theta);
     }
 
     public void execute()
@@ -59,15 +62,17 @@ public class ProfiledDriveDistance extends CommandBase
     	PathPoint p = calcAt(t);
         System.out.println(p);
         
-        double pow = ((p.pos-drivetrain.getFeetDistance())*0.0) + (p.vel/10.0) + (p.acc*0.0);
-        drivetrain.setMotorSpeeds(0, -pow, 0, 1, false);
+        double pow = ((p.pos-drivetrain.getFeetDistance())*0.9) +  (p.vel/8.8) + (p.acc*0.01);
+        System.out.println(p.pos-drivetrain.getFeetDistance());
+        drivetrain.setMotorSpeeds(0, -pow, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
     }
 
     public PathPoint calcAt(double t)
     {
         if ( t > ((tToCruise*2)+tCruising) )
+        {
         	t = ((tToCruise*2)+tCruising);
-        
+        }
         PathPoint point = new PathPoint();
 
 
@@ -95,7 +100,11 @@ public class ProfiledDriveDistance extends CommandBase
             point.vel = vcruise + ((-maxAccel) * i);
             point.acc = -maxAccel;
         }
-
+        if ( t == ((tToCruise*2)+tCruising) )
+        {
+        	point.acc = 0;
+        	point.vel = 0;
+        }
         point.theta = theta;
         return point;
 

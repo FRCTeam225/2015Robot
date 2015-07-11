@@ -27,7 +27,16 @@ public class FireDrive extends CommandBase {
 		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
 		double rotationThrottle = OI.getDriverRotation();
 		
-		
+		// gyro correction, holds the robot at the angle the driver wants it to be at
+		/*			if (Math.abs(rotationThrottle) > 0.1)
+					{
+						targetAngle = drivetrain.getGyro();
+					}
+					else
+					{
+						rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.02;
+					}
+		*/
 		//if (OI.driver.getRawButton(10)) {
 			drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, 1, false);
 		/*} else {
@@ -41,17 +50,9 @@ public class FireDrive extends CommandBase {
 			
 			// omni-directional mecanum scaling
 			double scale = 0.5 + (Math.abs(xThrottle) * 0.5);
+			*/
 			
-			// gyro correction, holds the robot at the angle the driver wants it to be at
-			if (Math.abs(rotationThrottle) > 0.1)
-			{
-				targetAngle = drivetrain.getGyro();
-			}
-			else
-			{
-				//rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.02;
-			}
-			drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scale, false);
+			/*drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, scale, false);
 		}*/
 	}
 

@@ -18,16 +18,14 @@ public class CompetitionRobotConstants {
     public static int ARM_FORWARD_MOTOR = 4; // PWM
     public static int ARM_BACK_MOTOR = 5; // PWM
     public static int ARM_POT = 1; // Analog
-    public static int FLOOR_POSITION = 2175; //old 2100
+    public static int FLOOR_POSITION = 2900; //old 2100
     public static int FIRST_POSITION = FLOOR_POSITION + 380;
     public static int SECOND_POSITION = FLOOR_POSITION + 685;
-    public static int TOP_POSITION = FLOOR_POSITION + 1045;
+    public static int TOP_POSITION = FLOOR_POSITION + 1055;
     public static int PRE_CONTAINER_POSITION = FLOOR_POSITION + 690;
     public static int POST_CONTAINER_POSITION = FLOOR_POSITION + 385;
     public static int PICKUP_CONTAINER_POSITION = FLOOR_POSITION + 280;
     public static int FORWARD_CANBURGLAR_POSITION = FLOOR_POSITION + 300;
-    //public static int TILT_POSITION = FLOOR_POSITION + 955;
-    //public static int TILT_SOLENOID = 4; // PCM
     
     // feeder station holder
     public static int TOTE_HOLDER_SOLENOID = 3; // PCM
@@ -39,9 +37,9 @@ public class CompetitionRobotConstants {
     
     
     // chokehold
-    //public static int CHOKEHOLD_MOTOR_RIGHT = 7; // PWM
-    //public static int CHOKEHOLD_MOTOR_LEFT = 6; // PWM
-    //public static int CHOKEHOLD_RETAINER_SOLENOID = 3; // PCM
+    public static int CHOKEHOLD_MOTOR_RIGHT = 7; // PWM
+    public static int CHOKEHOLD_MOTOR_LEFT = 6; // PWM
+    public static int CHOKEHOLD_RETAINER_SOLENOID = 3; // PCM
     
     // arm power
     public static int ARM_FORWARD_MOTOR_POWER = 14; // PDP
@@ -52,6 +50,10 @@ public class CompetitionRobotConstants {
     public static int ENCODER_RIGHT_B = 1; // DIO
     public static int ENCODER_LEFT_A = 2; // DIO
     public static int ENCODER_LEFT_B = 3; // DIO
+    public static int ENCODER_BACK_RIGHT_A = 4; // DIO
+    public static int ENCODER_BACK_RIGHT_B = 5; // DIO
+    public static int ENCODER_BACK_LEFT_A = 6; // DIO
+    public static int ENCODER_BACK_LEFT_B = 7; // DIO
         
     // sensors
     public static int PHOTO_SENSOR_LEFT = 4; // DIO

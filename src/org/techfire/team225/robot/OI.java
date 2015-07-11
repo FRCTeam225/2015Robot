@@ -1,6 +1,5 @@
 package org.techfire.team225.robot;
 
-import org.techfire.team225.robot.commands.arm.LegalTilt;
 import org.techfire.team225.robot.commands.arm.OverridePot;
 import org.techfire.team225.robot.commands.arm.PickupContainer;
 import org.techfire.team225.robot.commands.arm.SetArmTilt;
@@ -52,8 +51,8 @@ public class OI {
 		//new JoystickButton(operator, 10).whenPressed(new LegalTilt(true));
 		//new AxisButton(operator, 3, -0.5).whenPressed(new AutoStack());
 		new JoystickButton(operator, 9).whenPressed(new AutoStack());
-		new AxisButton(operator, 6, 0.5).whenPressed(new SetCangrabber(true));
-		new AxisButton(operator, 6, -0.5).whenPressed(new SetCangrabber(false));
+		new AxisButton(operator, 5, 0.75).whenPressed(new SetCangrabber(true));
+		new AxisButton(operator, 5, -0.75).whenPressed(new SetCangrabber(false));
 		new AxisButton(operator, 2, 0.5).whenPressed(new SetToteHolder(false));
 		new AxisButton(operator, 3, 0.5).whenPressed(new SetToteHolder(true));
 	}

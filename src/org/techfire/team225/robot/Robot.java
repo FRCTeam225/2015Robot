@@ -217,7 +217,6 @@ public class Robot extends IterativeRobot {
     public void disabledInit(){
     	sendDebugData = true;
     	
-		selected = autonomi.length-1;
 		System.out.println("Selected autonomous is: " + autonomi[selected]);
     	System.out.println("~");
     	SmartDashboard.putString("SelectedAutonomous", "" + autonomi[selected]);
@@ -231,11 +230,11 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         //CommandBase.arm.updatePID();
-        System.out.println(CommandBase.drivetrain.getFeetDistance());
-       /* System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
+        /*System.out.println(CommandBase.drivetrain.getFeetDistance());
+        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
         System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
-        System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
+        System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");*/
+        System.out.println("Arm: "+CommandBase.arm.getPosition());
     }
     
     public void testInit()
