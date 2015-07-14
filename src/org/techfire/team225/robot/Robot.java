@@ -15,6 +15,8 @@ import org.techfire.team225.robot.commands.autonomous.ChokeholdAutonScoringPlatf
 import org.techfire.team225.robot.commands.autonomous.DoNothing;
 import org.techfire.team225.robot.commands.autonomous.DriveBackward;
 import org.techfire.team225.robot.commands.autonomous.DriveForward;
+import org.techfire.team225.robot.commands.autonomous.ForwardCanburglarAuton;
+import org.techfire.team225.robot.commands.autonomous.ProfiledSideStack;
 import org.techfire.team225.robot.commands.autonomous.PullCan;
 import org.techfire.team225.robot.commands.autonomous.SideStack;
 import org.techfire.team225.robot.commands.autonomous.SideStackNoStable;
@@ -23,6 +25,8 @@ import org.techfire.team225.robot.commands.autonomous.StraightStack;
 import org.techfire.team225.robot.commands.autonomous.StraightStackNoSense;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
 import org.techfire.team225.robot.commands.drivetrain.ProfiledDriveDistance;
+import org.techfire.team225.robot.commands.drivetrain.ProfiledTurn;
+import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -78,6 +82,7 @@ public class Robot extends IterativeRobot {
         		new StraightStack(),
         		new StraightStackNoSense(),
         		new StraightStackOneCan(),
+        		new ForwardCanburglarAuton(),
         		new ChokeholdAuton(),
         		new ChokeholdAutonScoringPlatform(),
         		new ChokeholdAutonScoringPlatformNoMove(),
@@ -90,7 +95,8 @@ public class Robot extends IterativeRobot {
         		new PullCan(),
         		new DriveForward(),
         		new DriveBackward(),
-        		new ProfiledDriveDistance(5, 8, 4, 0)
+        		new ProfiledDriveDistance(5, 8, 4, 0),
+        		new ProfiledSideStack()
         };
     	
     	JedisProvider.autonomousInit(autonomi);
@@ -163,6 +169,8 @@ public class Robot extends IterativeRobot {
 	}
 	
     public void autonomousInit() {
+    	
+    	
     	sendDebugData = false;
     	autonomousCommand = autonomi[selected];
     	new PIDArmControl().start();
@@ -232,9 +240,9 @@ public class Robot extends IterativeRobot {
         //CommandBase.arm.updatePID();
         /*System.out.println(CommandBase.drivetrain.getFeetDistance());
         System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
-        System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");
-        System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");*/
-        System.out.println("Arm: "+CommandBase.arm.getPosition());
+        System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");*/
+        System.out.println("A: "+CommandBase.arm.getPosition());
+        //System.out.println(CommandBase.drivetrain.getGyroRate());
     }
     
     public void testInit()

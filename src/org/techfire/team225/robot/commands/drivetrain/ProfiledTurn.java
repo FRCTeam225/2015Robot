@@ -6,7 +6,7 @@ import org.techfire.team225.robot.SimplePID;
 import edu.wpi.first.wpilibj.Timer;
 
 
-public class ProfiledDriveDistance extends CommandBase
+public class ProfiledTurn extends CommandBase
 {
 
     class PathPoint
@@ -25,21 +25,24 @@ public class ProfiledDriveDistance extends CommandBase
     double target, vcruise, maxAccel;
     double startT = 0;
     double tToCruise, dRamping, dCruising, tCruising;
-    double theta;
-    public SimplePID pidTheta = new SimplePID(0.05, 0, 0);
-    public boolean reverse = false; // fix this eventually
-    public ProfiledDriveDistance(double target, double vcruise, double maxAccel, double theta)
+    double errorSum = 0;
+    double lastT = 0;
+    boolean reverse = false;
+    
+    int stable = 0;
+    
+    public ProfiledTurn(double target, double vcruise, double maxAccel)
     {
     	requires(drivetrain);
-        this.target = target;
+    	if ( target < 0 )
+    	{
+    		reverse = true;
+    		this.target = -target;
+    	}
+    	else
+    		this.target = target;
         this.vcruise = vcruise;
         this.maxAccel = maxAccel;
-        this.theta = theta;
-        if ( target < 0 )
-        {
-        	reverse = true;
-        	this.target = -target;
-        }
     }
 
     public void initialize()
@@ -59,21 +62,36 @@ public class ProfiledDriveDistance extends CommandBase
         }
         tCruising = dCruising / vcruise;
         startT = Timer.getFPGATimestamp();
-        pidTheta.setTarget(theta);
-       System.out.println("ProfiledDriveDistance to "+target+": Starting");
+        lastT = 0;
+        errorSum = 0;
+        System.out.println("ProfiledTurn to "+target+": Starting");
     }
 
     public void execute()
     {
     	double t = Timer.getFPGATimestamp()-startT;
+    	double dT = t-lastT;
+    	lastT = t;
     	PathPoint p = calcAt(t);
-        
+        double velconst = 103;
+        double pConst = 0.054;
         double pow;
-		if ( reverse )
-			pow = (((-p.pos)-drivetrain.getFeetDistance())*0.9) - ( (p.vel/8.8) + (p.acc*0.01) );
-		else
-			pow = ((p.pos-drivetrain.getFeetDistance())*0.9) +  (p.vel/8.8) + (p.acc*0.01);
-        drivetrain.setMotorSpeeds(0, -pow, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
+        double error;
+        
+        if ( reverse )
+        {
+        	error = (-p.pos)-drivetrain.getGyro();
+        	pow = ((error*pConst) - (p.vel/velconst));
+        }
+        else
+        {
+        	error = (p.pos-drivetrain.getGyro());
+        	pow = (error*pConst) +  (p.vel/velconst);
+        }
+        errorSum += error*dT;
+        pow += (errorSum*0.015);
+        System.out.println("ProfiledTurn to "+target+": err("+error+") tar("+p.pos+") at "+drivetrain.getGyro()+" sum("+errorSum+") dt("+dT+","+startT+","+lastT+")");
+        drivetrain.setMotorSpeeds(0, 0, -pow, 1, false);
     }
 
     public PathPoint calcAt(double t)
@@ -114,7 +132,6 @@ public class ProfiledDriveDistance extends CommandBase
         	point.acc = 0;
         	point.vel = 0;
         }
-        point.theta = theta;
         return point;
 
     }
@@ -126,14 +143,17 @@ public class ProfiledDriveDistance extends CommandBase
 
 	@Override
 	protected boolean isFinished() {
-		System.out.println("ProfiledDriveDistance to "+target+": err - "+(drivetrain.getFeetDistance()-(reverse?-target:target)));
-		return (Math.abs(drivetrain.getFeetDistance()-(reverse?-target:target)) < 0.1) || isTimedOut();
+		if ( Math.abs(drivetrain.getGyro()-(reverse?-target:target)) < 1.5 )
+			stable++;
+		else stable = 0;
+		
+		return stable > 4;
 	}
 
 	@Override
 	protected void end() {
 		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
-		System.out.println("ProfiledDriveDistance to "+target+": End");
+		System.out.println("ProfiledTurn to "+target+": End "+drivetrain.getGyro());
 		
 	}
 }

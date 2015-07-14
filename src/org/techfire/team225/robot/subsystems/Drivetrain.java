@@ -142,4 +142,8 @@ public class Drivetrain extends Subsystem {
 	protected void initDefaultCommand()  {
 		setDefaultCommand(new FireDrive());
 	}
+
+	public double getGyroRate() {
+		return gyro.getRate();
+	}
 }

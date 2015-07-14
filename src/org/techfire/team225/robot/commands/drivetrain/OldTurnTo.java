@@ -3,16 +3,16 @@ package org.techfire.team225.robot.commands.drivetrain;
 import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.SimplePID;
 
-public class TurnTo extends CommandBase {
+public class OldTurnTo extends CommandBase {
 
-	public SimplePID pidTheta = new SimplePID(0.04,0.0004,0);
+	public SimplePID pidTheta = new SimplePID(0.03, 0.00015, 0);
 	int loopsStable = 0;
-	public TurnTo(double theta)
+	public OldTurnTo(double theta)
 	{
 		this(theta, 1.0);
 	}
 	
-	public TurnTo(double theta, double maxSpeed)
+	public OldTurnTo(double theta, double maxSpeed)
 	{
 		pidTheta.setTarget(theta);
 		pidTheta.setOutputConstraints(maxSpeed, -maxSpeed);
@@ -36,7 +36,7 @@ public class TurnTo extends CommandBase {
 		if  ( Math.abs(pidTheta.getError()) < 4 )
 			loopsStable++;
 		else loopsStable = 0;
-		return loopsStable > 3 || isTimedOut();
+		return loopsStable > 5 || isTimedOut();
 	}
 
 	@Override
