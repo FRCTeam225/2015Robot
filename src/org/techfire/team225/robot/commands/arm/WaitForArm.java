@@ -21,5 +21,4 @@ public class WaitForArm extends CommandBase {
 	@Override
 	protected void end() {		
 	}
-
 }

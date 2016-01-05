@@ -7,9 +7,7 @@ import org.techfire.team225.robot.commands.drivetrain.FireDrive;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -24,7 +22,6 @@ public class Drivetrain extends Subsystem {
     public SettableEncoder encoderL;
     public SettableEncoder encoderR;
     
-    //GyroProvider gyro;
     Gyro gyro;
     
 	Victor[] victorLeft = new Victor[2];
@@ -46,13 +43,7 @@ public class Drivetrain extends Subsystem {
 		victorRight[0] = new Victor(ConstantsProvider.get("RIGHT_FORWARD_MOTOR"));
 		victorRight[1] = new Victor(ConstantsProvider.get("RIGHT_BACK_MOTOR"));
 		
-		//gyro = new GyroProvider();
 		gyro = new Gyro(ConstantsProvider.get("GYRO"));
-	}
-	
-	public boolean atBin()
-	{
-		return photoLeft.get();
 	}
 	
 	public void setMotorSpeeds(double xIn, double yIn, double rotation, double driveScale, boolean fieldCentric) {
@@ -79,15 +70,6 @@ public class Drivetrain extends Subsystem {
 	public void setPIDEnabled(boolean state)
 	{
 		this.pidEnabled = state;
-	}
-	
-	public boolean getRightEye() {
-		return true;
-		//return photoRight.get();
-	}
-	
-	public boolean getLeftEye() {
-		return photoLeft.get();
 	}
 	
 	public int getLeftEncoder() {

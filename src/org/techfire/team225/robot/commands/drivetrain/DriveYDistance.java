@@ -13,8 +13,7 @@ public class DriveYDistance extends CommandBase {
 	Timer t = new Timer();
 	boolean needsAngle = false;
 	
-	public DriveYDistance(double dist, double theta, double maxSpeed)
-	{
+	public DriveYDistance(double dist, double theta, double maxSpeed) {
 		pidY.setTarget(dist);
 		pidTheta.setTarget(theta);
 		pidY.setOutputConstraints(maxSpeed, -maxSpeed);
@@ -23,8 +22,7 @@ public class DriveYDistance extends CommandBase {
 	}
 	
 	
-	public DriveYDistance(double dist, double theta)
-	{
+	public DriveYDistance(double dist, double theta) {
 		this(dist, theta, 1);
 	}
 	
@@ -45,10 +43,6 @@ public class DriveYDistance extends CommandBase {
 	@Override
 	protected void execute() {
 		double pidSpeed =  -pidY.calculate(drivetrain.getAverageForwardEncoders());
-		/*if ( t.get() > 1 )
-			t.stop();
-		else
-			pidSpeed *= t.get();*/
 		
 		drivetrain.setMotorSpeeds(0, pidSpeed, -pidTheta.calculate(drivetrain.getGyro()), 1, false);
 		System.out.println("Target is: " + pidY.getTarget());
@@ -65,5 +59,4 @@ public class DriveYDistance extends CommandBase {
 	protected void end() {
 		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 	}
-
 }

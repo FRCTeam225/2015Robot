@@ -9,7 +9,6 @@ public class Gripper extends Subsystem {
 
 	Solenoid gripperSolenoidLeft;
 	Solenoid gripperSolenoidRight;
-	String state = "open";
 
 	public Gripper() {
 		gripperSolenoidLeft = new Solenoid(ConstantsProvider.get("GRIPPER_SOLENOID_LEFT"));
@@ -21,17 +20,8 @@ public class Gripper extends Subsystem {
 		gripperSolenoidRight.set(right);
 	}
 	
-	public void setState(String state) {
-		this.state = state;
-	}
-	
-	public String getState() {
-		return state;
-	}
-	
 	@Override
 	protected void initDefaultCommand() {
 		
 	}
-
 }

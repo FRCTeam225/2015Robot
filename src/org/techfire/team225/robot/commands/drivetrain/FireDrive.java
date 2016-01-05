@@ -1,12 +1,9 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
 import java.io.FileWriter;
-import java.io.IOException;
 
 import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.OI;
-
-import edu.wpi.first.wpilibj.Timer;
 
 public class FireDrive extends CommandBase {
 
@@ -21,10 +18,16 @@ public class FireDrive extends CommandBase {
 		targetAngle = drivetrain.getGyro();
 	}
 
+	// CODE RELEASE NOTE: This was used during the season and allows the mecanum drive
+	// to behave like a true omnidirectional drive for driving purposes. That is, FireDrive
+	// makes the robot move in all directions with the same speed, instead of the 
+	// traditional behavior for mecanum: full speed forwards and 50% strafe. However, with
+	// our ever changing strategy we decided to remove FireDrive in the offseason in favor 
+	// of maximum speed, so it is commented out here.
 	@Override
 	protected void execute() {
-		double yThrottle = OI.getDriverForwardThrottle(); // forward and backwards
-		double xThrottle = OI.getDriverStrafeThrottle(); // side to side
+		double yThrottle = OI.getDriverForwardThrottle(); 
+		double xThrottle = OI.getDriverStrafeThrottle(); 
 		double rotationThrottle = OI.getDriverRotation();
 		
 		// gyro correction, holds the robot at the angle the driver wants it to be at
@@ -37,6 +40,7 @@ public class FireDrive extends CommandBase {
 						rotationThrottle = (drivetrain.getGyro() - targetAngle) * -0.02;
 					}
 		*/
+		
 		//if (OI.driver.getRawButton(10)) {
 			drivetrain.setMotorSpeeds(-xThrottle, yThrottle, -rotationThrottle, 1, false);
 		/*} else {

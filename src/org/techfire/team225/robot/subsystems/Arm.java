@@ -1,12 +1,10 @@
 package org.techfire.team225.robot.subsystems;
 
-import org.techfire.team225.robot.CommandBase;
 import org.techfire.team225.robot.ConstantsProvider;
 import org.techfire.team225.robot.SimplePID;
 import org.techfire.team225.robot.commands.arm.ArmControl;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -35,9 +33,6 @@ public class Arm extends Subsystem {
 		preContainerPosition = ConstantsProvider.get("PRE_CONTAINER_POSITION");
 		pickupContainerPosition = ConstantsProvider.get("PICKUP_CONTAINER_POSITION");
 		forwardCanburglarPosition = ConstantsProvider.get("FORWARD_CANBURGLAR_POSITION");
-		
-		//victorForward.setSafetyEnabled(true);
-		//victorBack.setSafetyEnabled(true);
 	}
 	
 	
@@ -58,7 +53,6 @@ public class Arm extends Subsystem {
 	}
 	
 	public void setMotorSpeed(double speed) {
-
 		if (potOverride) {
 			if (speed > 0) {
 				victorForward.set(speed);
@@ -85,13 +79,8 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new ArmControl());
 	}
 	
-	public void updatePID()
-	{
+	public void updatePID() {
 		double calc = pid.calculate(getPosition());
 		setMotorSpeed(-calc);
-		/*System.out.println("PID Output is "+calc);
-		System.out.println("Position is "+getPosition());
-		System.out.println("Error is "+pid.getError());
-		System.out.println("Target is "+pid.getTarget());*/
 	}
 }

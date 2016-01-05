@@ -6,11 +6,12 @@ import org.techfire.team225.robot.OI;
 
 public class ArmControl extends CommandBase {
 	
+	int top;
+	int floor;
+	
 	public ArmControl() {
 		requires(arm);
 	}
-	int top;
-	int floor;
 	
 	@Override
 	protected void initialize() {
@@ -38,5 +39,4 @@ public class ArmControl extends CommandBase {
 	@Override
 	protected void end() {
 	}
-
 }

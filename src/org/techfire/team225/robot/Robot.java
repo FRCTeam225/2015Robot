@@ -22,11 +22,8 @@ import org.techfire.team225.robot.commands.autonomous.SideStack;
 import org.techfire.team225.robot.commands.autonomous.SideStackNoStable;
 import org.techfire.team225.robot.commands.autonomous.SideStackOldNewLoop;
 import org.techfire.team225.robot.commands.autonomous.StraightStack;
-import org.techfire.team225.robot.commands.autonomous.StraightStackNoSense;
 import org.techfire.team225.robot.commands.autonomous.StraightStackOneCan;
 import org.techfire.team225.robot.commands.drivetrain.ProfiledDriveDistance;
-import org.techfire.team225.robot.commands.drivetrain.ProfiledTurn;
-import org.techfire.team225.robot.commands.drivetrain.TurnTo;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -56,13 +53,8 @@ public class Robot extends IterativeRobot {
     DebugSenderThread debugSender;
     
     DigitalInput resetButton;
-    
-    //boolean armPIDenabled = false;
-    
-    public Robot()
-    {
-
-    }
+        
+    public Robot(){}
     
     /**
      * This function is run when the robot is first started up and should be
@@ -80,7 +72,6 @@ public class Robot extends IterativeRobot {
     			new SideStackOldNewLoop(),
     			new SideStackNoStable(),
         		new StraightStack(),
-        		new StraightStackNoSense(),
         		new StraightStackOneCan(),
         		new ForwardCanburglarAuton(),
         		new ChokeholdAuton(),
@@ -116,6 +107,7 @@ public class Robot extends IterativeRobot {
     	System.out.println("~");
     }
 	
+	@SuppressWarnings("deprecation")
 	public void disabledPeriodic() {
 		JedisProvider.write();
 		SmartDashboard.putDouble("Gyro", CommandBase.drivetrain.getGyro());
@@ -162,19 +154,12 @@ public class Robot extends IterativeRobot {
 			Timer.delay(0.5);
 		}
 		//selected = JedisProvider.checkAutonomous(selected);
-		
-		/*System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
-        System.out.print("A: "+CommandBase.drivetrain.getGyro()+", ");
-        System.out.println("Arm: "+CommandBase.arm.getPosition());*/
 	}
 	
     public void autonomousInit() {
-    	
-    	
     	sendDebugData = false;
     	autonomousCommand = autonomi[selected];
     	new PIDArmControl().start();
-    	//armPIDenabled = true;
     	CommandBase.arm.setTarget(CommandBase.arm.getPosition());
     	CommandBase.drivetrain.resetAngle();
     	CommandBase.drivetrain.resetForwardEncoders();
@@ -184,15 +169,15 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {
+    @SuppressWarnings("deprecation")
+	public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         CommandBase.arm.updatePID();
         JedisProvider.write();
         SmartDashboard.putDouble("Gyro", CommandBase.drivetrain.getGyro());
     }
     
-    public void resetSubsystem(Subsystem s)
-    {
+    public void resetSubsystem(Subsystem s) {
     	Command c;
     	if ( (c = CommandBase.arm.getCurrentCommand()) != null )
     		c.cancel();
@@ -207,9 +192,6 @@ public class Robot extends IterativeRobot {
     	resetSubsystem(CommandBase.drivetrain);
     	resetSubsystem(CommandBase.arm);
     	CommandBase.gripper.setGripper(false, false);
-    	//if (!armPIDenabled) {
-    		//new PIDArmControl().start();
-    	//}
     	
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
@@ -222,7 +204,7 @@ public class Robot extends IterativeRobot {
      * This function is called when the disabled button is hit.
      * You can use it to reset subsystems before shutting down.
      */
-    public void disabledInit(){
+    public void disabledInit() {
     	sendDebugData = true;
     	
 		System.out.println("Selected autonomous is: " + autonomi[selected]);
@@ -236,17 +218,9 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         JedisProvider.write();
         Scheduler.getInstance().run();
-        
-        //CommandBase.arm.updatePID();
-        /*System.out.println(CommandBase.drivetrain.getFeetDistance());
-        System.out.print("DT: "+CommandBase.drivetrain.getAverageForwardEncoders()+", ");
-        System.out.print("DTL: "+CommandBase.drivetrain.getRightEncoder()+", ");*/
-        System.out.println("A: "+CommandBase.arm.getPosition());
-        //System.out.println(CommandBase.drivetrain.getGyroRate());
     }
     
-    public void testInit()
-    {
+    public void testInit() {
     	sendDebugData = true;
     	sendExtendedDebugData = true;
     }
@@ -260,24 +234,20 @@ public class Robot extends IterativeRobot {
     
     public class DebugSenderThread extends Thread {
     	
-    	public void run()
-    	{
+    	public void run() {
     		String autolist = "";
-    		for ( int i = 0; i < autonomi.length; i++ )
-    		{
+    		for ( int i = 0; i < autonomi.length; i++ ) {
     			autolist += autonomi[i].toString();
     			if ( i != autonomi.length-1 )
     				autolist += ",";
     		}
     		
-    		while (true)
-    		{
+    		while (true) {
 	    		try {
 	    			if ( !resetButton.get() )
 	    				CommandBase.drivetrain.recalGyro();
 	    				
-	    			if ( sendDebugData || sendExtendedDebugData )
-	    			{
+	    			if ( sendDebugData || sendExtendedDebugData ) {
 	    				piTable.put("Gyro", String.valueOf(CommandBase.drivetrain.getGyro()));
 	    				
 	    				piTable.put("autonomi", autolist);

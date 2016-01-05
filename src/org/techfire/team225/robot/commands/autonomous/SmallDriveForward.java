@@ -1,7 +1,6 @@
 package org.techfire.team225.robot.commands.autonomous;
 
 import org.techfire.team225.robot.commands.drivetrain.CenterGyro;
-import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.ResetEncoders;
 import org.techfire.team225.robot.commands.drivetrain.SmallDriveYDistance;
 

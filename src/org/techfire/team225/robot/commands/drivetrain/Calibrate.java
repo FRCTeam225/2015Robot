@@ -15,21 +15,18 @@ public class Calibrate extends CommandBase {
 			try {
 				wait(4000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			drivetrain.setMotorSpeeds(0, 1, 0, 1, false);
 			try {
 				wait(4000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			drivetrain.setMotorSpeeds(0, 0, 0, 1, false);
 			try {
 				wait(4000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -43,5 +40,4 @@ public class Calibrate extends CommandBase {
 	@Override
 	protected void end() {		
 	}
-
 }

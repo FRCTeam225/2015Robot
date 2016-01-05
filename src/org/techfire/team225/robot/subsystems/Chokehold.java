@@ -2,7 +2,6 @@ package org.techfire.team225.robot.subsystems;
 
 import org.techfire.team225.robot.ConstantsProvider;
 import org.techfire.team225.robot.commands.chokehold.ChokeholdControl;
-import org.techfire.team225.robot.commands.drivetrain.FireDrive;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
@@ -30,5 +29,4 @@ public class Chokehold extends Subsystem {
 	protected void initDefaultCommand() {
 		setDefaultCommand(new ChokeholdControl());
 	}
-
 }

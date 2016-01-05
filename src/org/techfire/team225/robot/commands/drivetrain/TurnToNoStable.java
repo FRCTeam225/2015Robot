@@ -42,5 +42,4 @@ public class TurnToNoStable extends CommandBase {
 		drivetrain.setMotorSpeeds(0, 0, 0, 0, false);
 
 	}
-
 }

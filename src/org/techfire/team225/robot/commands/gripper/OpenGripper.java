@@ -7,7 +7,6 @@ public class OpenGripper extends CommandBase {
 	@Override
 	protected void initialize() {
 		gripper.setGripper(false, false);
-		gripper.setState("open");
 	}
 
 	@Override
@@ -22,5 +21,4 @@ public class OpenGripper extends CommandBase {
 	@Override
 	protected void end() {		
 	}
-
 }

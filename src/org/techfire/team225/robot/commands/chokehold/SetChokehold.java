@@ -38,5 +38,4 @@ public class SetChokehold extends CommandBase {
 	@Override
 	protected void end() {		
 	}
-
 }

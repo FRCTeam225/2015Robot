@@ -22,5 +22,4 @@ public class WaitForArmAndHoldPosition extends WaitForArm {
 		super.execute();
 		drivetrain.setMotorSpeeds(0, -pidY.calculate(drivetrain.getAverageForwardEncoders()), 0, 1, false);	
 	}
-
 }

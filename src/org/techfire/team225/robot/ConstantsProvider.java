@@ -11,7 +11,6 @@ public class ConstantsProvider {
 		try {
 			File flag = new File("/PracticeRobot");
 			isCompBot = !flag.exists();
-			//Robot.jedis.set("isCompBot", "false");
 		} catch (Exception e) {
 			e.printStackTrace();
 			isCompBot = true;

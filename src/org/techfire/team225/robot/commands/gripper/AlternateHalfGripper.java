@@ -7,7 +7,6 @@ public class AlternateHalfGripper extends CommandBase {
 	@Override
 	protected void initialize() {
 		gripper.setGripper(false, true);
-		gripper.setState("alternate_half");
 	}
 
 	@Override
@@ -22,5 +21,4 @@ public class AlternateHalfGripper extends CommandBase {
 	@Override
 	protected void end() {		
 	}
-
 }

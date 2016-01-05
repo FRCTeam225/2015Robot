@@ -25,5 +25,4 @@ public class ReleaseRetainer extends CommandBase {
 	@Override
 	protected void end() {		
 	}
-
 }

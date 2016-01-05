@@ -1,7 +1,5 @@
 package org.techfire.team225.robot.commands.drivetrain;
 
-import org.techfire.team225.robot.commands.drivetrain.ProfiledDriveDistance.PathPoint;
-
 public class ProfiledTwoAngleDrive extends ProfiledDriveDistance {
 
 	double theta2;
@@ -22,5 +20,4 @@ public class ProfiledTwoAngleDrive extends ProfiledDriveDistance {
 			p.theta = theta2;
 		return p;
 	}
-
 }

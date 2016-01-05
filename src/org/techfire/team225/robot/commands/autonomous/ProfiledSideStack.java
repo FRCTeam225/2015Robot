@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class ProfiledSideStack extends CommandGroup {
-
 	
 	double turnAngle = 33.5;
 	double returnAngle = -1;
@@ -24,61 +23,39 @@ public class ProfiledSideStack extends CommandGroup {
 		addSequential(new SetArm(Arm.firstPosition-100));
 		addSequential(new WaitCommand(0.2));
 		addSequential(profiledDriveFaster(-1, 0));
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new TurnTo(turnAngle+0.7));
 		addSequential(new SetArm(Arm.firstPosition+50));
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
 		addSequential(profiledDriveFaster(6.30, turnAngle+1.5));
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new TurnTo(returnAngle+1.5));
 		
 		
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition-130));
 		addSequential(new WaitForArm());
 		addSequential(new OpenGripper());
 		addSequential(new WaitCommand(0.4));
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new WaitForArm());
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
 		addSequential(profiledDrive(0.5, returnAngle+1.2));
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new CloseGripper());
 		
 		
 		addSequential(new WaitCommand(0.3));
-		//addSequential(profiledTurn(15).chainableSetTimeout(0.5));
-		////addSequential(profiledTurn(-15).chainableSetTimeout(0.5));
-		//addSequential(profiledTurn(-7.5).chainableSetTimeout(0.5));
-		//addSequential(new WaitCommand(0.5));
-		
-		//addSequential(new TurnTo(-12).chainableSetTimeout(0.5));
-		//addSequential(new TurnTo(-7).chainableSetTimeout(0.5));
-		//addSequential(new SetArm(Arm.firstPosition-100));
-		//addSequential(new WaitCommand(0.2));
-		//addSequential(new ResetEncoders());
-		//addSequential(profiledDrive(-1.3387, -7));
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new TurnTo(turnAngle+9.4));
 		addSequential(new SetArm(Arm.firstPosition+50));
 		
 		addSequential(new ResetEncoders());
-		addSequential(profiledDriveFaster(4, turnAngle+8)); // 1185
-		//addSequential(new WaitCommand(0.5));
+		addSequential(profiledDriveFaster(4, turnAngle+8));
 		addSequential(new TurnTo(returnAngle+5.1));
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new SetArm(Arm.firstPosition-130));
 		addSequential(new WaitForArm());
 		addSequential(new OpenGripper());
 		addSequential(new WaitCommand(0.4));
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new WaitForArm());
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new ResetEncoders());
 		addSequential(profiledDrive(1, returnAngle+3));
-		//addSequential(new WaitCommand(0.5));
 		addSequential(new CloseGripper());
 		addSequential(new WaitCommand(0.4));
 		addSequential(new SetArm(Arm.floorPosition+80));
@@ -107,5 +84,4 @@ public class ProfiledSideStack extends CommandGroup {
 	{
 		return new ProfiledDriveDistance(distance, 10, 6, theta);
 	}
-
 }

@@ -31,5 +31,4 @@ public class SetArm extends CommandBase {
 	@Override
 	protected void end() {		
 	}
-
 }

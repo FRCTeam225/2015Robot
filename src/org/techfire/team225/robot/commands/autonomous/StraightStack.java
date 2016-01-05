@@ -1,9 +1,7 @@
 package org.techfire.team225.robot.commands.autonomous;
 
-import org.techfire.team225.robot.commands.arm.SetArmTilt;
 import org.techfire.team225.robot.commands.arm.SetArm;
 import org.techfire.team225.robot.commands.arm.WaitForArm;
-import org.techfire.team225.robot.commands.automation.AutoAlignForPlacement;
 import org.techfire.team225.robot.commands.drivetrain.DriveYDistance;
 import org.techfire.team225.robot.commands.drivetrain.ResetEncoders;
 import org.techfire.team225.robot.commands.drivetrain.TurnTo;
@@ -17,8 +15,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class StraightStack extends CommandGroup {
 	private String name = "Straight Stack";
 	
-	public StraightStack()
-	{
+	public StraightStack() {
 		double turnAngle = 34;
 		double secondTurnAngle = 34;
 		double slowTurnSpeed = 0.55;
@@ -31,18 +28,13 @@ public class StraightStack extends CommandGroup {
 		addSequential(new TurnTo(turnAngle));
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new ResetEncoders());
-		addSequential(new SetArmTilt(true));
 		addSequential(new WaitCommand(0.25));
 		addSequential(new DriveYDistance(630, turnAngle, 1.0));
-		addSequential(new AutoAlignForPlacement());
 		
 		addSequential(new SetArm(Arm.firstPosition-130));
-		//addSequential(new WaitCommand(0.2));
 		addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
-		addSequential(new SetArmTilt(false));
-		//addSequential(new WaitCommand(0.5));
 		
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new WaitForArm());
@@ -57,7 +49,6 @@ public class StraightStack extends CommandGroup {
 		addSequential(new TurnTo(0).chainableSetTimeout(1.0));
 		addSequential(new SetArm(Arm.firstPosition-200));
 		addSequential(new WaitCommand(0.6));
-		addSequential(new SetArmTilt(true));
 		addSequential(new DriveYDistance(200, 0).chainableSetTimeout(2.0));
 		// second turn angle?
 		addSequential(new TurnTo(secondTurnAngle, 0.8));
@@ -65,19 +56,14 @@ public class StraightStack extends CommandGroup {
 		addSequential(new SetArm(Arm.firstPosition));
 		addSequential(new WaitCommand(0.3));
 		addSequential(new ResetEncoders());
-		addSequential(new DriveYDistance(1050, secondTurnAngle, 1.0).chainableSetTimeout(2.5));
-		addSequential(new AutoAlignForPlacement());
-		
+		addSequential(new DriveYDistance(1050, secondTurnAngle, 1.0).chainableSetTimeout(2.5));		
 				
 		addSequential(new ResetEncoders());
 		
 		addSequential(new SetArm(Arm.firstPosition-130));
-		//addSequential(new WaitCommand(0.2));
 		addSequential(new WaitForArm());
 		
 		addSequential(new OpenGripper());
-		addSequential(new SetArmTilt(false));
-		//addSequential(new WaitCommand(0.5));
 		
 		addSequential(new SetArm(Arm.floorPosition));
 		addSequential(new WaitForArm());
@@ -89,7 +75,6 @@ public class StraightStack extends CommandGroup {
 		addSequential(new WaitCommand(0.3));
 		
 		addSequential(new SetArm(Arm.floorPosition+70));
-		//addSequential(new WaitForArm());
 		
 		addSequential(new TurnTo(turnAngle+90, slowTurnSpeed).chainableSetTimeout(1.0));
 		addSequential(new ResetEncoders());
