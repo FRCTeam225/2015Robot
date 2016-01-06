@@ -7,4 +7,4 @@ Here are some notable parts of the software:
 - SimpleTableServer: This the custom dashboard implementation that we switched to. It uses UDP packets to communicate the values to the Pi.
 - We also have some motion profiling implemented; robot.commands.drivetrain.ProfiledDriveDistance works well and accurately moves the robot a specified number of feet with a maximum acceleration and velocity in either a triangular or trapezoidal motion profile. The other "profiled" commands need work.
 
-Thank you so much for taking interest in code!
+Thank you so much for taking interest in our code!
